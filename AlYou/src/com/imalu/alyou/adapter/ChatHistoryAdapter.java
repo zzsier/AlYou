@@ -71,9 +71,9 @@ public class ChatHistoryAdapter extends ArrayAdapter<EMContact> {
 		}
 		if(position%2==0)
 		{
-			holder.list_item_layout.setBackgroundResource(R.drawable.mm_listitem);
+			holder.list_item_layout.setBackgroundResource(R.drawable.chat_listitem);
 		}else{
-			holder.list_item_layout.setBackgroundResource(R.drawable.mm_listitem_grey);
+			holder.list_item_layout.setBackgroundResource(R.drawable.chat_listitem2);
 		}
 		
 		

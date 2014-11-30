@@ -77,9 +77,9 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			convertView.setTag(holder);
 		}
 		if (position % 2 == 0) {
-			holder.list_item_layout.setBackgroundResource(R.drawable.mm_listitem);
+			holder.list_item_layout.setBackgroundResource(R.drawable.chat_listitem);
 		} else {
-			holder.list_item_layout.setBackgroundResource(R.drawable.mm_listitem_grey);
+			holder.list_item_layout.setBackgroundResource(R.drawable.chat_listitem2);
 		}
 
 		// 获取与此用户/群组的会话
@@ -109,6 +109,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 			} else if (username.equals(Constant.NEW_FRIENDS_USERNAME)) {
 				holder.name.setText("申请与通知");
 			}
+			//holder.name.setBackgroundResource(R.color.common_top_bar_black);
 			holder.name.setText(username);
 		}
 

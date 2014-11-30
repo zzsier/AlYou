@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_bg"
+    android:background="@drawable/activity_bg"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -45,12 +45,12 @@
                     android:gravity="bottom|left"
                     android:paddingLeft="10dip"
                     android:text="新消息提醒"
-                    android:textColor="@color/btn_gray_pressed" />
+                    android:textColor="@color/btn_white_pressed" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/btn_gray_normal" />
+                    android:background="@color/btn_white_normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -71,7 +71,7 @@
                         android:layout_centerVertical="true"
                         android:paddingLeft="10dip"
                         android:text="接收新消息通知"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:typeface="serif" />
 
@@ -115,7 +115,7 @@
                         android:layout_centerVertical="true"
                         android:paddingLeft="10dip"
                         android:text="声音"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:typeface="serif" />
 
@@ -159,7 +159,7 @@
                         android:layout_centerVertical="true"
                         android:paddingLeft="10dip"
                         android:text="震动"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:typeface="serif" />
 
@@ -196,12 +196,12 @@
                         android:gravity="bottom|left"
                         android:paddingLeft="10dip"
                         android:text="聊天设置"
-                        android:textColor="@color/btn_gray_pressed" />
+                        android:textColor="@color/btn_white_pressed" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
-                        android:background="@color/btn_gray_normal" />
+                        android:background="@color/btn_white_normal" />
                 </LinearLayout>
 
                 <RelativeLayout
@@ -217,7 +217,7 @@
                         android:layout_centerVertical="true"
                         android:paddingLeft="10dip"
                         android:text="使用扬声器播放语音"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:typeface="serif" />
 
@@ -260,7 +260,7 @@
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="10dip"
                         android:text="通讯录黑名单"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp" />
                 </LinearLayout>
                 
@@ -283,7 +283,7 @@
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="10dip"
                         android:text="诊断"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -301,7 +301,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dip"
-                android:background="#ffffff"
+                android:background="#00000000"
                 android:orientation="vertical" >
                  
                 <Button

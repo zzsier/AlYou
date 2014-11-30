@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="common_top_bar_blue">#4ebcd3</color>
+    <color name="common_top_bar_black">#000000</color>
     <color name="btn_login_normal">#c36e00</color>
     <color name="btn_login_pressed">#303744</color>
     <color name="btn_logout_normal">#c36e00</color>
@@ -31,6 +32,15 @@
      <color name="gray_normal">#666667</color>
      <color name="grid_state_pressed">#1Affffff</color>
     <color name="grid_state_focused">#80000000</color>
+    
+    <color name="chat_history1_simple">#b8de01</color>
+    <color name="chat_history1_pressed">#ffffff</color>
+    
+    <color name="chat_history2_simple">#c4d433</color>
+    <color name="chat_history2_pressed">#ffffff</color>
+    
+    <color name="mmlist_history_simple">#ff9000</color>
+    <color name="mmlist_history_pressed">#ffffff</color>
     
       <color name="voip_interface_text_color">#bababa</color>
     <color name="black_deep">#FF000000</color>

@@ -6,10 +6,10 @@
     <item android:drawable="@drawable/mm_listitem_pressed" android:state_focused="false" android:state_pressed="true"/>
     <item android:drawable="@drawable/mm_listitem_simple"/> -->
 
-	<item android:drawable="@color/mmlist_history_pressed" android:state_selected="true"/>
-    <item android:drawable="@color/mmlist_history_pressed" android:state_focused="true"/>
-    <item android:drawable="@color/mmlist_history_pressed" android:state_focused="false" android:state_pressed="true"/>
-    <item android:drawable="@color/mmlist_history_simple"/>
+	<item android:drawable="@color/chat_history1_pressed" android:state_selected="true"/>
+    <item android:drawable="@color/chat_history1_pressed" android:state_focused="true"/>
+    <item android:drawable="@color/chat_history1_pressed" android:state_focused="false" android:state_pressed="true"/>
+    <item android:drawable="@color/chat_history1_simple"/>
 
 
 </selector>

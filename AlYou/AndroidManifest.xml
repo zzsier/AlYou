@@ -215,6 +215,21 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
+        
+        <activity
+            android:name="com.imalu.alyou.activity.UnConstructActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        
+        <activity
+            android:name="com.imalu.alyou.activity.MainPageClockActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        
         <!-- upload error log -->
         <activity
             android:name="com.imalu.alyou.activity.DiagnoseActivity"

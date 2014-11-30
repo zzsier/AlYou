@@ -2,28 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f2f0eb"
+    android:background="@drawable/activity_bg"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
-        android:background="@color/common_top_bar_blue" >
+        android:background="@color/common_top_bar_black" >
 
         <LinearLayout
-            android:layout_width="45dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:background="@drawable/common_tab_bg"
             android:onClick="back" >
+            
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerInParent="true"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="9dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/mm_title_back" />
         </LinearLayout>
 
         <TextView
@@ -66,7 +69,8 @@
                 android:background="@null"
                 android:hint="用户名"
                 android:singleLine="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="#FFFFFF" />
 
             <View
                 android:layout_width="match_parent"
@@ -99,7 +103,8 @@
                 android:hint="密码"
                 android:inputType="textPassword"
                 android:singleLine="true"
-                android:textSize="18sp" />
+                android:textSize="18sp" 
+                android:textColor="#FFFFFF" />
 
             <View
                 android:layout_width="match_parent"
@@ -132,7 +137,8 @@
                 android:hint="确认密码"
                 android:inputType="textPassword"
                 android:singleLine="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"  />
 
             <View
                 android:layout_width="match_parent"
@@ -155,7 +161,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/button_register_bg"
+                android:background="@drawable/button_login_bg"
                 android:onClick="register"
                 android:paddingBottom="7dp"
                 android:paddingTop="7dp"

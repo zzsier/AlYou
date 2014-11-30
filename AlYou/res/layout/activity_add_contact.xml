@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f2f2f2"
+    android:background="@color/top_bar_normal_bg"
     android:orientation="vertical" >
 
 
@@ -42,11 +42,11 @@
         android:layout_height="39dp"
         android:layout_margin="10dp"
         android:paddingLeft="5dp"
-        android:background="@drawable/button_normal_shape"
         android:hint="用户名"
         android:singleLine="true"
         android:textColorHint="#b3b3b3"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:background="@color/top_bar_normal_bg" />
 
     <LinearLayout
         android:id="@+id/ll_user"
@@ -58,7 +58,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/mm_listitem"
             android:duplicateParentState="true" >
 
             <ImageView

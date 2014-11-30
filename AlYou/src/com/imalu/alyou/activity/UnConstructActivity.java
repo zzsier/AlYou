@@ -11,15 +11,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.imalu.alyou;
+package com.imalu.alyou.activity;
 
-public class Constant {
-	public static final String NEW_FRIENDS_USERNAME = "item_new_friends";
-	public static final String GROUP_USERNAME = "item_groups";
-	public static final String MESSAGE_ATTR_IS_VOICE_CALL = "is_voice_call";
+
+import android.os.Bundle;
+import android.view.View;
+import com.imalu.alyou.R;
+
+public class UnConstructActivity extends BaseActivity{
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_unconstruct);	
+	}
 	
-	/*
-	 * 	粉丝数过分消耗流量
-		好友申请应该在通讯录里
-	 */
+	public void back(View v) {
+		finish();
+	}
 }

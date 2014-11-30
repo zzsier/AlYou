@@ -43,74 +43,6 @@ import com.imalu.alyou.AlUApplication;
  */
 public class MainPageFragment extends Fragment implements OnClickListener {
 
-	/**
-	 * 设置新消息通知布局
-	 */
-	private RelativeLayout rl_switch_notification;
-	/**
-	 * 设置声音布局
-	 */
-	private RelativeLayout rl_switch_sound;
-	/**
-	 * 设置震动布局
-	 */
-	private RelativeLayout rl_switch_vibrate;
-	/**
-	 * 设置扬声器布局
-	 */
-	private RelativeLayout rl_switch_speaker;
-
-	/**
-	 * 打开新消息通知imageView
-	 */
-	private ImageView iv_switch_open_notification;
-	/**
-	 * 关闭新消息通知imageview
-	 */
-	private ImageView iv_switch_close_notification;
-	/**
-	 * 打开声音提示imageview
-	 */
-	private ImageView iv_switch_open_sound;
-	/**
-	 * 关闭声音提示imageview
-	 */
-	private ImageView iv_switch_close_sound;
-	/**
-	 * 打开消息震动提示
-	 */
-	private ImageView iv_switch_open_vibrate;
-	/**
-	 * 关闭消息震动提示
-	 */
-	private ImageView iv_switch_close_vibrate;
-	/**
-	 * 打开扬声器播放语音
-	 */
-	private ImageView iv_switch_open_speaker;
-	/**
-	 * 关闭扬声器播放语音
-	 */
-	private ImageView iv_switch_close_speaker;
-
-	/**
-	 * 声音和震动中间的那条线
-	 */
-	private TextView textview1, textview2;
-
-	private LinearLayout blacklistContainer;
-	
-	/**
-	 * 退出按钮
-	 */
-	private Button logoutBtn;
-
-	private EMChatOptions chatOptions;
- 
-	/**
-	 * 诊断
-	 */
-	private LinearLayout llDiagnose;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_mainpage, container, false);
@@ -121,20 +53,26 @@ public class MainPageFragment extends Fragment implements OnClickListener {
 		super.onActivityCreated(savedInstanceState);
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
             return;
-		
+	
+		((Button)getView().findViewById(R.id.btn_mainpage_job)).setOnClickListener(this);
+		((Button)getView().findViewById(R.id.btn_mainpage_activity)).setOnClickListener(this);
+		((Button)getView().findViewById(R.id.btn_mainpage_board)).setOnClickListener(this);
+		((Button)getView().findViewById(R.id.btn_mainpage_clock)).setOnClickListener(this);
+		((Button)getView().findViewById(R.id.btn_mainpage_map)).setOnClickListener(this);
 	}
 
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.btn_mainpage_clock:
+				startActivity(new Intent(getActivity(), MainPageClockActivity.class));
+				break;
+			default:
+				startActivity(new Intent(getActivity(), UnConstructActivity.class));
+				break;
 		}
 	}
-	
-	public void showdetail(){
-		
-	}
-
 	
     @Override
     public void onSaveInstanceState(Bundle outState) {
