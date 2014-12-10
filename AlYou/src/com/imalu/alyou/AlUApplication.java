@@ -20,6 +20,9 @@ import android.content.Context;
 
 import com.baidu.mapapi.BMapManager;
 import com.easemob.EMCallBack;
+import com.imalu.alyou.db.gen.DaoMaster;
+import com.imalu.alyou.db.gen.DaoMaster.OpenHelper;
+import com.imalu.alyou.db.gen.DaoSession;
 import com.imalu.alyou.domain.User;
 
 public class AlUApplication extends Application {
@@ -28,6 +31,9 @@ public class AlUApplication extends Application {
 	private static AlUApplication instance;
 	// login user name
 	public final String PREF_USERNAME = "username";
+	
+	private static DaoMaster daoMaster;
+    private static DaoSession daoSession;
 	
 	/**
 	 * 当前用户nickname,为了苹果推送不是userid而是昵称
@@ -61,6 +67,36 @@ public class AlUApplication extends Application {
          */
         hxSDKHelper.onInit(applicationContext);
 	}
+	
+	/** 
+     * 取得DaoMaster 
+     *  
+     * @param context 
+     * @return 
+     */
+    public static DaoMaster getDaoMaster(Context context) {
+        if (daoMaster == null) {
+            OpenHelper helper = new DaoMaster.DevOpenHelper(context,Constant.DB_NAME, null);
+            daoMaster = new DaoMaster(helper.getWritableDatabase());
+        }
+        return daoMaster;
+    }
+      
+    /** 
+     * 取得DaoSession 
+     *  
+     * @param context 
+     * @return 
+     */  
+    public static DaoSession getDaoSession(Context context) {
+        if (daoSession == null) {
+            if (daoMaster == null) {
+                daoMaster = getDaoMaster(context);
+            }
+            daoSession = daoMaster.newSession();
+        }
+        return daoSession;  
+    }
 
 	public static AlUApplication getInstance() {
 		return instance;

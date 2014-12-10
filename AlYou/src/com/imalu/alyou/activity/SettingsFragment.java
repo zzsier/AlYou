@@ -105,7 +105,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	 */
 	private Button logoutBtn;
 
-	private EMChatOptions chatOptions;
+	//private EMChatOptions chatOptions;
  
 	/**
 	 * 诊断
@@ -119,157 +119,157 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
-            return;
-		rl_switch_notification = (RelativeLayout) getView().findViewById(R.id.rl_switch_notification);
-		rl_switch_sound = (RelativeLayout) getView().findViewById(R.id.rl_switch_sound);
-		rl_switch_vibrate = (RelativeLayout) getView().findViewById(R.id.rl_switch_vibrate);
-		rl_switch_speaker = (RelativeLayout) getView().findViewById(R.id.rl_switch_speaker);
-
-		iv_switch_open_notification = (ImageView) getView().findViewById(R.id.iv_switch_open_notification);
-		iv_switch_close_notification = (ImageView) getView().findViewById(R.id.iv_switch_close_notification);
-		iv_switch_open_sound = (ImageView) getView().findViewById(R.id.iv_switch_open_sound);
-		iv_switch_close_sound = (ImageView) getView().findViewById(R.id.iv_switch_close_sound);
-		iv_switch_open_vibrate = (ImageView) getView().findViewById(R.id.iv_switch_open_vibrate);
-		iv_switch_close_vibrate = (ImageView) getView().findViewById(R.id.iv_switch_close_vibrate);
-		iv_switch_open_speaker = (ImageView) getView().findViewById(R.id.iv_switch_open_speaker);
-		iv_switch_close_speaker = (ImageView) getView().findViewById(R.id.iv_switch_close_speaker);
+//		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
+//            return;
+//		rl_switch_notification = (RelativeLayout) getView().findViewById(R.id.rl_switch_notification);
+//		rl_switch_sound = (RelativeLayout) getView().findViewById(R.id.rl_switch_sound);
+//		rl_switch_vibrate = (RelativeLayout) getView().findViewById(R.id.rl_switch_vibrate);
+//		rl_switch_speaker = (RelativeLayout) getView().findViewById(R.id.rl_switch_speaker);
+//
+//		iv_switch_open_notification = (ImageView) getView().findViewById(R.id.iv_switch_open_notification);
+//		iv_switch_close_notification = (ImageView) getView().findViewById(R.id.iv_switch_close_notification);
+//		iv_switch_open_sound = (ImageView) getView().findViewById(R.id.iv_switch_open_sound);
+//		iv_switch_close_sound = (ImageView) getView().findViewById(R.id.iv_switch_close_sound);
+//		iv_switch_open_vibrate = (ImageView) getView().findViewById(R.id.iv_switch_open_vibrate);
+//		iv_switch_close_vibrate = (ImageView) getView().findViewById(R.id.iv_switch_close_vibrate);
+//		iv_switch_open_speaker = (ImageView) getView().findViewById(R.id.iv_switch_open_speaker);
+//		iv_switch_close_speaker = (ImageView) getView().findViewById(R.id.iv_switch_close_speaker);
 		logoutBtn = (Button) getView().findViewById(R.id.btn_logout);
-		if(!TextUtils.isEmpty(EMChatManager.getInstance().getCurrentUser())){
-			logoutBtn.setText(getString(R.string.button_logout) + "(" + EMChatManager.getInstance().getCurrentUser() + ")");
-		}
-
-		textview1 = (TextView) getView().findViewById(R.id.textview1);
-		textview2 = (TextView) getView().findViewById(R.id.textview2);
-		
-		blacklistContainer = (LinearLayout) getView().findViewById(R.id.ll_black_list);
-		llDiagnose=(LinearLayout) getView().findViewById(R.id.ll_diagnose);
-		blacklistContainer.setOnClickListener(this);
-		rl_switch_notification.setOnClickListener(this);
-		rl_switch_sound.setOnClickListener(this);
-		rl_switch_vibrate.setOnClickListener(this);
-		rl_switch_speaker.setOnClickListener(this);
+//		if(!TextUtils.isEmpty(EMChatManager.getInstance().getCurrentUser())){
+//			logoutBtn.setText(getString(R.string.button_logout) + "(" + EMChatManager.getInstance().getCurrentUser() + ")");
+//		}
+//
+//		textview1 = (TextView) getView().findViewById(R.id.textview1);
+//		textview2 = (TextView) getView().findViewById(R.id.textview2);
+//		
+//		blacklistContainer = (LinearLayout) getView().findViewById(R.id.ll_black_list);
+//		llDiagnose=(LinearLayout) getView().findViewById(R.id.ll_diagnose);
+//		blacklistContainer.setOnClickListener(this);
+//		rl_switch_notification.setOnClickListener(this);
+//		rl_switch_sound.setOnClickListener(this);
+//		rl_switch_vibrate.setOnClickListener(this);
+//		rl_switch_speaker.setOnClickListener(this);
 		logoutBtn.setOnClickListener(this);
-		llDiagnose.setOnClickListener(this);
-		chatOptions = EMChatManager.getInstance().getChatOptions();
-		if (chatOptions.getNotificationEnable()) {
-			iv_switch_open_notification.setVisibility(View.VISIBLE);
-			iv_switch_close_notification.setVisibility(View.INVISIBLE);
-		} else {
-			iv_switch_open_notification.setVisibility(View.INVISIBLE);
-			iv_switch_close_notification.setVisibility(View.VISIBLE);
-		}
-		if (chatOptions.getNoticedBySound()) {
-			iv_switch_open_sound.setVisibility(View.VISIBLE);
-			iv_switch_close_sound.setVisibility(View.INVISIBLE);
-		} else {
-			iv_switch_open_sound.setVisibility(View.INVISIBLE);
-			iv_switch_close_sound.setVisibility(View.VISIBLE);
-		}
-		if (chatOptions.getNoticedByVibrate()) {
-			iv_switch_open_vibrate.setVisibility(View.VISIBLE);
-			iv_switch_close_vibrate.setVisibility(View.INVISIBLE);
-		} else {
-			iv_switch_open_vibrate.setVisibility(View.INVISIBLE);
-			iv_switch_close_vibrate.setVisibility(View.VISIBLE);
-		}
+		//llDiagnose.setOnClickListener(this);
+//		chatOptions = EMChatManager.getInstance().getChatOptions();
+//		if (chatOptions.getNotificationEnable()) {
+//			iv_switch_open_notification.setVisibility(View.VISIBLE);
+//			iv_switch_close_notification.setVisibility(View.INVISIBLE);
+//		} else {
+//			iv_switch_open_notification.setVisibility(View.INVISIBLE);
+//			iv_switch_close_notification.setVisibility(View.VISIBLE);
+//		}
+//		if (chatOptions.getNoticedBySound()) {
+//			iv_switch_open_sound.setVisibility(View.VISIBLE);
+//			iv_switch_close_sound.setVisibility(View.INVISIBLE);
+//		} else {
+//			iv_switch_open_sound.setVisibility(View.INVISIBLE);
+//			iv_switch_close_sound.setVisibility(View.VISIBLE);
+//		}
+//		if (chatOptions.getNoticedByVibrate()) {
+//			iv_switch_open_vibrate.setVisibility(View.VISIBLE);
+//			iv_switch_close_vibrate.setVisibility(View.INVISIBLE);
+//		} else {
+//			iv_switch_open_vibrate.setVisibility(View.INVISIBLE);
+//			iv_switch_close_vibrate.setVisibility(View.VISIBLE);
+//		}
 
-		if (chatOptions.getUseSpeaker()) {
-			iv_switch_open_speaker.setVisibility(View.VISIBLE);
-			iv_switch_close_speaker.setVisibility(View.INVISIBLE);
-		} else {
-			iv_switch_open_speaker.setVisibility(View.INVISIBLE);
-			iv_switch_close_speaker.setVisibility(View.VISIBLE);
-		}
+//		if (chatOptions.getUseSpeaker()) {
+//			iv_switch_open_speaker.setVisibility(View.VISIBLE);
+//			iv_switch_close_speaker.setVisibility(View.INVISIBLE);
+//		} else {
+//			iv_switch_open_speaker.setVisibility(View.INVISIBLE);
+//			iv_switch_close_speaker.setVisibility(View.VISIBLE);
+//		}
 
 	}
 
 	
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.rl_switch_notification:
-			if (iv_switch_open_notification.getVisibility() == View.VISIBLE) {
-				iv_switch_open_notification.setVisibility(View.INVISIBLE);
-				iv_switch_close_notification.setVisibility(View.VISIBLE);
-				rl_switch_sound.setVisibility(View.GONE);
-				rl_switch_vibrate.setVisibility(View.GONE);
-				textview1.setVisibility(View.GONE);
-				textview2.setVisibility(View.GONE);
-				chatOptions.setNotificationEnable(false);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-
-				HXSDKHelper.getInstance().getModel().setSettingMsgNotification(false);
-			} else {
-				iv_switch_open_notification.setVisibility(View.VISIBLE);
-				iv_switch_close_notification.setVisibility(View.INVISIBLE);
-				rl_switch_sound.setVisibility(View.VISIBLE);
-				rl_switch_vibrate.setVisibility(View.VISIBLE);
-				textview1.setVisibility(View.VISIBLE);
-				textview2.setVisibility(View.VISIBLE);
-				chatOptions.setNotificationEnable(true);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-				HXSDKHelper.getInstance().getModel().setSettingMsgNotification(true);
-			}
-			break;
-		case R.id.rl_switch_sound:
-			if (iv_switch_open_sound.getVisibility() == View.VISIBLE) {
-				iv_switch_open_sound.setVisibility(View.INVISIBLE);
-				iv_switch_close_sound.setVisibility(View.VISIBLE);
-				chatOptions.setNoticeBySound(false);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-				HXSDKHelper.getInstance().getModel().setSettingMsgSound(false);
-			} else {
-				iv_switch_open_sound.setVisibility(View.VISIBLE);
-				iv_switch_close_sound.setVisibility(View.INVISIBLE);
-				chatOptions.setNoticeBySound(true);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-				HXSDKHelper.getInstance().getModel().setSettingMsgSound(true);
-			}
-			break;
-		case R.id.rl_switch_vibrate:
-			if (iv_switch_open_vibrate.getVisibility() == View.VISIBLE) {
-				iv_switch_open_vibrate.setVisibility(View.INVISIBLE);
-				iv_switch_close_vibrate.setVisibility(View.VISIBLE);
-				chatOptions.setNoticedByVibrate(false);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-				HXSDKHelper.getInstance().getModel().setSettingMsgVibrate(false);
-			} else {
-				iv_switch_open_vibrate.setVisibility(View.VISIBLE);
-				iv_switch_close_vibrate.setVisibility(View.INVISIBLE);
-				chatOptions.setNoticedByVibrate(true);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-				HXSDKHelper.getInstance().getModel().setSettingMsgVibrate(true);
-			}
-			break;
-		case R.id.rl_switch_speaker:
-			if (iv_switch_open_speaker.getVisibility() == View.VISIBLE) {
-				iv_switch_open_speaker.setVisibility(View.INVISIBLE);
-				iv_switch_close_speaker.setVisibility(View.VISIBLE);
-				chatOptions.setUseSpeaker(false);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-				HXSDKHelper.getInstance().getModel().setSettingMsgSpeaker(false);
-			} else {
-				iv_switch_open_speaker.setVisibility(View.VISIBLE);
-				iv_switch_close_speaker.setVisibility(View.INVISIBLE);
-				chatOptions.setUseSpeaker(true);
-				EMChatManager.getInstance().setChatOptions(chatOptions);
-				HXSDKHelper.getInstance().getModel().setSettingMsgVibrate(true);
-			}
-			break;
-		case R.id.btn_logout: //退出登陆
-			logout();
-			break;
-		case R.id.ll_black_list:
-			startActivity(new Intent(getActivity(), BlacklistActivity.class));
-			break;
-		case R.id.ll_diagnose:
-			startActivity(new Intent(getActivity(), DiagnoseActivity.class));
-			break;
-		default:
-			break;
-		}
-
+//		switch (v.getId()) {
+//		case R.id.rl_switch_notification:
+//			if (iv_switch_open_notification.getVisibility() == View.VISIBLE) {
+//				iv_switch_open_notification.setVisibility(View.INVISIBLE);
+//				iv_switch_close_notification.setVisibility(View.VISIBLE);
+//				rl_switch_sound.setVisibility(View.GONE);
+//				rl_switch_vibrate.setVisibility(View.GONE);
+//				textview1.setVisibility(View.GONE);
+//				textview2.setVisibility(View.GONE);
+//				//chatOptions.setNotificationEnable(false);
+//				//EMChatManager.getInstance().setChatOptions(chatOptions);
+//
+//				HXSDKHelper.getInstance().getModel().setSettingMsgNotification(false);
+//			} else {
+//				iv_switch_open_notification.setVisibility(View.VISIBLE);
+//				iv_switch_close_notification.setVisibility(View.INVISIBLE);
+//				rl_switch_sound.setVisibility(View.VISIBLE);
+//				rl_switch_vibrate.setVisibility(View.VISIBLE);
+//				textview1.setVisibility(View.VISIBLE);
+//				textview2.setVisibility(View.VISIBLE);
+//				//chatOptions.setNotificationEnable(true);
+//				//EMChatManager.getInstance().setChatOptions(chatOptions);
+//				HXSDKHelper.getInstance().getModel().setSettingMsgNotification(true);
+//			}
+//			break;
+//		case R.id.rl_switch_sound:
+//			if (iv_switch_open_sound.getVisibility() == View.VISIBLE) {
+//				iv_switch_open_sound.setVisibility(View.INVISIBLE);
+//				iv_switch_close_sound.setVisibility(View.VISIBLE);
+//				//chatOptions.setNoticeBySound(false);
+//				EMChatManager.getInstance().setChatOptions(chatOptions);
+//				HXSDKHelper.getInstance().getModel().setSettingMsgSound(false);
+//			} else {
+//				iv_switch_open_sound.setVisibility(View.VISIBLE);
+//				iv_switch_close_sound.setVisibility(View.INVISIBLE);
+//				//chatOptions.setNoticeBySound(true);
+//				EMChatManager.getInstance().setChatOptions(chatOptions);
+//				HXSDKHelper.getInstance().getModel().setSettingMsgSound(true);
+//			}
+//			break;
+//		case R.id.rl_switch_vibrate:
+//			if (iv_switch_open_vibrate.getVisibility() == View.VISIBLE) {
+//				iv_switch_open_vibrate.setVisibility(View.INVISIBLE);
+//				iv_switch_close_vibrate.setVisibility(View.VISIBLE);
+//				chatOptions.setNoticedByVibrate(false);
+//				EMChatManager.getInstance().setChatOptions(chatOptions);
+//				HXSDKHelper.getInstance().getModel().setSettingMsgVibrate(false);
+//			} else {
+//				iv_switch_open_vibrate.setVisibility(View.VISIBLE);
+//				iv_switch_close_vibrate.setVisibility(View.INVISIBLE);
+//				chatOptions.setNoticedByVibrate(true);
+//				EMChatManager.getInstance().setChatOptions(chatOptions);
+//				HXSDKHelper.getInstance().getModel().setSettingMsgVibrate(true);
+//			}
+//			break;
+//		case R.id.rl_switch_speaker:
+//			if (iv_switch_open_speaker.getVisibility() == View.VISIBLE) {
+//				iv_switch_open_speaker.setVisibility(View.INVISIBLE);
+//				iv_switch_close_speaker.setVisibility(View.VISIBLE);
+//				chatOptions.setUseSpeaker(false);
+//				EMChatManager.getInstance().setChatOptions(chatOptions);
+//				HXSDKHelper.getInstance().getModel().setSettingMsgSpeaker(false);
+//			} else {
+//				iv_switch_open_speaker.setVisibility(View.VISIBLE);
+//				iv_switch_close_speaker.setVisibility(View.INVISIBLE);
+//				chatOptions.setUseSpeaker(true);
+//				EMChatManager.getInstance().setChatOptions(chatOptions);
+//				HXSDKHelper.getInstance().getModel().setSettingMsgVibrate(true);
+//			}
+//			break;
+//		case R.id.btn_logout: //退出登陆
+//			logout();
+//			break;
+//		case R.id.ll_black_list:
+//			startActivity(new Intent(getActivity(), BlacklistActivity.class));
+//			break;
+//		case R.id.ll_diagnose:
+//			startActivity(new Intent(getActivity(), DiagnoseActivity.class));
+//			break;
+//		default:
+//			break;
+//		}
+//
 	}
 
 	void logout() {

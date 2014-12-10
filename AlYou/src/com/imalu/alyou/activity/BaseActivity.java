@@ -35,28 +35,28 @@ import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends FragmentActivity {
     private static final int notifiId = 11;
-    protected NotificationManager notificationManager;
+    //protected NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        //notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // onresume时，取消notification显示
-        EMChatManager.getInstance().activityResumed();
+        //EMChatManager.getInstance().activityResumed();
         // umeng
-        MobclickAgent.onResume(this);
+        //MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         // umeng
-        MobclickAgent.onPause(this);
+        //MobclickAgent.onPause(this);
     }
 
     /**
@@ -64,27 +64,27 @@ public class BaseActivity extends FragmentActivity {
      * 如果不需要，注释掉即可
      * @param message
      */
-    protected void notifyNewMessage(EMMessage message) {
+  //  protected void notifyNewMessage(EMMessage message) {
         //如果是设置了不提醒只显示数目的群组(这个是app里保存这个数据的，demo里不做判断)
         //以及设置了setShowNotificationInbackgroup:false(设为false后，后台时sdk也发送广播)
-        if(!EasyUtils.isAppRunningForeground(this)){
-            return;
-        }
+//        if(!EasyUtils.isAppRunningForeground(this)){
+//            return;
+//        }
+//        
+//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+//                .setSmallIcon(getApplicationInfo().icon)
+//                .setWhen(System.currentTimeMillis()).setAutoCancel(true);
         
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(getApplicationInfo().icon)
-                .setWhen(System.currentTimeMillis()).setAutoCancel(true);
-        
-        String ticker = CommonUtils.getMessageDigest(message, this);
-        if(message.getType() == Type.TXT)
-            ticker = ticker.replaceAll("\\[.{2,3}\\]", "[表情]");
+//        String ticker = CommonUtils.getMessageDigest(message, this);
+//        if(message.getType() == Type.TXT)
+//            ticker = ticker.replaceAll("\\[.{2,3}\\]", "[表情]");
         //设置状态栏提示
-        mBuilder.setTicker(message.getFrom()+": " + ticker);
+        //mBuilder.setTicker(message.getFrom()+": " + ticker);
 
-        Notification notification = mBuilder.build();
-        notificationManager.notify(notifiId, notification);
-        notificationManager.cancel(notifiId);
-    }
+        //Notification notification = mBuilder.build();
+        //notificationManager.notify(notifiId, notification);
+        //notificationManager.cancel(notifiId);
+  //  }
 
     /**
      * 返回

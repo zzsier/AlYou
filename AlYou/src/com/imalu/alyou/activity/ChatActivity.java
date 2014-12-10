@@ -989,7 +989,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 			}
 			if (!username.equals(toChatUsername)) {
 				// 消息不是发给当前会话，return
-			    notifyNewMessage(message);
+			    //notifyNewMessage(message);
 				return;
 			}
 			// conversation =

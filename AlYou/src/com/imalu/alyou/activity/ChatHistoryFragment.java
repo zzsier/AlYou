@@ -185,7 +185,7 @@ public class ChatHistoryFragment extends Fragment {
 			adapter.notifyDataSetChanged();
 
 			// 更新消息未读数
-			((MainActivity) getActivity()).updateUnreadLabel();
+			//((MainActivity) getActivity()).updateUnreadLabel();
 
 			return true;
 		}

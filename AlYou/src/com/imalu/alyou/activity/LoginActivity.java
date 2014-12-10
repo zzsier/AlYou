@@ -18,6 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -26,6 +31,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -42,8 +48,14 @@ import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.AlUHXSDKHelper;
 import com.imalu.alyou.db.UserDao;
 import com.imalu.alyou.domain.User;
+import com.imalu.alyou.net.JsonHttpResponseHandler;
+import com.imalu.alyou.net.NetManager;
+import com.imalu.alyou.net.NetObject;
+import com.imalu.alyou.net.request.LoginRequest;
+import com.imalu.alyou.net.response.UserInfo;
 import com.imalu.alyou.utils.CommonUtils;
 import com.umeng.analytics.MobclickAgent;
+
 
 /**
  * 登陆页面
@@ -62,12 +74,12 @@ public class LoginActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 
 		// 如果用户名密码都有，直接进入主页面
-		if (AlUHXSDKHelper.getInstance().isLogined()) {
-			autoLogin = true;
-			startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
-			return;
-		}
+//		if (AlUHXSDKHelper.getInstance().isLogined()) {
+//			autoLogin = true;
+//			startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//
+//			return;
+//		}
 		setContentView(R.layout.activity_login);
 
 		usernameEditText = (EditText) findViewById(R.id.username);
@@ -106,10 +118,11 @@ public class LoginActivity extends BaseActivity {
 
 		final String username = usernameEditText.getText().toString();
 		final String password = passwordEditText.getText().toString();
-		AlUApplication.currentUserNick = usernameEditText.getText().toString();
-
+		//AlUApplication.currentUserNick = usernameEditText.getText().toString();
+		
 		if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
-			progressShow = true;
+			
+			/*progressShow = true;
 			final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
 			pd.setCanceledOnTouchOutside(false);
 			pd.setOnCancelListener(new OnCancelListener() {
@@ -118,9 +131,109 @@ public class LoginActivity extends BaseActivity {
 				public void onCancel(DialogInterface dialog) {
 					progressShow = false;
 				}
+			});*/
+			//pd.setMessage("正在登陆...");
+			//pd.show();
+			
+			LoginRequest loginReq = new LoginRequest();
+			loginReq.setUsername(username);
+			loginReq.setPassword(password);
+		
+			NetManager.post(NetManager.LOGIN_REQUEST_OPERATION, loginReq, new JsonHttpResponseHandler() {
+				@Override
+				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+					//pd.dismiss();
+					Log.e("login_check", " response:"+response.toString());
+					UserInfo userInfo = new UserInfo();
+					userInfo.setJsonObject(response);
+					//Toast.makeText(getApplicationContext(), "登录失败: " + , 0).show();
+					
+					
+					//UserInfo userInfo = (UserInfo)response;
+					// 登陆成功，保存用户名密码
+					//AlUApplication.getInstance().setUserName(username);
+					//AlUApplication.getInstance().setPassword(password);
+					
+					/*runOnUiThread(new Runnable() {
+						public void run() {
+							pd.setMessage("正在获取好友和群聊列表...");
+						}
+					});*/
+					
+					try {
+						// ** 第一次登录或者之前logout后，加载所有本地群和回话
+						// ** manually load all local groups and
+						// conversations in case we are auto login
+						//EMGroupManager.getInstance().loadAllGroups();
+						//EMChatManager.getInstance().loadAllConversations();
+						
+						// demo中简单的处理成每次登陆都去获取好友username，开发者自己根据情况而定
+						/*List<String> usernames = EMContactManager.getInstance().getContactUserNames();
+						EMLog.d("roster", "contacts size: " + usernames.size());
+						
+						for (String username : usernames) {
+							User user = new User();
+							user.setUsername(username);
+							setUserHearder(username, user);
+							userlist.put(username, user);
+						}*/
+						/*Map<String, User> userlist = new HashMap<String, User>();
+						// 添加user"申请与通知"
+						User newFriends = new User();
+						newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
+						newFriends.setNick("申请与通知");
+						newFriends.setHeader("");
+						userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
+						// 添加"群聊"
+						User groupUser = new User();
+						groupUser.setUsername(Constant.GROUP_USERNAME);
+						groupUser.setNick("群聊");
+						groupUser.setHeader("");
+						userlist.put(Constant.GROUP_USERNAME, groupUser);*/
+						
+						// 存入内存
+						//AlUApplication.getInstance().setContactList(userlist);
+						// 存入db
+						//UserDao dao = new UserDao(LoginActivity.this);
+						//List<User> users = new ArrayList<User>(userlist.values());
+						//dao.saveContactList(users);
+						
+						// 获取群聊列表(群聊里只有groupid和groupname等简单信息，不包含members),sdk会把群组存入到内存和db中
+						//EMGroupManager.getInstance().getGroupsFromServer();*/
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
+					//boolean updatenick = EMChatManager.getInstance().updateCurrentUserNick(AlUApplication.currentUserNick);
+					//if (!updatenick) {
+					//	EMLog.e("LoginActivity", "update current user nick fail");
+					//}
+					
+					//if (!LoginActivity.this.isFinishing())
+					//pd.dismiss();
+					// 进入主页面
+					startActivity(new Intent(LoginActivity.this, MainActivity.class));
+					finish();
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers, final String responseString, Throwable throwable) {
+					if (!progressShow) {
+						return;
+					}
+					runOnUiThread(new Runnable() {
+						public void run() {
+							//pd.dismiss();
+							Toast.makeText(getApplicationContext(), "登录失败: " + responseString, 0).show();
+							
+						}
+					});
+				}
 			});
-			pd.setMessage("正在登陆...");
-			pd.show();
+		}
+
+		/*
+			
 
 			final long start = System.currentTimeMillis();
 			// 调用sdk登陆方法登陆聊天服务器
@@ -134,67 +247,7 @@ public class LoginActivity extends BaseActivity {
 					if (!progressShow) {
 						return;
 					}
-					// 登陆成功，保存用户名密码
-					AlUApplication.getInstance().setUserName(username);
-					AlUApplication.getInstance().setPassword(password);
-					runOnUiThread(new Runnable() {
-						public void run() {
-							pd.setMessage("正在获取好友和群聊列表...");
-						}
-					});
-					try {
-						// ** 第一次登录或者之前logout后，加载所有本地群和回话
-						// ** manually load all local groups and
-						// conversations in case we are auto login
-						EMGroupManager.getInstance().loadAllGroups();
-						EMChatManager.getInstance().loadAllConversations();
-
-						// demo中简单的处理成每次登陆都去获取好友username，开发者自己根据情况而定
-						List<String> usernames = EMContactManager.getInstance().getContactUserNames();
-						EMLog.d("roster", "contacts size: " + usernames.size());
-						Map<String, User> userlist = new HashMap<String, User>();
-						for (String username : usernames) {
-							User user = new User();
-							user.setUsername(username);
-							setUserHearder(username, user);
-							userlist.put(username, user);
-						}
-						// 添加user"申请与通知"
-						User newFriends = new User();
-						newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
-						newFriends.setNick("申请与通知");
-						newFriends.setHeader("");
-						userlist.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
-						// 添加"群聊"
-						User groupUser = new User();
-						groupUser.setUsername(Constant.GROUP_USERNAME);
-						groupUser.setNick("群聊");
-						groupUser.setHeader("");
-						userlist.put(Constant.GROUP_USERNAME, groupUser);
-
-						// 存入内存
-						AlUApplication.getInstance().setContactList(userlist);
-						// 存入db
-						UserDao dao = new UserDao(LoginActivity.this);
-						List<User> users = new ArrayList<User>(userlist.values());
-						dao.saveContactList(users);
-
-						// 获取群聊列表(群聊里只有groupid和groupname等简单信息，不包含members),sdk会把群组存入到内存和db中
-						EMGroupManager.getInstance().getGroupsFromServer();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					//更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
-					boolean updatenick = EMChatManager.getInstance().updateCurrentUserNick(AlUApplication.currentUserNick);
-					if (!updatenick) {
-						EMLog.e("LoginActivity", "update current user nick fail");
-					}
-
-					if (!LoginActivity.this.isFinishing())
-						pd.dismiss();
-					// 进入主页面
-					startActivity(new Intent(LoginActivity.this, MainActivity.class));
-					finish();
+					
 				}
 
 				@Override
@@ -206,19 +259,12 @@ public class LoginActivity extends BaseActivity {
 				public void onError(final int code, final String message) {
 					loginFailure2Umeng(start,code,message);
 
-					if (!progressShow) {
-						return;
-					}
-					runOnUiThread(new Runnable() {
-						public void run() {
-							pd.dismiss();
-							Toast.makeText(getApplicationContext(), "登录失败: " + message, 0).show();
-
-						}
-					});
+					
 				}
 			});
+			
 		}
+		*/
 
 	}
 
@@ -252,13 +298,13 @@ public class LoginActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (autoLogin) {
-			return;
-		}
-
-		if (AlUApplication.getInstance().getUserName() != null) {
-			usernameEditText.setText(AlUApplication.getInstance().getUserName());
-		}
+//		if (autoLogin) {
+//			return;
+//		}
+//
+//		if (AlUApplication.getInstance().getUserName() != null) {
+//			usernameEditText.setText(AlUApplication.getInstance().getUserName());
+//		}
 	}
 
 	/**
