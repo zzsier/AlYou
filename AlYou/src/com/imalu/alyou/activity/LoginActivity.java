@@ -139,7 +139,7 @@ public class LoginActivity extends BaseActivity {
 			loginReq.setUsername(username);
 			loginReq.setPassword(password);
 		
-			NetManager.post(NetManager.LOGIN_REQUEST_OPERATION, loginReq, new JsonHttpResponseHandler() {
+			NetManager.execute(NetManager.LOGIN_REQUEST_OPERATION, loginReq, new JsonHttpResponseHandler() {
 				@Override
 				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 					//pd.dismiss();

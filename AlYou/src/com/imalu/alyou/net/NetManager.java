@@ -13,10 +13,28 @@ public class NetManager {
 	
 	private static AsyncHttpClient client = new AsyncHttpClient();
 	
+	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
+		RequestParams params = new RequestParams(netObj.getParams());
+		client.get(getUrl(operationCode), params, responseHandler);
+	}
+	
 	public static void post(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
 		RequestParams params = new RequestParams(netObj.getParams());
 		params.setUseJsonStreamer(true);
 		client.post(getUrl(operationCode), params, responseHandler);
+	}
+	
+	
+	public static void execute(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
+		switch(operationCode)
+		{
+			case LOGIN_REQUEST_OPERATION:
+				NetManager.post(operationCode, netObj, responseHandler);
+			case REGISTER_REQUEST_OPERATION:
+				NetManager.post(operationCode, netObj, responseHandler);
+			default:
+				NetManager.get(operationCode, netObj, responseHandler);
+		}
 	}
 	
 	public static String getUrl(int operationCode)
