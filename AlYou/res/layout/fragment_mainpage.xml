@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/activity_bg"
+    android:background="@drawable/ico_29"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -14,135 +14,294 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="主页"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="消息"
             android:textColor="#fff"
             android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/image_title_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@+id/image_title_add"
+            android:layout_marginRight="26dp"
+            android:layout_toLeftOf="@+id/image_title_add"
+            android:src="@drawable/ico_search" />
+
+        <ImageView
+            android:id="@+id/image_title_add"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ico_add" />
+
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal" >
-        
-        <Button
-            android:id="@+id/btn_mainpage_job"
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/ioc_19"
+        android:orientation="vertical" >
+
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ico_006"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_mainpage_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="5"
+                android:background="@null"
+                android:gravity="center"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:paddingRight="100dp"
+                android:text="每日任务"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/image_mainpage_job"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignTop="@+id/btn_mainpage_job"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ico_003" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dip"
-            android:layout_marginTop="10dip"
-            android:layout_marginRight="40dip"
-            android:layout_marginBottom="10dip"
-            android:layout_weight="5"
-            android:background="@drawable/button_login_bg"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp"
-            android:gravity="center"
-            android:text="每日任务"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-        
-     </RelativeLayout>
-     
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
-        
-        <Button
-            android:id="@+id/btn_mainpage_activity"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ico_25" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dip"
-            android:layout_marginTop="10dip"
-            android:layout_marginRight="40dip"
-            android:layout_marginBottom="10dip"
-            android:layout_weight="5"
-            android:background="@drawable/button_login_bg"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp"
-            android:gravity="center"
-            android:text="我的活动"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-        
-     </RelativeLayout>
-     
-    <RelativeLayout
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ico_006"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_mainpage_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="5"
+                android:background="@null"
+                android:gravity="center"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:paddingRight="100dp"
+                android:text="我的活动"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/image_mainpage_activity"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ico_003" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
-        
-        <Button
-            android:id="@+id/btn_mainpage_board"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dip"
-            android:layout_marginTop="10dip"
-            android:layout_marginRight="40dip"
-            android:layout_marginBottom="10dip"
-            android:layout_weight="5"
-            android:background="@drawable/button_login_bg"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp"
-            android:gravity="center"
-            android:text="论坛"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-        
-     </RelativeLayout>
-     
-    <RelativeLayout
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ioc_19"
+        android:orientation="vertical" >
+     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/ico_006"
         android:orientation="horizontal" >
-        
+
         <Button
             android:id="@+id/btn_mainpage_clock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dip"
-            android:layout_marginTop="10dip"
-            android:layout_marginRight="40dip"
-            android:layout_marginBottom="10dip"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/ImageView03"
             android:layout_weight="5"
-            android:background="@drawable/button_login_bg"
+            android:background="@null"
+            android:gravity="center"
             android:paddingBottom="7dp"
             android:paddingTop="7dp"
-            android:gravity="center"
+            android:paddingRight="100dp"
             android:text="计时器"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
-        
-     </RelativeLayout>
-     
+
+        <ImageView
+            android:id="@+id/image_mainpage_clock"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/btn_mainpage_clock"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ico_003" />
+
+    </RelativeLayout>
+  <ImageView
+            android:id="@+id/iv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ico_25" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
+         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/ico_006"
         android:orientation="horizontal" >
-        
+
+        <Button
+            android:id="@+id/btn_mainpage_board"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            
+            android:layout_toRightOf="@+id/ImageView04"
+            android:layout_weight="5"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
+            android:paddingRight="100dp"
+            android:text="论坛"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/image_mainpage_board"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/btn_mainpage_board"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ico_003" />
+
+    </RelativeLayout>
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ioc_19"
+        android:orientation="vertical" >
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/ico_006"
+        android:orientation="horizontal" >
+
         <Button
             android:id="@+id/btn_mainpage_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dip"
-            android:layout_marginTop="10dip"
-            android:layout_marginRight="40dip"
-            android:layout_marginBottom="10dip"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/ImageView05"
             android:layout_weight="5"
-            android:background="@drawable/button_login_bg"
+            android:background="@null"
+            android:gravity="center"
             android:paddingBottom="7dp"
             android:paddingTop="7dp"
-            android:gravity="center"
+            android:paddingRight="100dp"
             android:text="地图"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
-        
-     </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/image_mainpage_map"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/btn_mainpage_map"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ico_003" />
+
+    </RelativeLayout>
+  <ImageView
+            android:id="@+id/iv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ico_25" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/ico_006"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_mainpage_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            
+            android:layout_toRightOf="@+id/ImageView04"
+            android:layout_weight="5"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
+            android:paddingRight="100dp"
+            android:text="视频"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/image_mainpage_video"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/btn_mainpage_video"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ico_003" />
+
+    </RelativeLayout>
+    </LinearLayout>
+    
+   
 
 </LinearLayout>

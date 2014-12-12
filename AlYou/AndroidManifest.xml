@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,12 +24,11 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    
 
-    <!--<permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />-->
+    <!-- <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" /> -->
 
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
- <!-- android:icon="@drawable/logo_uidemo" -->
+    <!-- android:icon="@drawable/logo_uidemo" -->
     <application
         android:name="AlUApplication"
         android:allowBackup="true"
@@ -41,9 +40,9 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustPan" >
         </activity>
-        
+
         <!-- 开屏页 -->
-           <activity
+        <activity
             android:name="com.imalu.alyou.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
@@ -53,7 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <!-- 登陆 -->
         <activity
             android:name="com.imalu.alyou.activity.LoginActivity"
@@ -193,8 +192,8 @@
         <activity
             android:name="com.imalu.alyou.activity.EditActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
             android:name="com.imalu.alyou.activity.ShowVideoActivity"
@@ -215,21 +214,19 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        
         <activity
             android:name="com.imalu.alyou.activity.UnConstructActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        
         <activity
             android:name="com.imalu.alyou.activity.MainPageClockActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        
+
         <!-- upload error log -->
         <activity
             android:name="com.imalu.alyou.activity.DiagnoseActivity"
@@ -237,7 +234,18 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-
+        <!-- 论坛  -->
+        <activity android:name=".activity.BBSActivity" 
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+        <!-- 我的活动 -->
+        <activity android:name=".activity.EverydayActivity" 
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
         <!-- 开机自启动服务 -->
         <receiver android:name="com.easemob.chat.StartServiceReceiver" >
             <intent-filter android:priority="1000" >
@@ -248,27 +256,24 @@
             </intent-filter>
         </receiver>
 
-        
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="easemob-demo#chatdemoui" />
         <!-- 声明sdk所需的service -->
         <service android:name="com.easemob.chat.EMChatService" />
-        
+
         <!-- 百度地图所需的service -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-        
+
         <!-- umeng appkey，可忽略 -->
-         <meta-data
+        <meta-data
             android:name="UMENG_APPKEY"
             android:value="53912a3156240b01a7075ed1" >
         </meta-data>
-        
-        
     </application>
 
 </manifest>

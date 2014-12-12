@@ -68,6 +68,18 @@ public class MainPageFragment extends Fragment implements OnClickListener {
 			case R.id.btn_mainpage_clock:
 				startActivity(new Intent(getActivity(), MainPageClockActivity.class));
 				break;
+			case R.id.btn_mainpage_board:
+				startActivity(new Intent(getActivity(),BBSActivity.class));
+				break;
+			case R.id.btn_mainpage_job:
+				break;
+			case R.id.btn_mainpage_activity:
+				startActivity( new Intent(getActivity(),EverydayActivity.class));
+				break;
+			case R.id.btn_mainpage_map:
+				startActivity( new Intent( getActivity(),BaiduMapActivity.class));
+				break;
+				
 			default:
 				startActivity(new Intent(getActivity(), UnConstructActivity.class));
 				break;

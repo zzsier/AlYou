@@ -10,7 +10,7 @@
     <color name="btn_register_pressed">#4ebcd3</color>
     <color name="common_bottom_bar_normal_bg">#2d2f31</color>
     <color name="common_bottom_bar_selected_bg">#161718</color>
-    <color name="common_botton_bar_blue">#2ea7e0</color>
+   <color name="common_botton_bar_white">#ffffff</color>
     <color name="common_bg">#fcfcfc</color>
     <color name="btn_pressed_green_solid">#B6DA53</color>
     <color name="divider_list">#cccccc</color>
