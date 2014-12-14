@@ -15,8 +15,6 @@ package com.imalu.alyou.activity;
 
 import java.util.List;
 
-import u.aly.bu;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;

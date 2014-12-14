@@ -23,7 +23,9 @@ import com.easemob.EMCallBack;
 import com.imalu.alyou.db.gen.DaoMaster;
 import com.imalu.alyou.db.gen.DaoMaster.OpenHelper;
 import com.imalu.alyou.db.gen.DaoSession;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
+import com.imalu.alyou.net.response.UserInfo;
 
 public class AlUApplication extends Application {
 
@@ -34,6 +36,8 @@ public class AlUApplication extends Application {
 	
 	private static DaoMaster daoMaster;
     private static DaoSession daoSession;
+    
+    private static User myinfo;
 	
 	/**
 	 * 当前用户nickname,为了苹果推送不是userid而是昵称
@@ -66,6 +70,13 @@ public class AlUApplication extends Application {
          * }
          */
         hxSDKHelper.onInit(applicationContext);
+	}
+	
+	public static User getMyInfo(){
+		if (myinfo == null) {
+            myinfo = new User();
+        }
+        return myinfo;
 	}
 	
 	/** 
@@ -107,7 +118,7 @@ public class AlUApplication extends Application {
 	 *
 	 * @return
 	 */
-	public Map<String, User> getContactList() {
+	public Map<String, HXUser> getContactList() {
 	    return hxSDKHelper.getContactList();
 	}
 
@@ -116,7 +127,7 @@ public class AlUApplication extends Application {
 	 *
 	 * @param contactList
 	 */
-	public void setContactList(Map<String, User> contactList) {
+	public void setContactList(Map<String, HXUser> contactList) {
 	    hxSDKHelper.setContactList(contactList);
 	}
 

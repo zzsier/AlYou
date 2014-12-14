@@ -37,6 +37,7 @@ import com.imalu.alyou.R;
 import com.imalu.alyou.Constant;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.adapter.ContactAdapter;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
 
@@ -67,15 +68,15 @@ public class GroupPickContactsActivity extends BaseActivity {
 		if(exitingMembers == null)
 			exitingMembers = new ArrayList<String>();
 		// 获取好友列表
-		final List<User> alluserList = new ArrayList<User>();
-		for (User user : AlUApplication.getInstance().getContactList().values()) {
+		final List<HXUser> alluserList = new ArrayList<HXUser>();
+		for (HXUser user : AlUApplication.getInstance().getContactList().values()) {
 			if (!user.getUsername().equals(Constant.NEW_FRIENDS_USERNAME) & !user.getUsername().equals(Constant.GROUP_USERNAME))
 				alluserList.add(user);
 		}
 		// 对list进行排序
-		Collections.sort(alluserList, new Comparator<User>() {
+		Collections.sort(alluserList, new Comparator<HXUser>() {
 			@Override
-			public int compare(User lhs, User rhs) {
+			public int compare(HXUser lhs, HXUser rhs) {
 				return (lhs.getUsername().compareTo(rhs.getUsername()));
 
 			}
@@ -131,7 +132,7 @@ public class GroupPickContactsActivity extends BaseActivity {
 
 		private boolean[] isCheckedArray;
 
-		public PickContactAdapter(Context context, int resource, List<User> users) {
+		public PickContactAdapter(Context context, int resource, List<HXUser> users) {
 			super(context, resource, users, null);
 			isCheckedArray = new boolean[users.size()];
 		}

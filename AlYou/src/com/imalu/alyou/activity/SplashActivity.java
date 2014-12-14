@@ -50,8 +50,8 @@ public class SplashActivity extends BaseActivity {
 					//不是必须的，不加sdk也会自动异步去加载(不会重复加载)；
 					//加上的话保证进了主页面会话和群组都已经load完毕
 					long start = System.currentTimeMillis();
-					EMGroupManager.getInstance().loadAllGroups();
-					EMChatManager.getInstance().loadAllConversations();
+//					EMGroupManager.getInstance().loadAllGroups();
+//					EMChatManager.getInstance().loadAllConversations();
 					long costTime = System.currentTimeMillis() - start;
 					//等待sleeptime时长
 					if (sleepTime - costTime > 0) {

@@ -20,6 +20,7 @@ import android.content.Context;
 import com.easemob.applib.model.DefaultHXSDKModel;
 import com.imalu.alyou.db.DbOpenHelper;
 import com.imalu.alyou.db.UserDao;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 
 public class AlUHXSDKModel extends DefaultHXSDKModel{
@@ -40,14 +41,14 @@ public class AlUHXSDKModel extends DefaultHXSDKModel{
         return true;
     }
     
-    public boolean saveContactList(List<User> contactList) {
+    public boolean saveContactList(List<HXUser> contactList) {
         // TODO Auto-generated method stub
         UserDao dao = new UserDao(context);
         dao.saveContactList(contactList);
         return true;
     }
 
-    public Map<String, User> getContactList() {
+    public Map<String, HXUser> getContactList() {
         // TODO Auto-generated method stub
         UserDao dao = new UserDao(context);
         return dao.getContactList();

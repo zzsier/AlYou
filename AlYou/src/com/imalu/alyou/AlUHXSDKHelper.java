@@ -23,6 +23,7 @@ import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.applib.model.HXSDKModel;
 
 import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMChatOptions;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.EMMessage.Type;
@@ -30,6 +31,7 @@ import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 import com.imalu.alyou.activity.ChatActivity;
 import com.imalu.alyou.activity.MainActivity;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.receiver.VoiceCallReceiver;
 import com.imalu.alyou.utils.CommonUtils;
@@ -44,13 +46,13 @@ public class AlUHXSDKHelper extends HXSDKHelper{
     /**
      * contact list in cache
      */
-    private Map<String, User> contactList;
+    private Map<String, HXUser> contactList;
     
     @Override
     protected void initHXOptions(){
         super.initHXOptions();
         // you can also get EMChatOptions to set related SDK options
-        // EMChatOptions options = EMChatManager.getInstance().getChatOptions();
+         EMChatOptions options = EMChatManager.getInstance().getChatOptions();
     }
 
     @Override
@@ -140,7 +142,7 @@ public class AlUHXSDKHelper extends HXSDKHelper{
      *
      * @return
      */
-    public Map<String, User> getContactList() {
+    public Map<String, HXUser> getContactList() {
         if (getHXId() != null && contactList == null) {
             contactList = ((AlUHXSDKModel) getModel()).getContactList();
         }
@@ -153,7 +155,7 @@ public class AlUHXSDKHelper extends HXSDKHelper{
      *
      * @param contactList
      */
-    public void setContactList(Map<String, User> contactList) {
+    public void setContactList(Map<String, HXUser> contactList) {
         this.contactList = contactList;
     }
     

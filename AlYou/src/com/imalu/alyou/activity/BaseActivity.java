@@ -31,16 +31,15 @@ import com.easemob.chat.EMMessage.Type;
 import com.easemob.util.EasyUtils;
 import com.imalu.alyou.utils.CommonUtils;
 import com.imalu.alyou.utils.SmileUtils;
-import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends FragmentActivity {
     private static final int notifiId = 11;
-    //protected NotificationManager notificationManager;
+//    protected NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        //notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     @Override
@@ -48,15 +47,11 @@ public class BaseActivity extends FragmentActivity {
         super.onResume();
         // onresume时，取消notification显示
         //EMChatManager.getInstance().activityResumed();
-        // umeng
-        //MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        // umeng
-        //MobclickAgent.onPause(this);
     }
 
     /**

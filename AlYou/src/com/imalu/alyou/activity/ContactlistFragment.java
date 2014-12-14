@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -40,8 +41,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.easemob.chat.EMContactManager;
@@ -52,6 +56,7 @@ import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.adapter.ContactAdapter;
 import com.imalu.alyou.db.InviteMessgeDao;
 import com.imalu.alyou.db.UserDao;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
 
@@ -61,16 +66,41 @@ import com.imalu.alyou.widget.Sidebar;
  */
 public class ContactlistFragment extends Fragment {
 	private ContactAdapter adapter;
-	private List<User> contactList;
+	private List<HXUser> contactList;
 	private ListView listView;
 	private boolean hidden;
 	private Sidebar sidebar;
 	private InputMethodManager inputMethodManager;
 	private List<String> blackList;
+	
+
+	protected static final String TAG = "ContractFragment";
+	
+	private Button[] mTabs;
+	private FriendlistFragment friendListFragment;
+	private Fragment[] fragments;
+	private int index;
+	private RelativeLayout[] tab_containers;
+	// 当前fragment的index
+	private int currentTabIndex;
+	//private NewMessageBroadcastReceiver msgReceiver;
+	// 账号在别处登录
+	public boolean isConflict = false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_contact_list, container, false);
+	}
+	
+	private void initView() {
+		mTabs = new Button[4];
+		mTabs[0] = (Button) this.getView().findViewById(R.id.btn_friend_list);
+		mTabs[1] = (Button) this.getView().findViewById(R.id.btn_club_list);
+		mTabs[2] = (Button) this.getView().findViewById(R.id.btn_fans_list);
+		mTabs[3] = (Button) this.getView().findViewById(R.id.btn_tweet_list);
+		// 把第一个tab设为选中状态
+		mTabs[0].setSelected(true);
+
 	}
 
 	@Override
@@ -79,62 +109,47 @@ public class ContactlistFragment extends Fragment {
 		//防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
 		    return;
-//		inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//		listView = (ListView) getView().findViewById(R.id.list);
-//		sidebar = (Sidebar) getView().findViewById(R.id.sidebar);
-//		sidebar.setListView(listView);
-//		//黑名单列表
-//		//blackList = EMContactManager.getInstance().getBlackListUsernames();
-//		contactList = new ArrayList<User>();
-//		// 获取设置contactlist
-//		getContactList();
-//		// 设置adapter
-//		adapter = new ContactAdapter(getActivity(), R.layout.row_contact, contactList, sidebar);
-//		listView.setAdapter(adapter);
-//		listView.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				String username = adapter.getItem(position).getUsername();
-//				if (Constant.NEW_FRIENDS_USERNAME.equals(username)) {
-//					// 进入申请与通知页面
-//					User user = AlUApplication.getInstance().getContactList().get(Constant.NEW_FRIENDS_USERNAME);
-//					user.setUnreadMsgCount(0);
-//					startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
-//				} else if (Constant.GROUP_USERNAME.equals(username)) {
-//					// 进入群聊列表页面
-//					startActivity(new Intent(getActivity(), GroupsActivity.class));
-//				} else {
-//					// demo中直接进入聊天页面，实际一般是进入用户详情页
-//					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUsername()));
-//				}
-//			}
-//		});
-//		listView.setOnTouchListener(new OnTouchListener() {
-//
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				// 隐藏软键盘
-//				if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
-//					if (getActivity().getCurrentFocus() != null)
-//						inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
-//								InputMethodManager.HIDE_NOT_ALWAYS);
-//				}
-//				return false;
-//			}
-//		});
-//
-//		ImageView addContactView = (ImageView) getView().findViewById(R.id.iv_new_contact);
-//		// 进入添加好友页
-//		addContactView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(getActivity(), AddContactActivity.class));
-//			}
-//		});
-//		registerForContextMenu(listView);
+		super.onCreate(savedInstanceState);
 
+		initView();
+		
+		friendListFragment = new FriendlistFragment();
+
+		fragments = new Fragment[] { friendListFragment, friendListFragment, friendListFragment, friendListFragment };
+		// 添加显示第一个fragment
+		this.getFragmentManager().beginTransaction().add(R.id.fragment_container, friendListFragment).show(friendListFragment).commit();
+				//.add(R.id.fragment_container, contactListFragment).hide(contactListFragment).show(chatHistoryFragment).commit();
+		
+
+	}
+	
+	public void onContractTabClicked(View view) {
+		switch (view.getId()) {
+		case R.id.btn_conversation:
+			index = 0;
+			break;
+		case R.id.btn_address_list:
+			index = 1;
+			break;
+		case R.id.btn_mainpage:
+			index = 2;
+			break;
+		case R.id.btn_setting:
+			index = 3;
+			break;
+		}
+		if (currentTabIndex != index) {
+			FragmentTransaction trx = this.getFragmentManager().beginTransaction();
+			trx.hide(fragments[currentTabIndex]);
+			if (!fragments[index].isAdded()) {
+				trx.add(R.id.fragment_container, fragments[index]);
+			}
+			trx.show(fragments[index]).commit();
+		}
+		mTabs[currentTabIndex].setSelected(false);
+		// 把当前tab设为选中状态
+		mTabs[index].setSelected(true);
+		currentTabIndex = index;
 	}
 
 	@Override
@@ -149,7 +164,7 @@ public class ContactlistFragment extends Fragment {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.delete_contact) {
-			User tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+			HXUser tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
 			// 删除此联系人
 			deleteContact(tobeDeleteUser);
 			// 删除相关的邀请消息
@@ -157,7 +172,7 @@ public class ContactlistFragment extends Fragment {
 			dao.deleteMessage(tobeDeleteUser.getUsername());
 			return true;
 		}else if(item.getItemId() == R.id.add_to_blacklist){
-			User user = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+			HXUser user = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
 			moveToBlacklist(user.getUsername());
 			return true;
 		}
@@ -186,7 +201,7 @@ public class ContactlistFragment extends Fragment {
 	 * 
 	 * @param toDeleteUser
 	 */
-	public void deleteContact(final User tobeDeleteUser) {
+	public void deleteContact(final HXUser tobeDeleteUser) {
 		final ProgressDialog pd = new ProgressDialog(getActivity());
 		pd.setMessage("正在删除...");
 		pd.setCanceledOnTouchOutside(false);
@@ -279,19 +294,19 @@ public class ContactlistFragment extends Fragment {
 	private void getContactList() {
 		contactList.clear();
 		//获取本地好友列表
-		Map<String, User> users = AlUApplication.getInstance().getContactList();
-		Iterator<Entry<String, User>> iterator = users.entrySet().iterator();
+		Map<String, HXUser> users = AlUApplication.getInstance().getContactList();
+		Iterator<Entry<String, HXUser>> iterator = users.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Entry<String, User> entry = iterator.next();
+			Entry<String, HXUser> entry = iterator.next();
 			if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME) && !entry.getKey().equals(Constant.GROUP_USERNAME)
 					&& !blackList.contains(entry.getKey()))
 				contactList.add(entry.getValue());
 		}
 		// 排序
-		Collections.sort(contactList, new Comparator<User>() {
+		Collections.sort(contactList, new Comparator<HXUser>() {
 
 			@Override
-			public int compare(User lhs, User rhs) {
+			public int compare(HXUser lhs, HXUser rhs) {
 				return lhs.getUsername().compareTo(rhs.getUsername());
 			}
 		});

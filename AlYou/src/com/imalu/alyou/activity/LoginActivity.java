@@ -47,6 +47,7 @@ import com.imalu.alyou.Constant;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.AlUHXSDKHelper;
 import com.imalu.alyou.db.UserDao;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
@@ -54,7 +55,6 @@ import com.imalu.alyou.net.NetObject;
 import com.imalu.alyou.net.request.LoginRequest;
 import com.imalu.alyou.net.response.UserInfo;
 import com.imalu.alyou.utils.CommonUtils;
-import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -73,13 +73,12 @@ public class LoginActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// 如果用户名密码都有，直接进入主页面
-//		if (AlUHXSDKHelper.getInstance().isLogined()) {
-//			autoLogin = true;
-//			startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//
-//			return;
-//		}
+		if (AlUHXSDKHelper.getInstance().isLogined()) {
+			autoLogin = true;
+			startActivity(new Intent(LoginActivity.this, MainActivity.class));
+			return;
+		}
+		
 		setContentView(R.layout.activity_login);
 
 		usernameEditText = (EditText) findViewById(R.id.username);
@@ -122,7 +121,7 @@ public class LoginActivity extends BaseActivity {
 		
 		if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
 			
-			/*progressShow = true;
+			progressShow = true;
 			final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
 			pd.setCanceledOnTouchOutside(false);
 			pd.setOnCancelListener(new OnCancelListener() {
@@ -131,9 +130,9 @@ public class LoginActivity extends BaseActivity {
 				public void onCancel(DialogInterface dialog) {
 					progressShow = false;
 				}
-			});*/
-			//pd.setMessage("正在登陆...");
-			//pd.show();
+			});
+			pd.setMessage("正在登陆...");
+			pd.show();
 			
 			LoginRequest loginReq = new LoginRequest();
 			loginReq.setUsername(username);
@@ -142,30 +141,56 @@ public class LoginActivity extends BaseActivity {
 			NetManager.execute(NetManager.LOGIN_REQUEST_OPERATION, loginReq, new JsonHttpResponseHandler() {
 				@Override
 				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-					//pd.dismiss();
-					Log.e("login_check", " response:"+response.toString());
-					UserInfo userInfo = new UserInfo();
-					userInfo.setJsonObject(response);
-					//Toast.makeText(getApplicationContext(), "登录失败: " + , 0).show();
-					
-					
-					//UserInfo userInfo = (UserInfo)response;
-					// 登陆成功，保存用户名密码
-					//AlUApplication.getInstance().setUserName(username);
-					//AlUApplication.getInstance().setPassword(password);
-					
-					/*runOnUiThread(new Runnable() {
-						public void run() {
-							pd.setMessage("正在获取好友和群聊列表...");
-						}
-					});*/
 					
 					try {
+						
+						pd.dismiss();
+						Log.e("login_check", " response:"+response.toString());
+						
+						UserInfo userInfo = new UserInfo();
+						userInfo.setJsonObject(response);			
+						
+						AlUApplication.getMyInfo().setPhoneNum(username);
+						AlUApplication.getMyInfo().setPassword(password);
+						AlUApplication.getMyInfo().setHxname(userInfo.getHXName());
+						AlUApplication.getMyInfo().setId(userInfo.getID());
+						AlUApplication.getMyInfo().setUsername(userInfo.getUserName());
+						
+						// 登陆成功，保存用户名密码
+						AlUApplication.getInstance().setUserName(username);
+						AlUApplication.getInstance().setPassword(password);
+						
+						/*
+						runOnUiThread(new Runnable() {
+							public void run() {
+								pd.setMessage("请等待...");
+							}
+						});
+						*/
+						
+						EMChatManager.getInstance().login(userInfo.getHXName(), userInfo.getHXPwd(), new EMCallBack() {
+							
+						    @Override
+						    public void onSuccess() {
+						    	EMChatManager.getInstance().loadAllConversations();
+						    }
+							
+						    @Override
+						    public void onProgress(int progress, String status) {
+						    // TODO Auto-generated method stub
+						    }
+								
+						    @Override
+						    public void onError(int code, String message) {
+						    // TODO Auto-generated method stub
+						    }
+						});
+						
 						// ** 第一次登录或者之前logout后，加载所有本地群和回话
 						// ** manually load all local groups and
 						// conversations in case we are auto login
 						//EMGroupManager.getInstance().loadAllGroups();
-						//EMChatManager.getInstance().loadAllConversations();
+						
 						
 						// demo中简单的处理成每次登陆都去获取好友username，开发者自己根据情况而定
 						/*List<String> usernames = EMContactManager.getInstance().getContactUserNames();
@@ -221,51 +246,17 @@ public class LoginActivity extends BaseActivity {
 					if (!progressShow) {
 						return;
 					}
+					pd.dismiss();
 					runOnUiThread(new Runnable() {
 						public void run() {
 							//pd.dismiss();
-							Toast.makeText(getApplicationContext(), "登录失败: " + responseString, 0).show();
+							//Toast.makeText(getApplicationContext(), "登录失败: " + responseString, 0).show();
 							
 						}
 					});
 				}
 			});
 		}
-
-		/*
-			
-
-			final long start = System.currentTimeMillis();
-			// 调用sdk登陆方法登陆聊天服务器
-			EMChatManager.getInstance().login(username, password, new EMCallBack() {
-
-				@Override
-				public void onSuccess() {
-					//umeng自定义事件，开发者可以把这个删掉
-					loginSuccess2Umeng(start);
-					
-					if (!progressShow) {
-						return;
-					}
-					
-				}
-
-				@Override
-				public void onProgress(int progress, String status) {
-
-				}
-
-				@Override
-				public void onError(final int code, final String message) {
-					loginFailure2Umeng(start,code,message);
-
-					
-				}
-			});
-			
-		}
-		*/
-
 	}
 
 	
@@ -313,7 +304,7 @@ public class LoginActivity extends BaseActivity {
 	 * @param username
 	 * @param user
 	 */
-	protected void setUserHearder(String username, User user) {
+	protected void setUserHearder(String username, HXUser user) {
 		String headerName = null;
 		if (!TextUtils.isEmpty(user.getNick())) {
 			headerName = user.getNick();
@@ -331,31 +322,5 @@ public class LoginActivity extends BaseActivity {
 				user.setHeader("#");
 			}
 		}
-	}
-	
-	private void loginSuccess2Umeng(final long start) {
-		runOnUiThread(new Runnable() {
-			public void run() {
-				long costTime = System.currentTimeMillis() - start;
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("status", "success");
-				MobclickAgent.onEventValue(LoginActivity.this, "login1", params, (int) costTime);
-				MobclickAgent.onEventDuration(LoginActivity.this, "login1", (int) costTime);
-			}
-		});
-	}
-	private void loginFailure2Umeng(final long start, final int code, final String message) {
-		runOnUiThread(new Runnable() {
-			public void run() {
-				long costTime = System.currentTimeMillis() - start;
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("status", "failure");
-				params.put("error_code", code + "");
-				params.put("error_description", message);
-				MobclickAgent.onEventValue(LoginActivity.this, "login1", params, (int) costTime);
-				MobclickAgent.onEventDuration(LoginActivity.this, "login1", (int) costTime);
-				
-			}
-		});
 	}
 }

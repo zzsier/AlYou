@@ -1,101 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_top_bar_black"
-    android:orientation="vertical" >
+    android:background="@color/common_bg" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_top_bar"
-        android:background="@color/top_bar_normal_bg"
-        android:gravity="center_vertical" >
-
-        <TextView
-            android:id="@+id/message_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="通讯录"
-            android:textColor="@color/bottom_text_color_normal"
-            android:textSize="18sp" />
-
-
-        <ImageView
-            android:id="@+id/iv_new_contact"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/common_tab_bg"
-            android:clickable="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/add" />
-    </RelativeLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="30dp"
+        android:background="@color/bottom_bar_normal_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <RelativeLayout
-            android:id="@+id/rl_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
 
-            <LinearLayout
-                android:id="@+id/ll_loading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:visibility="gone" >
-
-                <ProgressBar
-                    android:layout_width="28dp"
-                    android:layout_height="28dp" />
-
-                <TextView
-                    android:id="@+id/tv_loaing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:text="正在刷新联系人..." />
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/list"
+            <Button
+                android:id="@+id/btn_friend_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/ll_loading"
-                android:background="@android:color/transparent"
-                android:cacheColorHint="#00000000"
-                android:descendantFocusability="afterDescendants"
-                android:divider="@color/divider_list"
-                android:dividerHeight="1px"
-                android:fastScrollEnabled="false" />
-            
- 			<com.imalu.alyou.widget.Sidebar
-                android:id="@+id/sidebar"
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                android:clickable="true" />
-
-            <TextView
-                android:id="@+id/floating_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/show_head_toast_bg"
-                android:gravity="center"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:textColor="@android:color/white"
-                android:textSize="40sp"
-                android:visibility="invisible" />
+                android:background="@drawable/main_bottom_item_bg"
+                android:onClick="onContractTabClicked"
+                android:paddingBottom="2dip"
+                android:paddingTop="7dip"
+                android:scaleType="matrix"
+                android:text="好友"
+                android:textColor="@color/main_botton_text_color"
+                android:textSize="12sp" />
 
         </RelativeLayout>
-    </FrameLayout>
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/btn_club_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_bottom_item_bg"
+                android:onClick="onContractTabClicked"
+                android:paddingBottom="2dip"
+                android:paddingTop="7dip"
+                android:scaleType="matrix"
+                android:text="公会"
+                android:textColor="@color/main_botton_text_color"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/btn_fans_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_bottom_item_bg"
+                android:onClick="onContractTabClicked"
+                android:paddingBottom="2dip"
+                android:paddingTop="7dip"
+                android:scaleType="matrix"
+                android:text="粉丝"
+                android:textColor="@color/main_botton_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/btn_tweet_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_bottom_item_bg"
+                android:onClick="onContractTabClicked"
+                android:paddingBottom="2dip"
+                android:paddingTop="7dip"
+                android:scaleType="matrix"
+                android:text="关注"
+                android:textColor="@color/main_botton_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragment_contract_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_bottom" />
+
+</RelativeLayout>

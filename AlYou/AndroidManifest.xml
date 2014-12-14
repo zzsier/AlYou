@@ -237,6 +237,13 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
+        
+        <activity
+            android:name="com.imalu.alyou.activity.MySettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
 
         <!-- 开机自启动服务 -->
         <receiver android:name="com.easemob.chat.StartServiceReceiver" >
@@ -252,7 +259,7 @@
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="easemob-demo#chatdemoui" />
+            android:value="lianyou#lianyou" />
         <!-- 声明sdk所需的service -->
         <service android:name="com.easemob.chat.EMChatService" />
         
@@ -260,15 +267,7 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" />
-        
-        <!-- umeng appkey，可忽略 -->
-         <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="53912a3156240b01a7075ed1" >
-        </meta-data>
-        
-        
+            android:process=":remote" />    
     </application>
 
 </manifest>
