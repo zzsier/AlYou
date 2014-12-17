@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/main_bottom_item_bg"
-                android:drawableTop="@drawable/tab_setting_bg"
+                android:drawableTop="@drawable/tab_mainpage_bg"
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
                 android:paddingTop="7dip"

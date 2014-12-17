@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import com.imalu.alyou.R;
 import com.imalu.alyou.Constant;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
 
@@ -44,7 +45,7 @@ import com.imalu.alyou.widget.Sidebar;
  * 简单的好友Adapter实现
  *
  */
-public class ContactAdapter extends ArrayAdapter<User>  implements SectionIndexer{
+public class ContactAdapter extends ArrayAdapter<HXUser>  implements SectionIndexer{
 
 	private LayoutInflater layoutInflater;
 	private EditText query;
@@ -54,7 +55,7 @@ public class ContactAdapter extends ArrayAdapter<User>  implements SectionIndexe
 	private Sidebar sidebar;
 	private int res;
 
-	public ContactAdapter(Context context, int resource, List<User> objects,Sidebar sidebar) {
+	public ContactAdapter(Context context, int resource, List<HXUser> objects,Sidebar sidebar) {
 		super(context, resource, objects);
 		this.res = resource;
 		this.sidebar=sidebar;
@@ -120,7 +121,7 @@ public class ContactAdapter extends ArrayAdapter<User>  implements SectionIndexe
 			TextView unreadMsgView = (TextView) convertView.findViewById(R.id.unread_msg_number);
 			TextView nameTextview = (TextView) convertView.findViewById(R.id.name);
 			TextView tvHeader = (TextView) convertView.findViewById(R.id.header);
-			User user = getItem(position);
+			HXUser user = getItem(position);
 			if(user == null)
 				Log.d("ContactAdapter", position + "");
 			//设置nick，demo里不涉及到完整user，用username代替nick显示
@@ -162,8 +163,8 @@ public class ContactAdapter extends ArrayAdapter<User>  implements SectionIndexe
 	}
 	
 	@Override
-	public User getItem(int position) {
-		User user = new User();
+	public HXUser getItem(int position) {
+		HXUser user = new HXUser();
 		user.setHeader(getContext().getString(R.string.search_header));
 		return position == 0 ? user : super.getItem(position - 1);
 	}

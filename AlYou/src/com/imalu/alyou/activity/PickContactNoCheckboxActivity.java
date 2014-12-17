@@ -33,6 +33,7 @@ import com.imalu.alyou.R;
 import com.imalu.alyou.Constant;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.adapter.ContactAdapter;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
 
@@ -41,7 +42,7 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 	private ListView listView;
 	private Sidebar sidebar;
 	protected ContactAdapter contactAdapter;
-	private List<User> contactList;
+	private List<HXUser> contactList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 		listView = (ListView) findViewById(R.id.list);
 		sidebar = (Sidebar) findViewById(R.id.sidebar);
 		sidebar.setListView(listView);
-		contactList = new ArrayList<User>();
+		contactList = new ArrayList<HXUser>();
 		// 获取设置contactlist
 		getContactList();
 		// 设置adapter
@@ -80,18 +81,18 @@ public class PickContactNoCheckboxActivity extends BaseActivity {
 
 	private void getContactList() {
 		contactList.clear();
-		Map<String, User> users = AlUApplication.getInstance().getContactList();
-		Iterator<Entry<String, User>> iterator = users.entrySet().iterator();
+		Map<String, HXUser> users = AlUApplication.getInstance().getContactList();
+		Iterator<Entry<String, HXUser>> iterator = users.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Entry<String, User> entry = iterator.next();
+			Entry<String, HXUser> entry = iterator.next();
 			if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME) && !entry.getKey().equals(Constant.GROUP_USERNAME))
 				contactList.add(entry.getValue());
 		}
 		// 排序
-		Collections.sort(contactList, new Comparator<User>() {
+		Collections.sort(contactList, new Comparator<HXUser>() {
 
 			@Override
-			public int compare(User lhs, User rhs) {
+			public int compare(HXUser lhs, HXUser rhs) {
 				return lhs.getUsername().compareTo(rhs.getUsername());
 			}
 		});

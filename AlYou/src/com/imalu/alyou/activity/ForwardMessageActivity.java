@@ -17,10 +17,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.imalu.alyou.R;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 
 public class ForwardMessageActivity extends PickContactNoCheckboxActivity {
-	private User selectUser;
+	private HXUser selectUser;
 	private String forward_msg_id;
 
 	 

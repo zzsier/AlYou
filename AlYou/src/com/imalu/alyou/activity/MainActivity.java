@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity {
 
 	private Button[] mTabs;
 	private ContactlistFragment contactListFragment;
-	// private ChatHistoryFragment chatHistoryFragment;
+	//private ChatHistoryFragment chatHistoryFragment;
 	private ChatAllHistoryFragment chatHistoryFragment;
 	private SettingsFragment settingFragment;
 	private MainPageFragment mainpageFragment;
@@ -92,18 +92,15 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//if (savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false)) {
-            // 防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
-            // 三个fragment里加的判断同理
-        //    finish();
-        //    startActivity(new Intent(this, LoginActivity.class));
-        //    return;
-        //}
+		if (savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false)) {
+             //防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
+             //三个fragment里加的判断同理
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
 		setContentView(R.layout.activity_main);
 		initView();
-		
-		//MobclickAgent.setDebugMode( true );
-		//MobclickAgent.updateOnlineConfig(this);
 		
 		//if (getIntent().getBooleanExtra("conflict", false) && !isConflictDialogShow)
 		//	showConflictDialog();

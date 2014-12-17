@@ -13,59 +13,10 @@
  */
 package com.imalu.alyou.domain;
 
-//import com.easemob.chat.EMContact;  extends EMContact 
+import com.easemob.chat.EMContact;
 
-public class User {
-	
-	private String username;
-	private String password;
-	private String hxname;
-	private int id;
-	private String nickName;
-	private String phoneNum;
-	
-	
-	public String getPhoneNum() {
-		return phoneNum;
-	}
-	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getNickName() {
-		return nickName;
-	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getHxname() {
-		return hxname;
-	}
-	public void setHxname(String hxname) {
-		this.hxname = hxname;
-	}
-	
-	
-	
-	
-	/*
+public class HXUser extends EMContact {
+
 	private int unreadMsgCount;
 	private String header;
 
@@ -102,5 +53,4 @@ public class User {
 	public String toString() {
 		return nick == null ? username : nick;
 	}
-	*/
 }

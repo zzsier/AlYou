@@ -25,6 +25,7 @@ import android.text.TextUtils;
 
 import com.easemob.util.HanziToPinyin;
 import com.imalu.alyou.Constant;
+import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 
 public class UserDao {
@@ -44,11 +45,11 @@ public class UserDao {
 	 * 
 	 * @param contactList
 	 */
-	public void saveContactList(List<User> contactList) {
+	public void saveContactList(List<HXUser> contactList) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		if (db.isOpen()) {
 			db.delete(TABLE_NAME, null, null);
-			for (User user : contactList) {
+			for (HXUser user : contactList) {
 				ContentValues values = new ContentValues();
 				values.put(COLUMN_NAME_ID, user.getUsername());
 				if(user.getNick() != null)
@@ -63,15 +64,15 @@ public class UserDao {
 	 * 
 	 * @return
 	 */
-	public Map<String, User> getContactList() {
+	public Map<String, HXUser> getContactList() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Map<String, User> users = new HashMap<String, User>();
+		Map<String, HXUser> users = new HashMap<String, HXUser>();
 		if (db.isOpen()) {
 			Cursor cursor = db.rawQuery("select * from " + TABLE_NAME /* + " desc" */, null);
 			while (cursor.moveToNext()) {
 				String username = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID));
 				String nick = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_NICK));
-				User user = new User();
+				HXUser user = new HXUser();
 				user.setUsername(username);
 				user.setNick(nick);
 				String headerName = null;
@@ -115,7 +116,7 @@ public class UserDao {
 	 * 保存一个联系人
 	 * @param user
 	 */
-	public void saveContact(User user){
+	public void saveContact(HXUser user){
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_NAME_ID, user.getUsername());

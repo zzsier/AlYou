@@ -823,7 +823,8 @@ public class AsyncHttpClient {
      * @return RequestHandle of future request process
      */
     public RequestHandle get(String url, RequestParams params, ResponseHandlerInterface responseHandler) {
-        return get(null, url, params, responseHandler);
+    	Log.e(LOG_TAG, "url: "+url+" params:"+params.toString());
+    	return get(null, url, params, responseHandler);
     }
 
     /**

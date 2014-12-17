@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_bg"
+    android:orientation="vertical" >
+
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/top_bar_normal_bg"
+        android:gravity="center_vertical">
+
+        <include layout="@layout/commom_back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="个人中心"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp" >
+ 		
+ 		<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="昵称:"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="26dp"
+                android:textSize="18sp"/>
+		
+        <EditText
+            android:layout_centerVertical="true"
+            android:id="@+id/nickname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_toRightOf="@id/iv_username"
+            android:background="@null"
+            android:textColor="@android:color/white"
+            android:singleLine="true"
+            android:textSize="18sp" />
+        
+        <View 
+            android:background="#c8ff00"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            
+            />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+        
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="40dip"
+            android:layout_marginBottom="10dip"
+            android:layout_weight="5"
+            android:background="@drawable/button_login_bg"
+            android:onClick="modifySetting"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
+            android:gravity="center"
+            android:text="修改"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+        
+     </RelativeLayout>
+
+</LinearLayout>

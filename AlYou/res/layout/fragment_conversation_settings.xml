@@ -53,7 +53,7 @@
                     android:background="@color/btn_white_normal" />
             </LinearLayout>
 
-            <LinearLayout
+            <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -286,7 +286,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="14sp" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout> -->
 
             <!--
                  <TextView
@@ -317,6 +317,28 @@
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
             </LinearLayout>
+            
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:background="#00000000"
+                android:orientation="vertical" >
+                 
+                <Button
+                    android:id="@+id/mySetting"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/btn_style_alert_dialog_special"
+                    android:text="@string/button_my_setting"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            
         </LinearLayout>
     </ScrollView>
 

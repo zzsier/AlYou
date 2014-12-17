@@ -6,10 +6,12 @@ public class NetManager {
 	
 	public static final int LOGIN_REQUEST_OPERATION = 1;
 	public static final int REGISTER_REQUEST_OPERATION = 2;
+	public static final int MODIFY_USER_REQUEST_OPERATION = 3;
 	
 	
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
 	public static final String REGISTER_REQUEST_URL = "/service/ZhanghuServices.svc/Zhuce";
+	public static final String MODIRY_USER_REQUEST_URL = "/service/GerenzhongxinServices.svc/InsetUsers";
 	
 	private static AsyncHttpClient client = new AsyncHttpClient();
 	
@@ -45,6 +47,8 @@ public class NetManager {
 				return BASE_URL+LOGIN_REQUEST_URL;
 			case REGISTER_REQUEST_OPERATION:
 				return BASE_URL+REGISTER_REQUEST_URL;
+			case MODIFY_USER_REQUEST_OPERATION:
+				return BASE_URL+MODIRY_USER_REQUEST_URL;
 			default:
 				return BASE_URL+LOGIN_REQUEST_URL;
 		}
@@ -53,6 +57,5 @@ public class NetManager {
 	private static String getAbsoluteUrl(String relativeUrl) {
 		return BASE_URL + relativeUrl;
 	}
-	
 
 }

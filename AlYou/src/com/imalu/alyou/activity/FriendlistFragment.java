@@ -64,7 +64,7 @@ import com.imalu.alyou.widget.Sidebar;
  * 联系人列表页
  * 
  */
-public class ContactlistFragment extends Fragment {
+public class FriendlistFragment extends Fragment {
 	private ContactAdapter adapter;
 	private List<HXUser> contactList;
 	private ListView listView;
@@ -74,10 +74,18 @@ public class ContactlistFragment extends Fragment {
 	private List<String> blackList;
 	
 
-	protected static final String TAG = "ContractFragment";
-	
+	protected static final String TAG = "MainActivity";
+	// 未读消息textview
+	private TextView unreadLabel;
+	// 未读通讯录textview
+	private TextView unreadAddressLable;
+
 	private Button[] mTabs;
-	private FriendlistFragment friendListFragment;
+	private FriendlistFragment contactListFragment;
+	//private ChatHistoryFragment chatHistoryFragment;
+	private ChatAllHistoryFragment chatHistoryFragment;
+	private SettingsFragment settingFragment;
+	private MainPageFragment mainpageFragment;
 	private Fragment[] fragments;
 	private int index;
 	private RelativeLayout[] tab_containers;
@@ -91,17 +99,6 @@ public class ContactlistFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_contact_list, container, false);
 	}
-	
-	private void initView() {
-		mTabs = new Button[4];
-		mTabs[0] = (Button) this.getView().findViewById(R.id.btn_friend_list);
-		mTabs[1] = (Button) this.getView().findViewById(R.id.btn_club_list);
-		mTabs[2] = (Button) this.getView().findViewById(R.id.btn_fans_list);
-		mTabs[3] = (Button) this.getView().findViewById(R.id.btn_tweet_list);
-		// 把第一个tab设为选中状态
-		mTabs[0].setSelected(true);
-
-	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -109,47 +106,62 @@ public class ContactlistFragment extends Fragment {
 		//防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
 		    return;
-		super.onCreate(savedInstanceState);
+		inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		listView = (ListView) getView().findViewById(R.id.list);
+//		sidebar = (Sidebar) getView().findViewById(R.id.sidebar);
+//		sidebar.setListView(listView);
+//		//黑名单列表
+//		//blackList = EMContactManager.getInstance().getBlackListUsernames();
+		contactList = new ArrayList<HXUser>();
+//		// 获取设置contactlist
+//		getContactList();
+//		// 设置adapter
+//		adapter = new ContactAdapter(getActivity(), R.layout.row_contact, contactList, sidebar);
+//		listView.setAdapter(adapter);
+//		listView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				String username = adapter.getItem(position).getUsername();
+//				if (Constant.NEW_FRIENDS_USERNAME.equals(username)) {
+//					// 进入申请与通知页面
+//					HXUser user = AlUApplication.getInstance().getContactList().get(Constant.NEW_FRIENDS_USERNAME);
+//					user.setUnreadMsgCount(0);
+//					startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
+//				} else if (Constant.GROUP_USERNAME.equals(username)) {
+//					// 进入群聊列表页面
+//					startActivity(new Intent(getActivity(), GroupsActivity.class));
+//				} else {
+//					// demo中直接进入聊天页面，实际一般是进入用户详情页
+//					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUsername()));
+//				}
+//			}
+//		});
+//		listView.setOnTouchListener(new OnTouchListener() {
+//
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				// 隐藏软键盘
+//				if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+//					if (getActivity().getCurrentFocus() != null)
+//						inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+//								InputMethodManager.HIDE_NOT_ALWAYS);
+//				}
+//				return false;
+//			}
+//		});
+//
+//		ImageView addContactView = (ImageView) getView().findViewById(R.id.iv_new_contact);
+//		// 进入添加好友页
+//		addContactView.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				startActivity(new Intent(getActivity(), AddContactActivity.class));
+//			}
+//		});
+//		registerForContextMenu(listView);
 
-		initView();
-		
-		friendListFragment = new FriendlistFragment();
-
-		fragments = new Fragment[] { friendListFragment, friendListFragment, friendListFragment, friendListFragment };
-		// 添加显示第一个fragment
-		this.getFragmentManager().beginTransaction().add(R.id.fragment_container, friendListFragment).show(friendListFragment).commit();
-				//.add(R.id.fragment_container, contactListFragment).hide(contactListFragment).show(chatHistoryFragment).commit();
-		
-
-	}
-	
-	public void onContractTabClicked(View view) {
-		switch (view.getId()) {
-		case R.id.btn_conversation:
-			index = 0;
-			break;
-		case R.id.btn_address_list:
-			index = 1;
-			break;
-		case R.id.btn_mainpage:
-			index = 2;
-			break;
-		case R.id.btn_setting:
-			index = 3;
-			break;
-		}
-		if (currentTabIndex != index) {
-			FragmentTransaction trx = this.getFragmentManager().beginTransaction();
-			trx.hide(fragments[currentTabIndex]);
-			if (!fragments[index].isAdded()) {
-				trx.add(R.id.fragment_container, fragments[index]);
-			}
-			trx.show(fragments[index]).commit();
-		}
-		mTabs[currentTabIndex].setSelected(false);
-		// 把当前tab设为选中状态
-		mTabs[index].setSelected(true);
-		currentTabIndex = index;
 	}
 
 	@Override
