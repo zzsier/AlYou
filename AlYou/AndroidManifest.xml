@@ -248,14 +248,25 @@
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
-        
+        <!-- 设置 -->
         <activity
             android:name="com.imalu.alyou.activity.MySettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-
+		<!-- 注册1 -->
+		<activity android:name=".activity.RegisterActivity_first"
+		    android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden">
+		</activity>
+		<!-- 注册2 -->
+        <activity android:name=".activity.RegisterActivity_second"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
 
         <!-- 开机自启动服务 -->
         <receiver android:name="com.easemob.chat.StartServiceReceiver" >
@@ -279,6 +290,7 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+       
 
        
 
