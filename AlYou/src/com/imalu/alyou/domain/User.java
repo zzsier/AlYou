@@ -65,7 +65,7 @@ public class User {
 	
 	
 	
-	/*
+	
 	private int unreadMsgCount;
 	private String header;
 
@@ -98,9 +98,9 @@ public class User {
 		return getUsername().equals(((User) o).getUsername());
 	}
 
-	@Override
-	public String toString() {
-		return nick == null ? username : nick;
-	}
-	*/
+//	@Override
+//	public String toString() {
+//		return nick == null ? username : nick;
+//	}
+//	
 }
