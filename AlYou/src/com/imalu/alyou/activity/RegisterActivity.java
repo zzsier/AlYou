@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -43,16 +42,21 @@ import com.imalu.alyou.net.response.RegisterResponse;
  * 
  */
 public class RegisterActivity extends BaseActivity {
-	private EditText userNameEditText;
+
 	private EditText passwordEditText;
 	private EditText confirmPwdEditText;
+	private String username;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		userNameEditText = (EditText) findViewById(R.id.username);
+		
 		passwordEditText = (EditText) findViewById(R.id.password);
 		confirmPwdEditText = (EditText) findViewById(R.id.confirm_password);
+		Intent intent= getIntent();
+		username=intent.getStringExtra("phone");
+		Log.e("~PHONE~",username );
 	}
 
 	/**
@@ -61,14 +65,10 @@ public class RegisterActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void register(View view) {
-		final String username = userNameEditText.getText().toString().trim();
+	
 		final String pwd = passwordEditText.getText().toString().trim();
 		String confirm_pwd = confirmPwdEditText.getText().toString().trim();
-		if (TextUtils.isEmpty(username)) {
-			Toast.makeText(this, "用户名不能为空！", Toast.LENGTH_SHORT).show();
-			userNameEditText.requestFocus();
-			return;
-		} else if (TextUtils.isEmpty(pwd)) {
+		if (TextUtils.isEmpty(pwd)) {
 			Toast.makeText(this, "密码不能为空！", Toast.LENGTH_SHORT).show();
 			passwordEditText.requestFocus();
 			return;
@@ -82,10 +82,10 @@ public class RegisterActivity extends BaseActivity {
 		}
 
 		RegisterRequest registerReq = new RegisterRequest();
-		registerReq.setUsername(username);
+		
 		registerReq.setPassword(pwd);
-	
-		NetManager.post(NetManager.REGISTER_REQUEST_OPERATION, registerReq, new JsonHttpResponseHandler() {
+		registerReq.setUsername(username);
+		NetManager.execute(NetManager.REGISTER_REQUEST_OPERATION, registerReq, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				//pd.dismiss();
@@ -107,7 +107,7 @@ public class RegisterActivity extends BaseActivity {
 					
 					RegisterResponse regResp = new RegisterResponse();
 					regResp.setJsonObject(response);
-					
+					Log.e("AAAAAAAAAA",""+regResp.getCode());
 					if( regResp.getCode() ) {
 						Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
 					} else {
@@ -167,13 +167,13 @@ public class RegisterActivity extends BaseActivity {
 				//if (!LoginActivity.this.isFinishing())
 				//pd.dismiss();
 				// 进入主页面
-				//startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+				startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 				finish();
 			}
 			
 			@Override
 			public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObj) {
-				Log.e("register", throwable.getMessage());
+			//	Log.e("register", throwable.getMessage());
 				finish();
 			}
 			
@@ -190,7 +190,7 @@ public class RegisterActivity extends BaseActivity {
 			}
 		});
 		
-		/*
+		//注释
 		if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(pwd)) {
 			final ProgressDialog pd = new ProgressDialog(this);
 			pd.setMessage("正在注册...");
@@ -232,7 +232,7 @@ public class RegisterActivity extends BaseActivity {
 			}).start();
 
 		}
-		*/
+		//注释
 	}
 
 	public void back(View view) {

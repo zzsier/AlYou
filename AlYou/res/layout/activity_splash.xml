@@ -2,7 +2,7 @@
     android:id="@+id/splash_root"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/splash_gradient"
+    android:background="@drawable/ico_welcomepage"
     android:gravity="center"
     android:orientation="vertical" >
 
@@ -17,26 +17,10 @@
     </ImageView> -->
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:gravity="bottom"
-        android:shadowColor="#FFFFFF"
-        android:shadowDx="0"
-        android:shadowDy="2"
-        android:shadowRadius="1"
-        android:text="AlYou"
-        android:textColor="#444444"
-        android:textSize="35dip"
-        android:typeface="serif" >
-    </TextView>
-
-
-    <TextView
         android:id="@+id/tv_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
+        android:layout_marginTop="200dip"
         android:gravity="bottom"
         android:shadowColor="#FFFFFF"
         android:shadowDx="0"
