@@ -18,8 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easemob.chat.EMContactManager;
-import com.imalu.alyou.R;
 import com.easemob.exceptions.EaseMobException;
+import com.imalu.alyou.R;
 
 /**
  * 黑名单列表页面

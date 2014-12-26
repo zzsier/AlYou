@@ -66,7 +66,7 @@ public class MainPageFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_mainpage_clock:
-				startActivity(new Intent(getActivity(), MainPageClockActivity.class));
+				startActivity(new Intent(getActivity(),MainPageClockActivity.class  ));
 				break;
 			case R.id.btn_mainpage_board:
 				startActivity(new Intent(getActivity(),BBSActivity.class));

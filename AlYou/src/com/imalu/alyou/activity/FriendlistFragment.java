@@ -61,7 +61,7 @@ import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
 
 /**
- * 联系人列表页
+ * 通讯录-----好友列表
  * 
  */
 public class FriendlistFragment extends Fragment {
@@ -97,22 +97,22 @@ public class FriendlistFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_contact_list, container, false);
+		return inflater.inflate(R.layout.contact_friend_list, container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		//防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
-		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
-		    return;
-		inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-		listView = (ListView) getView().findViewById(R.id.list);
+		//if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
+		   // return;
+		//inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		//listView = (ListView) getView().findViewById(R.id.list);
 //		sidebar = (Sidebar) getView().findViewById(R.id.sidebar);
 //		sidebar.setListView(listView);
 //		//黑名单列表
 //		//blackList = EMContactManager.getInstance().getBlackListUsernames();
-		contactList = new ArrayList<HXUser>();
+	//	contactList = new ArrayList<HXUser>();
 //		// 获取设置contactlist
 //		getContactList();
 //		// 设置adapter

@@ -52,6 +52,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        
+
+        <!-- 计时器second跳转 -->
+        <activity
+            android:name="com.imalu.alyou.activity.AddClockActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        
+        
+        
+        
 
         <!-- 登陆 -->
         <activity

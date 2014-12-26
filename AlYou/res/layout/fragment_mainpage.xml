@@ -155,22 +155,6 @@
         android:background="@drawable/ico_006"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/btn_mainpage_clock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/ImageView03"
-            android:layout_weight="5"
-            android:background="@null"
-            android:gravity="center"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp"
-            android:paddingRight="100dp"
-            android:text="计时器"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
         <ImageView
             android:id="@+id/image_mainpage_clock"
             android:layout_width="40dp"
@@ -179,6 +163,22 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:src="@drawable/ico_003" />
+
+        <Button
+            android:id="@+id/btn_mainpage_clock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="5"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingBottom="7dp"
+            android:paddingRight="100dp"
+            android:paddingTop="7dp"
+            android:text="计时器"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
 
     </RelativeLayout>
   <ImageView

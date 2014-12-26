@@ -1,12 +1,12 @@
 package com.imalu.alyou.activity;
 
-import com.imalu.alyou.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.imalu.alyou.R;
 
 public class EditActivity extends BaseActivity{
 	private EditText editText;

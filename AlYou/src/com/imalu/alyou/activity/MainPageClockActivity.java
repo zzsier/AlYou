@@ -13,18 +13,52 @@
  */
 package com.imalu.alyou.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
 import com.imalu.alyou.R;
 
+ 
+
 public class MainPageClockActivity extends BaseActivity{
+	private Button btCome;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_mainpage_clock);	
+		setContentView(R.layout.activity_mainpage_clock);
+		setview();
+		setListener();
+		 
 	}
 	
+	 
+	private void setListener() {
+		// TODO Auto-generated method stub
+		btCome.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent =  new Intent(
+						MainPageClockActivity.this,
+						AddClockActivity.class);		
+						startActivity(intent);
+			}
+		});
+	}
+
+
+	private void setview() {
+		// TODO Auto-generated method stub
+		btCome = (Button) findViewById(R.id.button1);
+	}
+
+
 	public void back(View v) {
 		finish();
 	}
+	
 }

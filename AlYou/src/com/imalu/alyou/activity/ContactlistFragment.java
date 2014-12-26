@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -72,12 +73,18 @@ public class ContactlistFragment extends Fragment {
 	private Sidebar sidebar;
 	private InputMethodManager inputMethodManager;
 	private List<String> blackList;
-	
+
 
 	protected static final String TAG = "ContractFragment";
-	
+
 	private Button[] mTabs;
-	private FriendlistFragment friendListFragment;
+	private ImageView[] mImages;
+	private ImageView imageView;
+	private FriendlistFragment friendListFragment;//好友列表
+	private ConcernlistFragment concernlistFragment;//关注界面
+	private ConsortialistFragment consortialistFragment;//公会界面
+	private FanslistFragment fanslistFragment;//粉丝界面
+
 	private Fragment[] fragments;
 	private int index;
 	private RelativeLayout[] tab_containers;
@@ -91,16 +98,26 @@ public class ContactlistFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_contact_list, container, false);
 	}
-	
+
 	private void initView() {
 		mTabs = new Button[4];
 		mTabs[0] = (Button) this.getView().findViewById(R.id.btn_friend_list);
 		mTabs[1] = (Button) this.getView().findViewById(R.id.btn_club_list);
 		mTabs[2] = (Button) this.getView().findViewById(R.id.btn_fans_list);
 		mTabs[3] = (Button) this.getView().findViewById(R.id.btn_tweet_list);
+		mImages=new ImageView[4];
+		mImages[0]=(ImageView) this.getView().findViewById(R.id.image_guangbiao0);
+		mImages[1]=(ImageView) this.getView().findViewById(R.id.image_guangbiao1);
+		mImages[2]=(ImageView) this.getView().findViewById(R.id.image_guangbiao2);
+		mImages[3]=(ImageView) this.getView().findViewById(R.id.image_guangbiao3);
+		imageView=(ImageView) this.getView().findViewById(R.id.contact_image);
 		// 把第一个tab设为选中状态
 		mTabs[0].setSelected(true);
-
+		mTabs[0].setTextColor(Color.GREEN);
+		mImages[0].setVisibility(View.VISIBLE);
+		mImages[0].bringToFront();
+		imageView.bringToFront();
+	 
 	}
 
 	@Override
@@ -108,50 +125,155 @@ public class ContactlistFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		//防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
-		    return;
+			return;
 		super.onCreate(savedInstanceState);
 
 		initView();
-		
-		friendListFragment = new FriendlistFragment();
 
-		fragments = new Fragment[] { friendListFragment, friendListFragment, friendListFragment, friendListFragment };
-		// 添加显示第一个fragment
-		this.getFragmentManager().beginTransaction().add(R.id.fragment_container, friendListFragment).show(friendListFragment).commit();
-				//.add(R.id.fragment_container, contactListFragment).hide(contactListFragment).show(chatHistoryFragment).commit();
 		
+	friendListFragment = new FriendlistFragment();
+		consortialistFragment= new ConsortialistFragment();
+		concernlistFragment= new ConcernlistFragment();
+		fanslistFragment= new FanslistFragment();
+		fragments = new Fragment[] { friendListFragment ,consortialistFragment, concernlistFragment, fanslistFragment };
+		// 添加显示第一个fragment
+		 FragmentTransaction	transaction=getChildFragmentManager().beginTransaction();
+		transaction.add(R.id.fragment_layout, friendListFragment)
+			.add(R.id.fragment_layout, consortialistFragment)
+			.add(R.id.fragment_layout, concernlistFragment)
+			.add(R.id.fragment_layout, fanslistFragment)
+			.hide(consortialistFragment)
+			.hide(concernlistFragment)
+			.hide(fanslistFragment)
+			.show(friendListFragment)
+			.commit();
+		onContractTabClicked();
 
 	}
-	
-	public void onContractTabClicked(View view) {
-		switch (view.getId()) {
-		case R.id.btn_conversation:
-			index = 0;
-			break;
-		case R.id.btn_address_list:
-			index = 1;
-			break;
-		case R.id.btn_mainpage:
-			index = 2;
-			break;
-		case R.id.btn_setting:
-			index = 3;
-			break;
-		}
-		if (currentTabIndex != index) {
-			FragmentTransaction trx = this.getFragmentManager().beginTransaction();
-			trx.hide(fragments[currentTabIndex]);
-			if (!fragments[index].isAdded()) {
-				trx.add(R.id.fragment_container, fragments[index]);
+
+	public void onContractTabClicked() {
+		mTabs[0].setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				index=0;
+				mTabs[0].setTextColor(Color.GREEN);
+				mTabs[1].setTextColor(Color.WHITE);
+				mTabs[2].setTextColor(Color.WHITE);
+				mTabs[3].setTextColor(Color.WHITE);
+
+				mImages[0].setVisibility(View.VISIBLE);
+				mImages[1].setVisibility(View.GONE);
+				mImages[2].setVisibility(View.GONE);
+				mImages[3].setVisibility(View.GONE);
+
+				/*	mImages[0].bringToFront();
+				mImages[1].bringToFront();
+				mImages[2].bringToFront();
+				mImages[3].bringToFront();*/
+				imageView.bringToFront();
+				mImages[0].bringToFront();
+				util(index);
 			}
-			trx.show(fragments[index]).commit();
+		});
+		mTabs[1].setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				index=1;
+				mTabs[0].setTextColor(Color.WHITE);
+				mTabs[1].setTextColor(Color.GREEN);
+				mTabs[2].setTextColor(Color.WHITE);
+				mTabs[3].setTextColor(Color.WHITE);
+
+				mImages[0].setVisibility(View.GONE);
+				mImages[1].setVisibility(View.VISIBLE);
+				mImages[2].setVisibility(View.GONE);
+				mImages[3].setVisibility(View.GONE);
+
+				imageView.bringToFront();
+				mImages[1].bringToFront();
+				util(index);
+			}
+		});
+		mTabs[2].setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				index=2;
+				mTabs[0].setTextColor(Color.WHITE);
+				mTabs[1].setTextColor(Color.WHITE);
+				mTabs[2].setTextColor(Color.GREEN);
+				mTabs[3].setTextColor(Color.WHITE);
+
+				mImages[0].setVisibility(View.GONE);
+				mImages[1].setVisibility(View.GONE);
+				mImages[2].setVisibility(View.VISIBLE);
+				mImages[3].setVisibility(View.GONE);
+
+				imageView.bringToFront();
+				mImages[2].bringToFront();
+				util(index);
+			}
+		});
+		mTabs[3].setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				index=3;
+				mTabs[0].setTextColor(Color.WHITE);
+				mTabs[1].setTextColor(Color.WHITE);
+				mTabs[2].setTextColor(Color.WHITE);
+				mTabs[3].setTextColor(Color.GREEN);
+
+				mImages[0].setVisibility(View.GONE);
+				mImages[1].setVisibility(View.GONE);
+				mImages[2].setVisibility(View.GONE);
+				mImages[3].setVisibility(View.VISIBLE);
+
+				imageView.bringToFront();
+				mImages[3].bringToFront();
+				util(index);
+			}
+		});
+	/*	if (currentTabIndex != index) {
+		
+			transaction.hide(fragments[currentTabIndex]);
+			if (!fragments[index].isAdded()) {
+				transaction.add(R.id.fragment_container, fragments[index]);
+			}
+			transaction.show(fragments[index]).commit();
 		}
 		mTabs[currentTabIndex].setSelected(false);
+		mImages[currentTabIndex].setVisibility(View.INVISIBLE);
 		// 把当前tab设为选中状态
 		mTabs[index].setSelected(true);
-		currentTabIndex = index;
+		mImages[index].setVisibility(View.VISIBLE);
+		currentTabIndex = index;*/
 	}
-
+   public void util(int index){
+		if (currentTabIndex != index) {
+			 FragmentTransaction ft=getChildFragmentManager().beginTransaction();
+			ft.hide(fragments[currentTabIndex]);
+			if (!fragments[index].isAdded()) {
+				ft.add(R.id.fragment_container, fragments[index]);
+			}
+			ft.show(fragments[index]).commit();
+		}
+		mTabs[currentTabIndex].setSelected(false);
+		mImages[currentTabIndex].setVisibility(View.INVISIBLE);
+		// 把当前tab设为选中状态
+		mTabs[index].setSelected(true);
+		mImages[index].setVisibility(View.VISIBLE);
+		currentTabIndex = index;
+   }
+	
+	
+	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -248,45 +370,45 @@ public class ContactlistFragment extends Fragment {
 		new Thread(new Runnable() {
 			public void run() {
 				//try {
-					//加入到黑名单
-					//EMContactManager.getInstance().addUserToBlackList(username,false);
-					getActivity().runOnUiThread(new Runnable() {
-						public void run() {
-							pd.dismiss();
-							Toast.makeText(getActivity(), "移入黑名单成功", 0).show();
-							//refresh();
-						}
-					});
+				//加入到黑名单
+				//EMContactManager.getInstance().addUserToBlackList(username,false);
+				getActivity().runOnUiThread(new Runnable() {
+					public void run() {
+						pd.dismiss();
+						Toast.makeText(getActivity(), "移入黑名单成功", 0).show();
+						//refresh();
+					}
+				});
 				//} 
-//				catch (EaseMobException e) {
-//					e.printStackTrace();
-//					getActivity().runOnUiThread(new Runnable() {
-//						public void run() {
-//							pd.dismiss();
-//							Toast.makeText(getActivity(), "移入黑名单失败", 0).show();
-//						}
-//					});
-//				}
+				//				catch (EaseMobException e) {
+				//					e.printStackTrace();
+				//					getActivity().runOnUiThread(new Runnable() {
+				//						public void run() {
+				//							pd.dismiss();
+				//							Toast.makeText(getActivity(), "移入黑名单失败", 0).show();
+				//						}
+				//					});
+				//				}
 			}
 		}).start();
-		
+
 	}
-	
+
 	// 刷新ui
-//	public void refresh() {
-//		try {
-//			// 可能会在子线程中调到这方法
-//			getActivity().runOnUiThread(new Runnable() {
-//				public void run() {
-//					getContactList();
-//					adapter.notifyDataSetChanged();
-//
-//				}
-//			});
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	//	public void refresh() {
+	//		try {
+	//			// 可能会在子线程中调到这方法
+	//			getActivity().runOnUiThread(new Runnable() {
+	//				public void run() {
+	//					getContactList();
+	//					adapter.notifyDataSetChanged();
+	//
+	//				}
+	//			});
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//		}
+	//	}
 
 	/**
 	 * 获取联系人列表，并过滤掉黑名单和排序
@@ -316,12 +438,12 @@ public class ContactlistFragment extends Fragment {
 		// 把"申请与通知"添加到首位
 		contactList.add(0, users.get(Constant.NEW_FRIENDS_USERNAME));
 	}
-	
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-	    if(((MainActivity)getActivity()).isConflict)
-	        outState.putBoolean("isConflict", true);
-	    super.onSaveInstanceState(outState);
-	    
+		if(((MainActivity)getActivity()).isConflict)
+			outState.putBoolean("isConflict", true);
+		super.onSaveInstanceState(outState);
+
 	}
 }
