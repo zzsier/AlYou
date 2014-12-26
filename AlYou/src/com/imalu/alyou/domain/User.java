@@ -23,8 +23,15 @@ public class User {
 	private int id;
 	private String nickName;
 	private String phoneNum;
+	private String key;
 	
 	
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
 	public String getPhoneNum() {
 		return phoneNum;
 	}

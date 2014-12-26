@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ico_personal_data_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/common_top_bar_black" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/common_tab_bg"
+            android:onClick="back" >
+
+            <Button
+                android:id="@+id/back_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:text="返回"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="系统设置"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_welline" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ico_welline" />
+
+   
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_settings_04" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="25dp"
+                        android:textSize="15sp"
+                        android:text="消息推送" />
+
+                    <Switch
+                        android:id="@+id/switch1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null" />
+
+                </RelativeLayout>
+
+             <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="好友验证" 
+            android:paddingRight="200dp"
+             android:background="@drawable/ico_settings_03" 
+             android:textSize="15sp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/button2"
+          android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+                   android:paddingRight="215dp"
+                   android:textSize="15sp"
+             android:background="@drawable/ico_settings_04" 
+            android:text="黑名单" 
+            />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+                   android:paddingRight="200dp"
+                   android:textSize="15sp"
+            android:background="@drawable/ico_settings_03" 
+            android:text="版本测试" 
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="意见反馈"
+                   android:paddingRight="200dp"
+                   android:textSize="15sp"
+            android:background="@drawable/ico_settings_04" 
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="15sp"
+            android:text="关于我们"
+                   android:paddingRight="200dp"
+            android:background="@drawable/ico_settings_03" 
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="亲，给个评价吧！" 
+            android:textSize="15sp"
+                   android:paddingRight="140dp"
+            android:background="@drawable/ico_settings_04" 
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/ico_settings_03" 
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/button8"
+          android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/ico_settings_04" 
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/button9"
+           android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/ico_settings_03" 
+            android:layout_weight="1"/>
+
+       
+            </LinearLayout>
+        </ScrollView>
+
+       
+
+
+</LinearLayout>

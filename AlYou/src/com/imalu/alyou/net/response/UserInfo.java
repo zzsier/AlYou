@@ -33,7 +33,14 @@ public class UserInfo extends NetObject{
 		}
 		
 	}
-	
+	public String getKey(){
+		try {
+			return this.getJsonObject().getString("Key");
+		} catch (JSONException e) {
+			return "";
+		}
+		
+	}
 	public String getUserName(){
 		try {
 			return this.getJsonObject().getString("UserName");

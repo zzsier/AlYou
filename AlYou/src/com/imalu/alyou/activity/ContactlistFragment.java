@@ -110,13 +110,12 @@ public class ContactlistFragment extends Fragment {
 		mImages[1]=(ImageView) this.getView().findViewById(R.id.image_guangbiao1);
 		mImages[2]=(ImageView) this.getView().findViewById(R.id.image_guangbiao2);
 		mImages[3]=(ImageView) this.getView().findViewById(R.id.image_guangbiao3);
-		imageView=(ImageView) this.getView().findViewById(R.id.contact_image);
+		//imageView=(ImageView) this.getView().findViewById(R.id.contact_image);
 		// 把第一个tab设为选中状态
 		mTabs[0].setSelected(true);
 		mTabs[0].setTextColor(Color.GREEN);
 		mImages[0].setVisibility(View.VISIBLE);
-		mImages[0].bringToFront();
-		imageView.bringToFront();
+	//	imageView.bringToFront();
 	 
 	}
 
@@ -172,8 +171,7 @@ public class ContactlistFragment extends Fragment {
 				mImages[1].bringToFront();
 				mImages[2].bringToFront();
 				mImages[3].bringToFront();*/
-				imageView.bringToFront();
-				mImages[0].bringToFront();
+			//	imageView.bringToFront();
 				util(index);
 			}
 		});
@@ -193,8 +191,7 @@ public class ContactlistFragment extends Fragment {
 				mImages[2].setVisibility(View.GONE);
 				mImages[3].setVisibility(View.GONE);
 
-				imageView.bringToFront();
-				mImages[1].bringToFront();
+				//imageView.bringToFront();
 				util(index);
 			}
 		});
@@ -214,8 +211,7 @@ public class ContactlistFragment extends Fragment {
 				mImages[2].setVisibility(View.VISIBLE);
 				mImages[3].setVisibility(View.GONE);
 
-				imageView.bringToFront();
-				mImages[2].bringToFront();
+				//imageView.bringToFront();
 				util(index);
 			}
 		});
@@ -235,8 +231,7 @@ public class ContactlistFragment extends Fragment {
 				mImages[2].setVisibility(View.GONE);
 				mImages[3].setVisibility(View.VISIBLE);
 
-				imageView.bringToFront();
-				mImages[3].bringToFront();
+				//imageView.bringToFront();
 				util(index);
 			}
 		});

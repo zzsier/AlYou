@@ -52,8 +52,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        
 
         <!-- 计时器second跳转 -->
         <activity
@@ -61,10 +59,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-        
-        
-        
-        
 
         <!-- 登陆 -->
         <activity
@@ -248,17 +242,19 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
 
-        <!-- 论坛  -->
-        <activity android:name=".activity.BBSActivity" 
+        <!-- 论坛 -->
+        <activity
+            android:name=".activity.BBSActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <!-- 我的活动 -->
-        <activity android:name=".activity.EverydayActivity" 
+        <activity
+            android:name=".activity.EverydayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
 
         <!-- 设置 -->
@@ -268,19 +264,41 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-		<!-- 注册1 -->
-		<activity android:name=".activity.RegisterActivity_first"
-		    android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden">
-		</activity>
-		<!-- 注册2 -->
-        <activity android:name=".activity.RegisterActivity_second"
+        <!-- 注册1 -->
+        <activity
+            android:name=".activity.RegisterActivity_first"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-
+        <!-- 注册2 -->
+        <activity
+            android:name=".activity.RegisterActivity_second"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 捐助记录 -->
+        <activity
+            android:name=".activity.DonorRecordsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 系统设置 -->
+        <activity
+            android:name=".activity.SystemSettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 个人中心 -->
+        <activity
+            android:name=".activity.PersonalCenterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
         <!-- 开机自启动服务 -->
         <receiver android:name="com.easemob.chat.StartServiceReceiver" >
             <intent-filter android:priority="1000" >
@@ -303,11 +321,6 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-       
-
-       
-
-        
     </application>
 
 </manifest>
