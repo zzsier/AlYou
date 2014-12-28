@@ -46,9 +46,11 @@ import com.easemob.util.HanziToPinyin;
 import com.imalu.alyou.Constant;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.AlUHXSDKHelper;
-import com.imalu.alyou.db.UserDao;
+
+
+import com.imalu.alyou.db.UserDbService;
+import com.imalu.alyou.db.gen.User;
 import com.imalu.alyou.domain.HXUser;
-import com.imalu.alyou.domain.User;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.NetObject;
@@ -73,7 +75,7 @@ public class LoginActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (AlUHXSDKHelper.getInstance().isLogined()) {
+		if (AlUApplication.getInstance().isLogined()) {
 			autoLogin = true;
 			startActivity(new Intent(LoginActivity.this, MainActivity.class));
 			return;
@@ -102,6 +104,10 @@ public class LoginActivity extends BaseActivity {
 			}
 		});
 
+	}
+	
+	public void saveUserToDB(User user) {
+		UserDbService.getInstance(this).saveUser(user);
 	}
 
 	/**
@@ -159,6 +165,15 @@ public class LoginActivity extends BaseActivity {
 						// 登陆成功，保存用户名密码
 						AlUApplication.getInstance().setUserName(username);
 						AlUApplication.getInstance().setPassword(password);
+						
+						
+						User user = new User();
+						user.setId((long)userInfo.getID());
+						user.setUsername(username);
+						user.setPassword(password);
+						user.setChatuser(userInfo.getHXName());
+						saveUserToDB(user);
+						
 						
 						/*
 						runOnUiThread(new Runnable() {

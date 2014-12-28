@@ -56,7 +56,6 @@ import com.imalu.alyou.Constant;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.adapter.ContactAdapter;
 import com.imalu.alyou.db.InviteMessgeDao;
-import com.imalu.alyou.db.UserDao;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
@@ -323,34 +322,34 @@ public class ContactlistFragment extends Fragment {
 		pd.setMessage("正在删除...");
 		pd.setCanceledOnTouchOutside(false);
 		pd.show();
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					//EMContactManager.getInstance().deleteContact(tobeDeleteUser.getUsername());
-					// 删除db和内存中此用户的数据
-					UserDao dao = new UserDao(getActivity());
-					dao.deleteContact(tobeDeleteUser.getUsername());
-					AlUApplication.getInstance().getContactList().remove(tobeDeleteUser.getUsername());
-					getActivity().runOnUiThread(new Runnable() {
-						public void run() {
-							pd.dismiss();
-							adapter.remove(tobeDeleteUser);
-							adapter.notifyDataSetChanged();
-
-						}
-					});
-				} catch (final Exception e) {
-					getActivity().runOnUiThread(new Runnable() {
-						public void run() {
-							pd.dismiss();
-							Toast.makeText(getActivity(), "删除失败: " + e.getMessage(), 1).show();
-						}
-					});
-
-				}
-
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//			public void run() {
+//				try {
+//					//EMContactManager.getInstance().deleteContact(tobeDeleteUser.getUsername());
+//					// 删除db和内存中此用户的数据
+//					UserDao dao = new UserDao(getActivity());
+//					dao.deleteContact(tobeDeleteUser.getUsername());
+//					AlUApplication.getInstance().getContactList().remove(tobeDeleteUser.getUsername());
+//					getActivity().runOnUiThread(new Runnable() {
+//						public void run() {
+//							pd.dismiss();
+//							adapter.remove(tobeDeleteUser);
+//							adapter.notifyDataSetChanged();
+//
+//						}
+//					});
+//				} catch (final Exception e) {
+//					getActivity().runOnUiThread(new Runnable() {
+//						public void run() {
+//							pd.dismiss();
+//							Toast.makeText(getActivity(), "删除失败: " + e.getMessage(), 1).show();
+//						}
+//					});
+//
+//				}
+//
+//			}
+//		}).start();
 
 	}
 

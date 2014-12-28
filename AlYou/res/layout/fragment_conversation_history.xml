@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:background="@color/common_bg"
+    android:background="@color/common_top_bar_black"
     android:orientation="vertical" >
-
-    <RelativeLayout
+    
+    
+    <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
         android:background="@color/top_bar_normal_bg"
@@ -20,9 +21,110 @@
             android:textColor="#fff"
             android:textSize="18sp" />
 
-    </RelativeLayout>
+    </RelativeLayout> -->
     <include layout="@layout/search_bar" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/btn_contract_green_noraml1"
+        android:gravity="center_vertical" 
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp">
+        
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:singleLine="true"
+            android:text="朋友圈"
+            android:textColor="@color/bottom_text_color_black"
+            android:textSize="16sp" />
+        
+        <!-- <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ico_welline" /> -->
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/btn_contract_green_noraml2"
+        android:gravity="center_vertical" 
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:singleLine="true"
+            android:text="已关注的公会"
+            android:textColor="@color/bottom_text_color_black"
+            android:textSize="16sp" />
+        
+       <!--  <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ico_welline" /> -->
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/btn_contract_green_noraml1"
+        android:gravity="center_vertical" 
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:singleLine="true"
+            android:text="通知消息"
+            android:textColor="@color/bottom_text_color_black"
+            android:textSize="16sp" />
+        
+        <!-- <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ico_welline" /> -->
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical" 
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="会话列表"
+            android:textColor="@color/bottom_text_color_normal"
+            android:textSize="15sp" />
+        
+
+    </RelativeLayout>
+    
     <include
         android:id="@+id/rl_error_item"
         layout="@layout/chat_neterror_item"
@@ -36,6 +138,7 @@
         android:layout_height="match_parent"
         android:background="@color/top_bar_normal_bg"
         android:divider="@null"
-        
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         />
 </LinearLayout>

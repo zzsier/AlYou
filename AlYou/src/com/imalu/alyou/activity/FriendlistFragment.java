@@ -21,12 +21,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -54,10 +60,17 @@ import com.easemob.exceptions.EaseMobException;
 import com.imalu.alyou.Constant;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.adapter.ContactAdapter;
+import com.imalu.alyou.adapter.FriendAdapter;
 import com.imalu.alyou.db.InviteMessgeDao;
-import com.imalu.alyou.db.UserDao;
+import com.imalu.alyou.domain.ConsernPerson;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
+import com.imalu.alyou.net.JsonHttpResponseHandler;
+import com.imalu.alyou.net.NetManager;
+import com.imalu.alyou.net.request.ConcernRequest;
+import com.imalu.alyou.net.request.SearchFriendRequest;
+import com.imalu.alyou.net.response.FriendInfo;
+import com.imalu.alyou.net.response.FriendListResponse;
 import com.imalu.alyou.widget.Sidebar;
 
 /**
@@ -65,9 +78,10 @@ import com.imalu.alyou.widget.Sidebar;
  * 
  */
 public class FriendlistFragment extends Fragment {
-	private ContactAdapter adapter;
+	private FriendAdapter adapter;
 	private List<HXUser> contactList;
 	private ListView listView;
+	FriendListResponse friendlist;
 	private boolean hidden;
 	private Sidebar sidebar;
 	private InputMethodManager inputMethodManager;
@@ -104,64 +118,70 @@ public class FriendlistFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		//防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
-		//if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
-		   // return;
-		//inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-		//listView = (ListView) getView().findViewById(R.id.list);
-//		sidebar = (Sidebar) getView().findViewById(R.id.sidebar);
-//		sidebar.setListView(listView);
+		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
+		    return;
+		inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		listView = (ListView) getView().findViewById(R.id.list);
+		sidebar = (Sidebar) getView().findViewById(R.id.sidebar);
+		sidebar.setListView(listView);
+		sidebar.setVisibility(ViewGroup.GONE);
 //		//黑名单列表
 //		//blackList = EMContactManager.getInstance().getBlackListUsernames();
-	//	contactList = new ArrayList<HXUser>();
+//		contactList = new ArrayList<HXUser>();
 //		// 获取设置contactlist
-//		getContactList();
+		getContactList();
 //		// 设置adapter
-//		adapter = new ContactAdapter(getActivity(), R.layout.row_contact, contactList, sidebar);
-//		listView.setAdapter(adapter);
-//		listView.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				String username = adapter.getItem(position).getUsername();
-//				if (Constant.NEW_FRIENDS_USERNAME.equals(username)) {
-//					// 进入申请与通知页面
-//					HXUser user = AlUApplication.getInstance().getContactList().get(Constant.NEW_FRIENDS_USERNAME);
-//					user.setUnreadMsgCount(0);
-//					startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
-//				} else if (Constant.GROUP_USERNAME.equals(username)) {
-//					// 进入群聊列表页面
-//					startActivity(new Intent(getActivity(), GroupsActivity.class));
-//				} else {
-//					// demo中直接进入聊天页面，实际一般是进入用户详情页
-//					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUsername()));
-//				}
-//			}
-//		});
-//		listView.setOnTouchListener(new OnTouchListener() {
-//
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				// 隐藏软键盘
-//				if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
-//					if (getActivity().getCurrentFocus() != null)
-//						inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
-//								InputMethodManager.HIDE_NOT_ALWAYS);
-//				}
-//				return false;
-//			}
-//		});
-//
-//		ImageView addContactView = (ImageView) getView().findViewById(R.id.iv_new_contact);
-//		// 进入添加好友页
-//		addContactView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(getActivity(), AddContactActivity.class));
-//			}
-//		});
-//		registerForContextMenu(listView);
+		
 
+	}
+	
+	private void showListView() {
+		adapter = new FriendAdapter(getActivity(), R.layout.row_contact, R.layout.row_contact2, friendlist.getFriendList(), sidebar);
+		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				String username = adapter.getItem(position).getUserName();
+				if (Constant.NEW_FRIENDS_USERNAME.equals(username)) {
+					// 进入申请与通知页面
+					HXUser user = AlUApplication.getInstance().getContactList().get(Constant.NEW_FRIENDS_USERNAME);
+					user.setUnreadMsgCount(0);
+					startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
+				} else if (Constant.GROUP_USERNAME.equals(username)) {
+					// 进入群聊列表页面
+					startActivity(new Intent(getActivity(), GroupsActivity.class));
+				} else {
+					// demo中直接进入聊天页面，实际一般是进入用户详情页
+					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getHXName()));
+				}
+			}
+		});
+		
+		listView.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// 隐藏软键盘
+				if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+					if (getActivity().getCurrentFocus() != null)
+						inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+								InputMethodManager.HIDE_NOT_ALWAYS);
+				}
+				return false;
+			}
+		});
+//
+		TextView addContactView = (TextView) getView().findViewById(R.id.add_friend);
+//		// 进入添加好友页
+		addContactView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getActivity(), AddContactActivity.class));
+			}
+		});
+		registerForContextMenu(listView);
 	}
 
 	@Override
@@ -176,16 +196,16 @@ public class FriendlistFragment extends Fragment {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.delete_contact) {
-			HXUser tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+			FriendInfo tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
 			// 删除此联系人
-			deleteContact(tobeDeleteUser);
+//			deleteContact(tobeDeleteUser);
 			// 删除相关的邀请消息
-			InviteMessgeDao dao = new InviteMessgeDao(getActivity());
-			dao.deleteMessage(tobeDeleteUser.getUsername());
+//			InviteMessgeDao dao = new InviteMessgeDao(getActivity());
+//			dao.deleteMessage(tobeDeleteUser.getUsername());
 			return true;
 		}else if(item.getItemId() == R.id.add_to_blacklist){
-			HXUser user = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
-			moveToBlacklist(user.getUsername());
+			FriendInfo user = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+//			moveToBlacklist(user.getUsername());
 			return true;
 		}
 		return super.onContextItemSelected(item);
@@ -218,34 +238,34 @@ public class FriendlistFragment extends Fragment {
 		pd.setMessage("正在删除...");
 		pd.setCanceledOnTouchOutside(false);
 		pd.show();
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					//EMContactManager.getInstance().deleteContact(tobeDeleteUser.getUsername());
-					// 删除db和内存中此用户的数据
-					UserDao dao = new UserDao(getActivity());
-					dao.deleteContact(tobeDeleteUser.getUsername());
-					AlUApplication.getInstance().getContactList().remove(tobeDeleteUser.getUsername());
-					getActivity().runOnUiThread(new Runnable() {
-						public void run() {
-							pd.dismiss();
-							adapter.remove(tobeDeleteUser);
-							adapter.notifyDataSetChanged();
-
-						}
-					});
-				} catch (final Exception e) {
-					getActivity().runOnUiThread(new Runnable() {
-						public void run() {
-							pd.dismiss();
-							Toast.makeText(getActivity(), "删除失败: " + e.getMessage(), 1).show();
-						}
-					});
-
-				}
-
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//			public void run() {
+//				try {
+//					//EMContactManager.getInstance().deleteContact(tobeDeleteUser.getUsername());
+//					// 删除db和内存中此用户的数据
+//					UserDao dao = new UserDao(getActivity());
+//					dao.deleteContact(tobeDeleteUser.getUsername());
+//					AlUApplication.getInstance().getContactList().remove(tobeDeleteUser.getUsername());
+//					getActivity().runOnUiThread(new Runnable() {
+//						public void run() {
+//							pd.dismiss();
+////							adapter.remove(tobeDeleteUser);
+//							adapter.notifyDataSetChanged();
+//
+//						}
+//					});
+//				} catch (final Exception e) {
+//					getActivity().runOnUiThread(new Runnable() {
+//						public void run() {
+//							pd.dismiss();
+//							Toast.makeText(getActivity(), "删除失败: " + e.getMessage(), 1).show();
+//						}
+//					});
+//
+//				}
+//
+//			}
+//		}).start();
 
 	}
 
@@ -285,48 +305,66 @@ public class FriendlistFragment extends Fragment {
 	}
 	
 	// 刷新ui
-//	public void refresh() {
-//		try {
-//			// 可能会在子线程中调到这方法
-//			getActivity().runOnUiThread(new Runnable() {
-//				public void run() {
-//					getContactList();
-//					adapter.notifyDataSetChanged();
-//
-//				}
-//			});
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void refresh() {
+		try {
+			// 可能会在子线程中调到这方法
+			getActivity().runOnUiThread(new Runnable() {
+				public void run() {
+					getContactList();
+					adapter.notifyDataSetChanged();
+
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 获取联系人列表，并过滤掉黑名单和排序
 	 */
 	private void getContactList() {
-		contactList.clear();
-		//获取本地好友列表
-		Map<String, HXUser> users = AlUApplication.getInstance().getContactList();
-		Iterator<Entry<String, HXUser>> iterator = users.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<String, HXUser> entry = iterator.next();
-			if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME) && !entry.getKey().equals(Constant.GROUP_USERNAME)
-					&& !blackList.contains(entry.getKey()))
-				contactList.add(entry.getValue());
-		}
-		// 排序
-		Collections.sort(contactList, new Comparator<HXUser>() {
-
+		
+		SearchFriendRequest searchFriendReq= new SearchFriendRequest();
+		searchFriendReq.setUserKey(AlUApplication.getMyInfo().getKey());
+		
+		friendlist = new FriendListResponse();
+		
+		NetManager.execute(NetManager.MY_FRIEND_OPERATION, searchFriendReq, new JsonHttpResponseHandler() {
 			@Override
-			public int compare(HXUser lhs, HXUser rhs) {
-				return lhs.getUsername().compareTo(rhs.getUsername());
+			public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+				Log.e("FriendListFragament", response.toString());
+				super.onSuccess(statusCode, headers, response);
+				friendlist.setJsonObject(response);
+				AlUApplication.setFriends(friendlist);
+				showListView();
 			}
 		});
+		
+//		contactList.clear();
+		//获取本地好友列表
+//		Map<String, HXUser> users = AlUApplication.getInstance().getContactList();
+//		Iterator<Entry<String, HXUser>> iterator = users.entrySet().iterator();
+//		while (iterator.hasNext()) {
+//			Entry<String, HXUser> entry = iterator.next();
+//			if (!entry.getKey().equals(Constant.NEW_FRIENDS_USERNAME) && !entry.getKey().equals(Constant.GROUP_USERNAME)
+//					&& !blackList.contains(entry.getKey()))
+//				contactList.add(entry.getValue());
+//		}
+		
+		// 排序
+//		Collections.sort(contactList, new Comparator<HXUser>() {
+//
+//			@Override
+//			public int compare(HXUser lhs, HXUser rhs) {
+//				return lhs.getUsername().compareTo(rhs.getUsername());
+//			}
+//		});
 
 		// 加入"申请与通知"和"群聊"
-		contactList.add(0, users.get(Constant.GROUP_USERNAME));
+//		contactList.add(0, users.get(Constant.GROUP_USERNAME));
 		// 把"申请与通知"添加到首位
-		contactList.add(0, users.get(Constant.NEW_FRIENDS_USERNAME));
+//		contactList.add(0, users.get(Constant.NEW_FRIENDS_USERNAME));
 	}
 	
 	@Override

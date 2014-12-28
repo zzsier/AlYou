@@ -22,7 +22,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
-        <!-- <RelativeLayout
+        <RelativeLayout
             android:id="@+id/container_remove"
             android:layout_width="50dp"
             android:layout_height="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_marginRight="9dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/mm_title_remove" />
-        </RelativeLayout> -->
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/container_to_group"

@@ -123,8 +123,10 @@ public class JsonHttpResponseHandler extends TextHttpResponseHandler {
                             @Override
                             public void run() {
                                 if (jsonResponse instanceof JSONObject) {
+                                	Log.e(LOG_TAG, "JSONObject response:"+jsonResponse);
                                     onSuccess(statusCode, headers, (JSONObject) jsonResponse);
                                 } else if (jsonResponse instanceof JSONArray) {
+                                	Log.e(LOG_TAG, "JSONArray response:"+jsonResponse);
                                     onSuccess(statusCode, headers, (JSONArray) jsonResponse);
                                 } else if (jsonResponse instanceof String) {
                                     onFailure(statusCode, headers, (String) jsonResponse, new JSONException("Response cannot be parsed as JSON data"));
@@ -210,7 +212,7 @@ public class JsonHttpResponseHandler extends TextHttpResponseHandler {
      * @throws org.json.JSONException exception if thrown while parsing JSON
      */
     protected Object parseResponse(byte[] responseBody) throws JSONException {
-    	Log.e(LOG_TAG, " response:"+responseBody);
+//    	Log.e(LOG_TAG, " response:"+responseBody);
     	if (null == responseBody)
             return null;
         Object result = null;

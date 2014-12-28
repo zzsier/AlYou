@@ -157,6 +157,8 @@ public class ChatAllHistoryFragment extends Fragment {
 				hideSoftKeyboard();
 			}
 		});
+		query.setVisibility(View.GONE);
+		clearSearch.setVisibility(View.GONE);
 
 	}
 

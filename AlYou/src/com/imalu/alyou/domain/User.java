@@ -18,12 +18,12 @@ package com.imalu.alyou.domain;
 public class User {
 	
 	private String username;
-	private String password;
-	private String hxname;
-	private int id;
+	private String password = "cc55aed9-0d13-4097-a8cf-f8b1b882a91c";
+	private String hxname = "cc55aed90d134097a8cff8b1b882a91c";
+	private int id = 66;
 	private String nickName;
 	private String phoneNum;
-	private String key;
+	private String key = "cc55aed9-0d13-4097-a8cf-f8b1b882a91c";
 	
 	
 	public String getKey() {
