@@ -12,5 +12,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="粉丝 " />
+    <ListView
+        android:id="@+id/lv_fans_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </ListView>
 
 </RelativeLayout>
