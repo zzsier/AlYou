@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="59dp"
-     android:id="@+id/list_item_layout"
-    android:gravity="center_vertical" >
+    android:id="@+id/list_item_layout"
+    android:gravity="center_vertical" 
+    android:background="@drawable/mm_listitem">
 
     <RelativeLayout
         android:id="@+id/avatar_container"

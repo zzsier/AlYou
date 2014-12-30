@@ -18,9 +18,13 @@
     <color name="error_item_color">#F6EBE6</color>
     <color name="bottom_bar_normal_bg">#2D2F31</color>
     <color name="bottom_text_color_normal">#ffffff</color>
+    <color name="bottom_text_color_black">#000000</color>
      <color name="btn_white_normal">#f7f8f8</color>
     <color name="btn_white_pressed">#b5b5b6</color>
     <color name="btn_green_noraml">#68C270</color>
+    <color name="btn_contract_green_noraml1">#b4bf00</color>
+    <color name="btn_contract_green_noraml2">#c4d433</color>
+    
     <color name="btn_green_pressed">#6FCD78</color>
     <color name="btn_gray_normal">#c0c0c0</color>
      <color name="btn_gray_pressed_status">#b5b5b6</color>

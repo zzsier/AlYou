@@ -314,25 +314,27 @@ public class MessageAdapter extends BaseAdapter{
 		if (message.direct == EMMessage.Direct.SEND && chatType != ChatType.GroupChat) {
 			holder.tv_ack = (TextView) convertView.findViewById(R.id.tv_ack);
 			holder.tv_delivered = (TextView) convertView.findViewById(R.id.tv_delivered);
-			if (holder.tv_ack != null) {
-				if (message.isAcked) {
-					if (holder.tv_delivered != null) {
-						holder.tv_delivered.setVisibility(View.INVISIBLE);
-					}
-					holder.tv_ack.setVisibility(View.VISIBLE);
-				} else {
-					holder.tv_ack.setVisibility(View.INVISIBLE);
-
-					// check and display msg delivered ack status
-					if (holder.tv_delivered != null) {
-						if (message.isDelivered) {
-							holder.tv_delivered.setVisibility(View.VISIBLE);
-						} else {
-							holder.tv_delivered.setVisibility(View.INVISIBLE);
-						}
-					}
-				}
-			}
+			holder.tv_delivered.setVisibility(View.INVISIBLE);
+			holder.tv_ack.setVisibility(View.INVISIBLE);
+//			if (holder.tv_ack != null) {
+//				if (message.isAcked) {
+//					if (holder.tv_delivered != null) {
+//						holder.tv_delivered.setVisibility(View.INVISIBLE);
+//					}
+//					holder.tv_ack.setVisibility(View.VISIBLE);
+//				} else {
+//					holder.tv_ack.setVisibility(View.INVISIBLE);
+//
+//					// check and display msg delivered ack status
+//					if (holder.tv_delivered != null) {
+//						if (message.isDelivered) {
+//							holder.tv_delivered.setVisibility(View.VISIBLE);
+//						} else {
+//							holder.tv_delivered.setVisibility(View.INVISIBLE);
+//						}
+//					}
+//				}
+//			}
 		} else {
 			// 如果是文本或者地图消息并且不是group messgae，显示的时候给对方发送已读回执
 			if ((message.getType() == Type.TXT || message.getType() == Type.LOCATION) && !message.isAcked && chatType != ChatType.GroupChat) {

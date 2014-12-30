@@ -13,6 +13,9 @@
  */
 package com.imalu.alyou;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import android.app.Application;
@@ -23,8 +26,12 @@ import com.easemob.EMCallBack;
 import com.imalu.alyou.db.gen.DaoMaster;
 import com.imalu.alyou.db.gen.DaoMaster.OpenHelper;
 import com.imalu.alyou.db.gen.DaoSession;
+import com.imalu.alyou.domain.Friend;
+import com.imalu.alyou.domain.Friends;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
+import com.imalu.alyou.net.response.FriendInfo;
+import com.imalu.alyou.net.response.FriendListResponse;
 import com.imalu.alyou.net.response.UserInfo;
 
 public class AlUApplication extends Application {
@@ -38,6 +45,8 @@ public class AlUApplication extends Application {
     private static DaoSession daoSession;
     
     private static User myinfo;
+    
+    private static Friends friends;
 	
 	/**
 	 * 当前用户nickname,为了苹果推送不是userid而是昵称
@@ -77,6 +86,28 @@ public class AlUApplication extends Application {
             myinfo = new User();
         }
         return myinfo;
+	}
+	
+	public static Friends getFriends(){
+		if (friends == null) {
+            friends = new Friends();
+        }
+        return friends;
+	}
+	
+	public static void setFriends(FriendListResponse friendlist) {
+		if (friends == null) {
+            friends = new Friends();
+        }
+		for (Iterator<FriendInfo> iter = friendlist.getFriendList().iterator(); iter.hasNext();) {
+			FriendInfo friendInfo = (FriendInfo)iter.next();
+			Friend friend = new Friend();
+			friend.setHxname(friendInfo.getHXName());
+			friend.setId(friendInfo.getId());
+			friend.setUsername(friendInfo.getUserName());
+			friend.setHeadpicUrl(friendInfo.getHeadPicture());
+			friends.addFriend(friend);
+		}
 	}
 	
 	/** 
@@ -167,12 +198,22 @@ public class AlUApplication extends Application {
 	public void setPassword(String pwd) {
 	    hxSDKHelper.setPassword(pwd);
 	}
+	
+	public boolean isLogined() {
+		if(getMyInfo().getUsername() != null && getMyInfo().getPassword() != null){
+            return true;
+        }
+        
+        return false;
+	}
 
 	/**
 	 * 退出登录,清空数据
 	 */
 	public void logout(final EMCallBack emCallBack) {
 		// 先调用sdk logout，在清理app中自己的数据
+		getMyInfo().setUsername("");
+		getMyInfo().setPassword("");
 	    hxSDKHelper.logout(emCallBack);
 	}
 }

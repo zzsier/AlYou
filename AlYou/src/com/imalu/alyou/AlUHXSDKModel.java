@@ -19,7 +19,6 @@ import java.util.Map;
 import android.content.Context;
 import com.easemob.applib.model.DefaultHXSDKModel;
 import com.imalu.alyou.db.DbOpenHelper;
-import com.imalu.alyou.db.UserDao;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 
@@ -43,15 +42,16 @@ public class AlUHXSDKModel extends DefaultHXSDKModel{
     
     public boolean saveContactList(List<HXUser> contactList) {
         // TODO Auto-generated method stub
-        UserDao dao = new UserDao(context);
-        dao.saveContactList(contactList);
+//        UserDao dao = new UserDao(context);
+//        dao.saveContactList(contactList);
         return true;
     }
 
     public Map<String, HXUser> getContactList() {
         // TODO Auto-generated method stub
-        UserDao dao = new UserDao(context);
-        return dao.getContactList();
+//        UserDao dao = new UserDao(context);
+    	return null;
+//        return dao.getContactList();
     }
 
     public void closeDB() {

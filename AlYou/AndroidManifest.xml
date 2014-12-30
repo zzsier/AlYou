@@ -53,27 +53,25 @@
             </intent-filter>
         </activity>
 
-        
-        
-        <!--添加好友跳转 -->
+        <!-- 添加好友跳转 -->
         <activity
-            android:name="com.imalu.alyou.activity.Activity_add_tianjia"
+            android:name="com.imalu.alyou.activity.Activity_add"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-        <!--个人资料添加跳转 -->
+        <!-- 个人资料添加跳转 -->
         <activity
-            android:name="com.imalu.alyou.activity.Activity_personal_data_tianjia"
+            android:name="com.imalu.alyou.activity.Activity_personal_data_add"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-        <!--搜号码跳转 -->
+        <!-- 搜号码跳转 -->
         <activity
-            android:name="com.imalu.alyou.activity.Activity_add_findhaoma"
+            android:name="com.imalu.alyou.activity.Activity_add_findId"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-    
+
         <!-- 计时器second跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.AddClockActivity"
@@ -316,6 +314,27 @@
         <!-- 个人中心 -->
         <activity
             android:name=".activity.PersonalCenterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 添加好友 -->
+        <activity
+            android:name=".activity.FindFriendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 输入号码 -->
+        <activity
+            android:name=".activity.FindFriendByIdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 添加好友个人资料 -->
+        <activity
+            android:name=".activity.FindFriendDataActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >

@@ -59,7 +59,6 @@ import com.easemob.util.NetUtils;*/
 import com.imalu.alyou.Constant;
 //import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.db.InviteMessgeDao;
-import com.imalu.alyou.db.UserDao;
 import com.imalu.alyou.domain.InviteMessage;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.domain.InviteMessage.InviteMesageStatus;
@@ -408,7 +407,7 @@ public class MainActivity extends BaseActivity {
 	// };
 
 	private InviteMessgeDao inviteMessgeDao;
-	private UserDao userDao;
+//	private UserDao userDao;
 
 	/***
 	 * 好友变化listener

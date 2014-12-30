@@ -18,7 +18,6 @@ package com.easemob.applib.model;
  */
 
 import com.easemob.applib.utils.HXPreferenceUtils;
-import com.imalu.alyou.db.UserDao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -32,7 +31,7 @@ import android.preference.PreferenceManager;
 public class DefaultHXSDKModel extends HXSDKModel{
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PWD = "pwd";
-    UserDao dao = null;
+//    UserDao dao = null;
     protected Context context = null;
     
     public DefaultHXSDKModel(Context ctx){

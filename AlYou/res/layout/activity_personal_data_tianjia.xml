@@ -23,9 +23,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
+                android:onClick="back"
                 android:text="返回"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
+
         </LinearLayout>
 
         <TextView
@@ -114,7 +116,7 @@
                         android:textColor="#FFFFFF" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/username_find_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
@@ -130,7 +132,7 @@
                         android:textColor="#FFFFFF" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/appid_find_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"

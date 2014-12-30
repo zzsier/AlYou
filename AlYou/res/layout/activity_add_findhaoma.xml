@@ -22,15 +22,17 @@
             android:textColor="#ffffff"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:text="返回"
-            android:textColor="#ffffff" />
+      <Button
+                android:id="@+id/back_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:text="返回"
+                android:textColor="#FFFFFF"
+                android:onClick="back"
+                android:textSize="16sp" />
+        
     </RelativeLayout>
 
     <TextView

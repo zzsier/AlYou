@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 
+import com.imalu.alyou.adapter.ConsernlistFragemntAdapter;
 import com.imalu.alyou.domain.ConsernPerson;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;

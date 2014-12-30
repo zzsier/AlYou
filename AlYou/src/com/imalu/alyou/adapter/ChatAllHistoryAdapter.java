@@ -35,6 +35,7 @@ import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.ImageMessageBody;
 import com.easemob.chat.TextMessageBody;
+import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.easemob.util.DateUtils;
 import com.imalu.alyou.Constant;
@@ -110,7 +111,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 				holder.name.setText("申请与通知");
 			}
 			//holder.name.setBackgroundResource(R.color.common_top_bar_black);
-			holder.name.setText(username);
+			holder.name.setText(AlUApplication.getFriends().getUserNameByHXName(username));
 		}
 
 		if (conversation.getUnreadMsgCount() > 0) {
