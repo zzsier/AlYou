@@ -23,6 +23,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
+                android:onClick="back"
                 android:text="返回"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="系统设置"
+            android:text="设置"
             android:textColor="#ffffff"
             android:textSize="18sp" />
 
@@ -90,82 +91,94 @@
 
                 </RelativeLayout>
 
-             <Button
+             <TextView
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="好友验证" 
-            android:paddingRight="200dp"
+            android:layout_centerVertical="true"
+                        android:paddingLeft="25dp"
+                         android:paddingTop="15dp"
              android:background="@drawable/ico_settings_03" 
              android:textSize="15sp"
             android:layout_weight="1"/>
 
-        <Button
+        <TextView
             android:id="@+id/button2"
           android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
-                   android:paddingRight="215dp"
+                   android:layout_centerVertical="true"
+                        android:paddingLeft="25dp"
+                         android:paddingTop="15dp"
                    android:textSize="15sp"
              android:background="@drawable/ico_settings_04" 
             android:text="黑名单" 
             />
 
-        <Button
+        <TextView
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-                   android:paddingRight="200dp"
+                 android:layout_centerVertical="true"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="15dp"
                    android:textSize="15sp"
             android:background="@drawable/ico_settings_03" 
             android:text="版本测试" 
             android:layout_weight="1"/>
 
-        <Button
+        <TextView
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+             android:paddingTop="15dp"
             android:text="意见反馈"
-                   android:paddingRight="200dp"
+                   android:layout_centerVertical="true"
+                        android:paddingLeft="25dp"
                    android:textSize="15sp"
             android:background="@drawable/ico_settings_04" 
             android:layout_weight="1" />
 
-        <Button
+        <TextView
             android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="15sp"
             android:text="关于我们"
-                   android:paddingRight="200dp"
+                   android:layout_centerVertical="true"
+                        android:paddingLeft="25dp"
+                         android:paddingTop="15dp"
             android:background="@drawable/ico_settings_03" 
             android:layout_weight="1" />
 
-        <Button
+        <TextView
             android:id="@+id/button6"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="亲，给个评价吧！" 
             android:textSize="15sp"
-                   android:paddingRight="140dp"
+                   android:layout_centerVertical="true"
+                        android:paddingLeft="25dp"
+                         android:paddingTop="15dp"
             android:background="@drawable/ico_settings_04" 
             android:layout_weight="1"/>
 
-        <Button
+        <TextView
             android:id="@+id/button7"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/ico_settings_03" 
             android:layout_weight="1"/>
 
-        <Button
+        <TextView
             android:id="@+id/button8"
           android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/ico_settings_04" 
             android:layout_weight="1"/>
 
-        <Button
+        <TextView
             android:id="@+id/button9"
            android:layout_width="match_parent"
             android:layout_height="50dp"

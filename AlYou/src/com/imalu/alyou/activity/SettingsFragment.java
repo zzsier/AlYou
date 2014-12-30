@@ -34,6 +34,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
 import com.imalu.alyou.R;
 import com.imalu.alyou.AlUApplication;
+import com.imalu.alyou.R.layout;
 
 /**
  * 设置界面
@@ -112,6 +113,21 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	 * 诊断
 	 */
 	private LinearLayout llDiagnose;
+	
+	/**
+	 * 个人中心——个人设置
+	 */
+	private LinearLayout personalcenter;
+	private TextView textView;
+	private String username;
+	/**
+	 * 捐助设置
+	 */
+	private RelativeLayout donorrecordslayout;
+	/**
+	 * 系统设置 
+	 */
+	private RelativeLayout systemsettingslayout;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_conversation_settings, container, false);
@@ -135,8 +151,8 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 //		iv_switch_close_vibrate = (ImageView) getView().findViewById(R.id.iv_switch_close_vibrate);
 //		iv_switch_open_speaker = (ImageView) getView().findViewById(R.id.iv_switch_open_speaker);
 //		iv_switch_close_speaker = (ImageView) getView().findViewById(R.id.iv_switch_close_speaker);
-		logoutBtn = (Button) getView().findViewById(R.id.btn_logout);
-		mySettingBtn = (Button) getView().findViewById(R.id.mySetting);
+	//	logoutBtn = (Button) getView().findViewById(R.id.btn_logout);
+	//	mySettingBtn = (Button) getView().findViewById(R.id.mySetting);
 //		if(!TextUtils.isEmpty(EMChatManager.getInstance().getCurrentUser())){
 //			logoutBtn.setText(getString(R.string.button_logout) + "(" + EMChatManager.getInstance().getCurrentUser() + ")");
 //		}
@@ -151,8 +167,8 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 //		rl_switch_sound.setOnClickListener(this);
 //		rl_switch_vibrate.setOnClickListener(this);
 //		rl_switch_speaker.setOnClickListener(this);
-		logoutBtn.setOnClickListener(this);
-		mySettingBtn.setOnClickListener(this);
+		//logoutBtn.setOnClickListener(this);
+		//mySettingBtn.setOnClickListener(this);
 		//llDiagnose.setOnClickListener(this);
 //		chatOptions = EMChatManager.getInstance().getChatOptions();
 //		if (chatOptions.getNotificationEnable()) {
@@ -185,6 +201,44 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 //			iv_switch_close_speaker.setVisibility(View.VISIBLE);
 //		}
 
+		
+		personalcenter =(LinearLayout) getView().findViewById(R.id.personal_center_layout);
+		donorrecordslayout=(RelativeLayout) getView().findViewById(R.id.donor_records_layout);
+		systemsettingslayout=(RelativeLayout) getView().findViewById(R.id.system_settings_layout);
+		textView =(TextView) getView().findViewById(R.id.username_textview);
+		username=AlUApplication.getMyInfo().getUsername();
+		if(username.equals("null")){
+			textView.setText("未设置");
+		}else{
+			textView.setText(username);
+		}
+		
+		personalcenter.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(getActivity(),PersonalCenterActivity.class));
+				
+			}
+		});
+		
+		donorrecordslayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(getActivity(),DonorRecordsActivity.class));
+			}
+		});
+		systemsettingslayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(getActivity(),SystemSettingsActivity.class));
+			}
+		});
 	}
 
 	
@@ -260,18 +314,25 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 //				HXSDKHelper.getInstance().getModel().setSettingMsgVibrate(true);
 //			}
 //			break;
-		case R.id.btn_logout:
-			logout();
-			break;
-		case R.id.mySetting:
-			startActivity(new Intent(getActivity(), MySettingActivity.class));
-			break;
+	//	case R.id.btn_logout:
+		//	logout();
+			//break;
+		//case R.id.mySetting:
+			//startActivity(new Intent(getActivity(), MySettingActivity.class));
+			//break;
 //		case R.id.ll_black_list:
 //			startActivity(new Intent(getActivity(), BlacklistActivity.class));
 //			break;
 //		case R.id.ll_diagnose:
 //			startActivity(new Intent(getActivity(), DiagnoseActivity.class));
 //			break;
+		case R.id.personal_center_layout:
+				startActivity(new Intent(getActivity(),PersonalCenterActivity.class));
+		case R.id.donor_records_layout:
+			startActivity(new Intent(getActivity(),DonorRecordsActivity.class));
+		case R.id.system_settings_layout:
+			startActivity(new Intent(getActivity(),SystemSettingsActivity.class));
+		
 		default:
 			break;
 		}
