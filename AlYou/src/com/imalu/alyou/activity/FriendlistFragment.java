@@ -13,7 +13,6 @@
  */
 package com.imalu.alyou.activity;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -22,43 +21,34 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.easemob.chat.EMContactManager;
-import com.imalu.alyou.R;
-import com.easemob.exceptions.EaseMobException;
-import com.imalu.alyou.Constant;
+ 
 import com.imalu.alyou.AlUApplication;
+import com.imalu.alyou.Constant;
+import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.ContactAdapter;
 import com.imalu.alyou.db.InviteMessgeDao;
 import com.imalu.alyou.db.UserDao;
 import com.imalu.alyou.domain.HXUser;
-import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
+//import com.easemob.chat.EMContactManager;
 
 /**
  * 通讯录-----好友列表
@@ -72,6 +62,7 @@ public class FriendlistFragment extends Fragment {
 	private Sidebar sidebar;
 	private InputMethodManager inputMethodManager;
 	private List<String> blackList;
+	private Button bt;
 	
 
 	protected static final String TAG = "MainActivity";
@@ -94,7 +85,6 @@ public class FriendlistFragment extends Fragment {
 	//private NewMessageBroadcastReceiver msgReceiver;
 	// 账号在别处登录
 	public boolean isConflict = false;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.contact_friend_list, container, false);
@@ -161,7 +151,29 @@ public class FriendlistFragment extends Fragment {
 //			}
 //		});
 //		registerForContextMenu(listView);
+		setview();
+		setListerner();
 
+	}
+
+	private void setview() {
+		// TODO Auto-generated method stub
+		 bt =  (Button) getActivity().findViewById(R.id.tianjia_button1);
+	}
+
+	private void setListerner() {
+		// TODO Auto-generated method stub
+		bt.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent=new  Intent(
+						getActivity(),
+						Activity_add_tianjia.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override

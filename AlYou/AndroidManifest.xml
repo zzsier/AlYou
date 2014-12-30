@@ -53,6 +53,27 @@
             </intent-filter>
         </activity>
 
+        
+        
+        <!--添加好友跳转 -->
+        <activity
+            android:name="com.imalu.alyou.activity.Activity_add_tianjia"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!--个人资料添加跳转 -->
+        <activity
+            android:name="com.imalu.alyou.activity.Activity_personal_data_tianjia"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        <!--搜号码跳转 -->
+        <activity
+            android:name="com.imalu.alyou.activity.Activity_add_findhaoma"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+    
         <!-- 计时器second跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.AddClockActivity"
