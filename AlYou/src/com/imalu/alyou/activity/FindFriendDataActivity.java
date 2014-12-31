@@ -17,6 +17,7 @@ public class FindFriendDataActivity  extends BaseActivity{
 	private int id;
 	private String key;
 	private Button back_bt;
+	private Button guanzhu_bt;
 
 
 
@@ -26,6 +27,7 @@ public class FindFriendDataActivity  extends BaseActivity{
 		setContentView(R.layout.activity_personal_data_tianjia);
 		init();
 		setView();
+		setListener();
 		Intent intent= getIntent();
 		username=intent.getStringExtra("username");
 		id=intent.getIntExtra("id", 1);
@@ -42,24 +44,27 @@ public class FindFriendDataActivity  extends BaseActivity{
 
 	}
 
-	/*private void setListener() {
+	 private void setListener() {
 		// TODO Auto-generated method stub
-		back_bt.setOnClickListener(new OnClickListener() {
+		 guanzhu_bt.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent  =new Intent(FindFriendDataActivity.this,
-						FindFriendByIdActivity.class);
-				startActivity(intent);
-				finish();
+				 String btText = guanzhu_bt.getText().toString();
+				 if ("关注".equals(btText)) {
+					guanzhu_bt.setText("取消关注");
+				} else if("取消关注".equals(btText)){
+					guanzhu_bt.setText("关注");
+				}
 			}
 		});
-	}*/
+	} 
 
 	private void setView() {
 		// TODO Auto-generated method stub
 		back_bt=(Button) findViewById(R.id.back_bt);
+		guanzhu_bt=(Button) findViewById(R.id.guanzhu_bt);
 	}
 
 	public void init(){
