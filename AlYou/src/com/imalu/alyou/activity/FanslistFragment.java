@@ -20,6 +20,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.FansAdapter;
@@ -28,15 +41,6 @@ import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.request.FansRequest;
 import com.imalu.alyou.net.response.FansResponse;
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 
 
@@ -62,6 +66,16 @@ public class FanslistFragment extends Fragment {
 		Log.e("FANS",""+fans.toString());
 		FansAdapter adapter=new FansAdapter(getActivity(), fans);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				startActivity(new Intent(getActivity(), PersonInfoActivity.class));
+				//Toast.makeText(getActivity(), "你点击了"+position,0).show();
+				
+			}
+		});
 	}
 	//发送请求，查询粉丝数据
 		private void fansFund() {

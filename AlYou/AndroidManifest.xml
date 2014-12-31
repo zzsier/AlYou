@@ -71,6 +71,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
+         <!-- 个人信息 -->
+        <activity
+            android:name=".activity.PersonInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
 
         <!-- 计时器second跳转 -->
         <activity
