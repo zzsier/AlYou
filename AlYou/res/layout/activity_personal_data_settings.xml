@@ -43,6 +43,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ico_welline" />
 
+        <Button
+            android:id="@+id/save_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:onClick="save"
+            android:text="保存"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <ImageView
@@ -54,9 +66,9 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,8 +78,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:layout_marginTop="15dp" 
-                android:orientation="vertical">
+                android:layout_marginTop="15dp"
+                android:orientation="vertical" >
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -92,14 +104,13 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
                         android:src="@drawable/ico_personal_data_photo" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" 
-                      android:layout_weight="1"
-                      android:background="@drawable/ico_guanzhu_item_bg_1" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_guanzhu_item_bg_1" >
 
                     <TextView
                         android:id="@+id/textView2"
@@ -107,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="昵称" />
 
                     <EditText
@@ -118,14 +129,13 @@
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:ems="10" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" 
-                      android:layout_weight="1"
-                      android:background="@drawable/ico_guanzhu_item_bg_2" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_guanzhu_item_bg_2" >
 
                     <TextView
                         android:id="@+id/textView3"
@@ -133,7 +143,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="我的二维码" />
 
                     <ImageView
@@ -144,14 +154,13 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
                         android:src="@drawable/erweima" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" 
-                      android:layout_weight="1"
-                      android:background="@drawable/ico_guanzhu_item_bg_1" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_guanzhu_item_bg_1" >
 
                     <TextView
                         android:id="@+id/textView4"
@@ -159,8 +168,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="实名验证" />
+
                     <EditText
                         android:id="@+id/realname_edittext"
                         android:layout_width="100dp"
@@ -168,10 +178,11 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:background="@null"
-                        android:ems="10" />
+                        android:ems="10" >
 
+                        <requestFocus />
+                    </EditText>
                 </RelativeLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -192,16 +203,41 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="性别" />
+
+                   <RadioGroup
+                       android:id="@+id/radioGroup1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentRight="true"
+                       android:layout_centerVertical="true"
+                       android:layout_marginRight="20dp"
+                       android:orientation="horizontal" >
+
+                       <RadioButton
+                           android:id="@+id/radio_man"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:checked="true"
+                           android:text="男"
+                           android:textSize="15sp" />
+
+                       <RadioButton
+                           android:id="@+id/radio_woman"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="15sp" 
+                           android:text="女" />
+                   </RadioGroup>
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" 
-                      android:layout_weight="1"
-                      android:background="@drawable/ico_guanzhu_item_bg_1" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_guanzhu_item_bg_1" >
 
                     <TextView
                         android:id="@+id/textView6"
@@ -209,8 +245,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="年龄" />
+
                     <EditText
                         android:id="@+id/age_edittext"
                         android:layout_width="100dp"
@@ -219,14 +256,13 @@
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:ems="10" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" 
-                      android:layout_weight="1"
-                      android:background="@drawable/ico_guanzhu_item_bg_2" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_guanzhu_item_bg_2" >
 
                     <TextView
                         android:id="@+id/textView7"
@@ -234,9 +270,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="所在地" />
-<EditText
+
+                    <EditText
                         android:id="@+id/address_edittext"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
@@ -245,7 +282,6 @@
                         android:background="@null"
                         android:ems="10" />
                 </RelativeLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -286,16 +322,16 @@
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/textView8"
                         android:layout_alignBottom="@+id/textView8"
-                        android:layout_toLeftOf="@+id/bangding_bt"
                         android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/bangding_bt"
                         android:text="黎明之翼" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" 
-                      android:layout_weight="1"
-                      android:background="@drawable/ico_guanzhu_item_bg_2" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_guanzhu_item_bg_2" >
 
                     <TextView
                         android:id="@+id/textView9"
@@ -303,23 +339,24 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="app号" />
-<EditText
-                        android:id="@+id/appnum_edittext"
-                        android:layout_width="100dp"
+
+                    <TextView
+                        android:id="@+id/appid_textview"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:background="@null"
-                        android:ems="10" />
+                        android:layout_marginRight="20dp"
+                        android:text="0" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" 
-                      android:layout_weight="1"
-                      android:background="@drawable/ico_guanzhu_item_bg_1" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ico_guanzhu_item_bg_1" >
 
                     <TextView
                         android:id="@+id/textView10"
@@ -327,21 +364,20 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                          android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="积分" />
-<EditText
-                        android:id="@+id/jifen_edittext"
-                        android:layout_width="100dp"
+
+                    <TextView
+                        android:id="@+id/jifen_textview"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:background="@null"
-                        android:ems="10" />
+                        android:layout_marginRight="20dp"
+                        android:text="0" />
                 </RelativeLayout>
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-  
+
 </LinearLayout>

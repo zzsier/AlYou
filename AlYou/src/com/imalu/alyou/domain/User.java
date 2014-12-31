@@ -24,8 +24,51 @@ public class User {
 	private String nickName;
 	private String phoneNum;
 	private String key = "cc55aed9-0d13-4097-a8cf-f8b1b882a91c";
+	private int jifen;
+	private String locus;
+	private String sex;
+	private String societykey;
+	private String realname;
+	private int age;
 	
 	
+	
+	public int getJifen() {
+		return jifen;
+	}
+	public void setJifen(int jifen) {
+		this.jifen = jifen;
+	}
+	public String getLocus() {
+		return locus;
+	}
+	public void setLocus(String locus) {
+		this.locus = locus;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getSocietykey() {
+		return societykey;
+	}
+	public void setSocietykey(String societykey) {
+		this.societykey = societykey;
+	}
+	public String getRealname() {
+		return realname;
+	}
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
 	public String getKey() {
 		return key;
 	}

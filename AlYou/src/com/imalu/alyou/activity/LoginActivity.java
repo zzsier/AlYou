@@ -162,6 +162,11 @@ public class LoginActivity extends BaseActivity {
 						AlUApplication.getMyInfo().setId(userInfo.getID());
 						AlUApplication.getMyInfo().setUsername(userInfo.getUserName());
 						AlUApplication.getMyInfo().setKey(userInfo.getKey());
+						AlUApplication.getMyInfo().setJifen(userInfo.getJifen());
+						AlUApplication.getMyInfo().setAge(userInfo.getAge());
+						AlUApplication.getMyInfo().setLocus(userInfo.getLocus());
+						AlUApplication.getMyInfo().setRealname(userInfo.getRealName());
+						AlUApplication.getMyInfo().setSex(userInfo.getSex());
 						// 登陆成功，保存用户名密码
 						AlUApplication.getInstance().setUserName(username);
 						AlUApplication.getInstance().setPassword(password);

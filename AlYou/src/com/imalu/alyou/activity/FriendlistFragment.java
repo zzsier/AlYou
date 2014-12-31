@@ -114,7 +114,6 @@ public class FriendlistFragment extends Fragment {
 		sidebar.setListView(listView);
 		sidebar.setVisibility(ViewGroup.GONE);
 		relativeLayout.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -176,10 +175,6 @@ public class FriendlistFragment extends Fragment {
 //		setLisetener();
 		
 	}
-	
-
-
-
 	private void showListView() {
 		adapter = new FriendAdapter(getActivity(), R.layout.row_contact, R.layout.row_contact2, friendlist.getFriendList(), sidebar);
 		listView.setAdapter(adapter);
@@ -228,9 +223,6 @@ public class FriendlistFragment extends Fragment {
 		});
 		registerForContextMenu(listView);
 	}
-
-	
-
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);

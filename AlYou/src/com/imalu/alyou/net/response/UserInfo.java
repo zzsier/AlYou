@@ -15,10 +15,58 @@ public class UserInfo extends NetObject{
 		}
 		
 	}
+	public int getJifen(){
+		try {
+			return this.getJsonObject().getInt("Jifen");
+		} catch (JSONException e) {
+			return 0;
+		}
+		
+	}
 	
 	public String getHXName(){
 		try {
 			return this.getJsonObject().getString("HxName");
+		} catch (JSONException e) {
+			return "";
+		}
+		
+	}
+	public String getRealName(){
+		try {
+			return this.getJsonObject().getString("RealName");
+		} catch (JSONException e) {
+			return "";
+		}
+		
+	}
+	public int getAge(){
+		try {
+			return this.getJsonObject().getInt("Age");
+		} catch (JSONException e) {
+			return 0;
+		}
+		
+	}
+	public String getSex(){
+		try {
+			return this.getJsonObject().getString("Sex");
+		} catch (JSONException e) {
+			return "";
+		}
+		
+	}
+	public String getLocus(){
+		try {
+			return this.getJsonObject().getString("Locus");
+		} catch (JSONException e) {
+			return "";
+		}
+		
+	}
+	public String getSocietyKey(){
+		try {
+			return this.getJsonObject().getString("SocietyKey");
 		} catch (JSONException e) {
 			return "";
 		}

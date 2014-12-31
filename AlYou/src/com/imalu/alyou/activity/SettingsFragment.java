@@ -207,7 +207,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 		systemsettingslayout=(RelativeLayout) getView().findViewById(R.id.system_settings_layout);
 		textView =(TextView) getView().findViewById(R.id.username_textview);
 		username=AlUApplication.getMyInfo().getUsername();
-		if(username.equals("null")){
+		if(username==null){
 			textView.setText("未设置");
 		}else{
 			textView.setText(username);

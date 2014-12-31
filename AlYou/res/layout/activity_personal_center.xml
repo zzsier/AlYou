@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/common_tab_bg"
-            android:onClick="back" >
+           >
 
             <Button
                 android:id="@+id/back_bt"
@@ -23,6 +23,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
+                 android:onClick="back" 
                 android:text="返回"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
@@ -90,7 +91,7 @@
                         android:textColor="#FFFFFF" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/username_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
@@ -128,7 +129,7 @@
                         android:textColor="#FFFFFF" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/jifen_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
@@ -150,7 +151,7 @@
                         android:textColor="#FFFFFF" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/gonghui_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
@@ -276,7 +277,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:background="@drawable/ico_gerenzhongxin68"
+            android:background="@drawable/ico_47"
             android:text="修改密码"
             android:textSize="15sp" />
         <Button
@@ -287,7 +288,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="30dp"
             android:layout_weight="2"
-            android:background="@drawable/ico_gerenzhongxin69"
+            android:background="@drawable/ico_login"
             android:text="关注"
             android:textSize="15sp" />
     </LinearLayout>

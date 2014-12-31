@@ -31,6 +31,7 @@ public class PersonalCenterActivity extends BaseActivity{
 	private ProgressDialog progressDialog;*/
 	private TextView username;
 	private TextView appnum;
+	private TextView jifen;
 	private ImageView userphoto;
 	
 	@Override
@@ -40,10 +41,13 @@ public class PersonalCenterActivity extends BaseActivity{
 	username=(TextView) findViewById(R.id.username_text);
 	appnum=(TextView) findViewById(R.id.app_text);
 	userphoto=(ImageView) findViewById(R.id.image_personal_data_photo);
+	jifen=(TextView) findViewById(R.id.jifen_text);
 	
 	String app_id=String.valueOf(AlUApplication.getMyInfo().getId());
 	String name=AlUApplication.getMyInfo().getUsername();
-	if(name.equals("null")){
+	String jifen_number=String.valueOf(AlUApplication.getMyInfo().getJifen());
+	Log.i("NAME", ""+name);
+	if(name==null){
 		username.setText("未设置");
 		
 	}else{
@@ -51,7 +55,7 @@ public class PersonalCenterActivity extends BaseActivity{
 		username.setText(name);
 	}
 	appnum.setText(app_id);
-	
+	jifen.setText(jifen_number);
 	userphoto.setOnClickListener(new OnClickListener() {
 		
 		@Override
