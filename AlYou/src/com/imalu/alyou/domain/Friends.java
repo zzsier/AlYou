@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.util.Log;
+
 public class Friends {
 	
 	private List<Friend> friendlist;
@@ -37,6 +39,23 @@ public class Friends {
 		}
 		
 		return "";
+	}
+	
+	public Boolean existUserbyKey(String userkey) {
+		Log.e("existUserbyKey", "User Key: "+userkey);
+		Log.e("existUserbyKey", "Friend list size: "+friendlist.size());
+		if(userkey == null) {
+			return false;
+		}
+		for (Iterator<Friend> iter = friendlist.iterator(); iter.hasNext();) {
+			Friend friend = (Friend)iter.next();
+			Log.e("existUserbyKey", "Friend Key: "+friend.getKey());
+			if( friend.getKey().equals(userkey) ) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 }

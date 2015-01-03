@@ -35,6 +35,7 @@
 </RelativeLayout>
     
     <RelativeLayout
+        android:id="@+id/groups"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/btn_contract_green_noraml2"
@@ -43,7 +44,6 @@
         android:layout_marginRight="20dp">
 
         <TextView
-            android:id="@+id/add_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"

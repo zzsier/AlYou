@@ -319,7 +319,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 			findViewById(R.id.container_voice_call).setVisibility(View.GONE);
 			toChatUsername = getIntent().getStringExtra("groupId");
 			group = EMGroupManager.getInstance().getGroup(toChatUsername);
-			((TextView) findViewById(R.id.name)).setText(group.getGroupName());
+			((TextView) findViewById(R.id.name)).setText(getIntent().getStringExtra("groupName"));
 			// conversation =
 			// EMChatManager.getInstance().getConversation(toChatUsername,true);
 		}

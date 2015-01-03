@@ -18,6 +18,11 @@ public class NetManager {
 
 	//修改个人设置
 	public static final int UPDATE_USERDATA_REQUEST_OPERATION=9;
+	
+	public static final int GROUPS_REQUEST_OPERATION=10;
+	public static final int GROUP_MEMBER_REQUEST_OPERATION=11;
+	
+	public static final int ADD_FRIEND_REQUEST_OPERATION=12;
 
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
@@ -29,6 +34,9 @@ public class NetManager {
 	public static final String FANS_REQUEST_URL="/service/GerenzhongxinServices.svc/GuanzhuwodeYonghuLiebiao";
 	public static final String ADDFRIEND_FRIEND_REQUEST_URL = "/service/LianxirenServices.svc/SearchUser";
 	public static final String UPDATE_USERDATA_REQUEST_URL="service/GerenzhongxinServices.svc/InsetUsers";
+	public static final String GROUPS_REQUEST_URL="service/LianxirenServices.svc/GetForumInfo";
+	public static final String GROUP_MEMBER__REQUEST_URL="service/LianxirenServices.svc/HouQuTaoLunZhuChengYuan";
+	public static final String ADD_FRIEND_REQUEST_URL="service/LianxirenServices.svc/BecomeFriend";
 
 
 
@@ -80,6 +88,13 @@ public class NetManager {
 			return BASE_URL+ADDFRIEND_FRIEND_REQUEST_URL;
 		case UPDATE_USERDATA_REQUEST_OPERATION:
 			return BASE_URL+UPDATE_USERDATA_REQUEST_URL;
+		case GROUPS_REQUEST_OPERATION:
+			return BASE_URL+GROUPS_REQUEST_URL;
+		case GROUP_MEMBER_REQUEST_OPERATION:
+			return BASE_URL+GROUP_MEMBER__REQUEST_URL;
+		case ADD_FRIEND_REQUEST_OPERATION:
+			return BASE_URL+ADD_FRIEND_REQUEST_URL;
+			
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;
 		}

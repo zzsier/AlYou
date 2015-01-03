@@ -48,6 +48,7 @@ import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.Constant;
 import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.FriendAdapter;
+import com.imalu.alyou.domain.Friend;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
@@ -65,7 +66,7 @@ public class FriendlistFragment extends Fragment {
 	private FriendAdapter adapter;
 	private List<HXUser> contactList;
 	private ListView listView;
-	FriendListResponse friendlist;
+//	FriendListResponse friendlist;
 	private boolean hidden;
 	private Sidebar sidebar;
 	private InputMethodManager inputMethodManager;
@@ -88,6 +89,7 @@ public class FriendlistFragment extends Fragment {
 	private SettingsFragment settingFragment;
 	private MainPageFragment mainpageFragment;
 	private RelativeLayout relativeLayout;
+	private RelativeLayout groups;
 	private Fragment[] fragments;
 	private int index;
 	private RelativeLayout[] tab_containers;
@@ -111,6 +113,7 @@ public class FriendlistFragment extends Fragment {
 		listView = (ListView) getView().findViewById(R.id.list);
 		sidebar = (Sidebar) getView().findViewById(R.id.sidebar);
 		relativeLayout=(RelativeLayout) getView().findViewById(R.id.add_friend_layout);
+		groups = (RelativeLayout) getView().findViewById(R.id.groups);
 		sidebar.setListView(listView);
 		sidebar.setVisibility(ViewGroup.GONE);
 		relativeLayout.setOnClickListener(new OnClickListener() {
@@ -120,11 +123,20 @@ public class FriendlistFragment extends Fragment {
 			startActivity(new Intent(getActivity(),FindFriendActivity.class));	
 			}
 		});
+		
+		groups.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			startActivity(new Intent(getActivity(),GroupsActivity.class));	
+			}
+		});
+		showListView();
 //		//黑名单列表
 //		//blackList = EMContactManager.getInstance().getBlackListUsernames();
 //		contactList = new ArrayList<HXUser>();
 //		// 获取设置contactlist
-		getContactList();
+//		getContactList();
 //		// 设置adapter
 //		adapter = new ContactAdapter(getActivity(), R.layout.row_contact, contactList, sidebar);
 //		listView.setAdapter(adapter);
@@ -176,13 +188,13 @@ public class FriendlistFragment extends Fragment {
 		
 	}
 	private void showListView() {
-		adapter = new FriendAdapter(getActivity(), R.layout.row_contact, R.layout.row_contact2, friendlist.getFriendList(), sidebar);
+		adapter = new FriendAdapter(getActivity(), R.layout.row_contact, R.layout.row_contact2, AlUApplication.getFriends().getFriendList(), sidebar);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 //
 //			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				String username = adapter.getItem(position).getUserName();
+				String username = adapter.getItem(position).getUsername();
 				if (Constant.NEW_FRIENDS_USERNAME.equals(username)) {
 					// 进入申请与通知页面
 					HXUser user = AlUApplication.getInstance().getContactList().get(Constant.NEW_FRIENDS_USERNAME);
@@ -193,7 +205,7 @@ public class FriendlistFragment extends Fragment {
 					startActivity(new Intent(getActivity(), GroupsActivity.class));
 				} else {
 					// demo中直接进入聊天页面，实际一般是进入用户详情页
-					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getHXName()));
+					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getHxname()));
 				}
 			}
 		});
@@ -235,7 +247,7 @@ public class FriendlistFragment extends Fragment {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.delete_contact) {
-			FriendInfo tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+			Friend tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
 			// 删除此联系人
 //			deleteContact(tobeDeleteUser);
 			// 删除相关的邀请消息
@@ -243,7 +255,7 @@ public class FriendlistFragment extends Fragment {
 //			dao.deleteMessage(tobeDeleteUser.getUsername());
 			return true;
 		}else if(item.getItemId() == R.id.add_to_blacklist){
-			FriendInfo user = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+			Friend user = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
 //			moveToBlacklist(user.getUsername());
 			return true;
 		}
@@ -367,18 +379,18 @@ public class FriendlistFragment extends Fragment {
 		SearchFriendRequest searchFriendReq= new SearchFriendRequest();
 		searchFriendReq.setUserKey(AlUApplication.getMyInfo().getKey());
 		
-		friendlist = new FriendListResponse();
-		
-		NetManager.execute(NetManager.MY_FRIEND_OPERATION, searchFriendReq, new JsonHttpResponseHandler() {
-			@Override
-			public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-				Log.e("FriendListFragament", response.toString());
-				super.onSuccess(statusCode, headers, response);
-				friendlist.setJsonObject(response);
-				AlUApplication.setFriends(friendlist);
-				showListView();
-			}
-		});
+//		friendlist = new FriendListResponse();
+//		
+//		NetManager.execute(NetManager.MY_FRIEND_OPERATION, searchFriendReq, new JsonHttpResponseHandler() {
+//			@Override
+//			public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//				Log.e("FriendListFragament", response.toString());
+//				super.onSuccess(statusCode, headers, response);
+//				friendlist.setJsonObject(response);
+//				AlUApplication.setFriends(friendlist);
+//				showListView();
+//			}
+//		});
 		
 //		contactList.clear();
 		//获取本地好友列表

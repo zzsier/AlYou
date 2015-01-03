@@ -24,7 +24,7 @@ public class FindFriendResponse  extends  NetObject{
 	}
 	public String getKey() {
 		try {
-			return this.getJsonObject().getString("key");
+			return this.getJsonObject().getString("Key");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return "";
@@ -36,6 +36,14 @@ public class FindFriendResponse  extends  NetObject{
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			return 0;
+		}
+	}
+	public String getHxname() {
+		try {
+			return this.getJsonObject().getString("HxName");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			return "";
 		}
 	}
 	public int getLuntanGonghuiID() {

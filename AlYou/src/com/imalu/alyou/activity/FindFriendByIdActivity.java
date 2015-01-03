@@ -33,6 +33,9 @@ public class FindFriendByIdActivity extends BaseActivity{
 	private Friend friend;
 	private String username;
 	private String key;
+	private String hxname;
+	private String headpic;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -58,15 +61,7 @@ public class FindFriendByIdActivity extends BaseActivity{
 				Log.e("id", ""+id);
 				friend= new Friend();
 				FriendFound();
-				Intent intent = new Intent(
-						FindFriendByIdActivity.this,
-						FindFriendDataActivity.class);
-				Log.e("NAME", ""+friend.getUsername());
-				intent.putExtra("username", username);
-				intent.putExtra("id", id);
-				intent.putExtra("key",key);
-				startActivity(intent); 
-				finish();
+				
  
 			}
 		});
@@ -91,9 +86,27 @@ public class FindFriendByIdActivity extends BaseActivity{
 				id=friendResponse.getId();
 				username=friendResponse.getUserName();
 				key=friendResponse.getKey();
+				hxname = friendResponse.getHxname();
+				headpic = friendResponse.getHeadPicture();
+				
+				Intent intent = new Intent(
+						FindFriendByIdActivity.this,
+						FindFriendDataActivity.class);
+				Log.e("NAME", ""+friend.getUsername());
+				
+				
+				intent.putExtra("username", username);
+				intent.putExtra("id", id);
+				intent.putExtra("key",key);
+				intent.putExtra("hxname",hxname);
+				intent.putExtra("headpic",headpic);
+				
 				friend.setId(friendResponse.getId());
 				friend.setUsername(friendResponse.getUserName());
 				friend.setKey(friendResponse.getKey());
+				
+				startActivity(intent); 
+				finish();
 			}
 		});
 

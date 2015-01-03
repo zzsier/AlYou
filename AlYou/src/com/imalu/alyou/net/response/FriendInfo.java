@@ -94,4 +94,12 @@ public class FriendInfo extends NetObject{
 			return "";
 		}
 	}
+	public String getUserKey(){
+		try {
+			return this.getJsonObject().getString("UserKey");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+	}
 }

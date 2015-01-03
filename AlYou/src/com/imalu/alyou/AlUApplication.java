@@ -20,18 +20,25 @@ import java.util.Map;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.baidu.mapapi.BMapManager;
 import com.easemob.EMCallBack;
 import com.imalu.alyou.db.gen.DaoMaster;
 import com.imalu.alyou.db.gen.DaoMaster.OpenHelper;
 import com.imalu.alyou.db.gen.DaoSession;
+import com.imalu.alyou.domain.ConversationGroup;
+import com.imalu.alyou.domain.ConversationGroups;
 import com.imalu.alyou.domain.Friend;
 import com.imalu.alyou.domain.Friends;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.net.response.FriendInfo;
 import com.imalu.alyou.net.response.FriendListResponse;
+import com.imalu.alyou.net.response.GroupListResponse;
+import com.imalu.alyou.net.response.GroupMemberResponse;
+import com.imalu.alyou.net.response.MemberListResponse;
+import com.imalu.alyou.net.response.UserGroupResponse;
 import com.imalu.alyou.net.response.UserInfo;
 
 public class AlUApplication extends Application {
@@ -47,6 +54,8 @@ public class AlUApplication extends Application {
     private static User myinfo;
     
     private static Friends friends;
+    
+    private static ConversationGroups groups;
 	
 	/**
 	 * 当前用户nickname,为了苹果推送不是userid而是昵称
@@ -95,6 +104,13 @@ public class AlUApplication extends Application {
         return friends;
 	}
 	
+	public static ConversationGroups getGroups() {
+		if (groups == null) {
+			groups = new ConversationGroups();
+        }
+        return groups;
+	}
+	
 	public static void setFriends(FriendListResponse friendlist) {
 		if (friends == null) {
             friends = new Friends();
@@ -106,7 +122,36 @@ public class AlUApplication extends Application {
 			friend.setId(friendInfo.getId());
 			friend.setUsername(friendInfo.getUserName());
 			friend.setHeadpicUrl(friendInfo.getHeadPicture());
+			friend.setKey(friendInfo.getUserKey());
 			friends.addFriend(friend);
+		}
+	}
+	
+	public static void setGroups(GroupListResponse grouplist) {
+		if (groups == null) {
+			groups = new ConversationGroups();
+        }
+		for (Iterator<UserGroupResponse> iter = grouplist.getGroupList().iterator(); iter.hasNext();) {
+			UserGroupResponse usergroup = (UserGroupResponse)iter.next();
+			ConversationGroup group = new ConversationGroup();
+			group.setGroupID(usergroup.getGroupID());
+			group.setCreateKey(usergroup.getCreateKey());
+			group.setGroupKey(usergroup.getGroupKey());
+			group.setGroupName(usergroup.getGroupName());
+			groups.addConversationGroup(group);
+			Log.e("groupsActivity", group.toString());
+		}
+	}
+	
+	public static void setGroupMemberList(MemberListResponse memberlist) {
+		if (groups == null) {
+			groups = new ConversationGroups();
+        }
+		
+		for (Iterator<GroupMemberResponse> iter = memberlist.getMemberList().iterator(); iter.hasNext();) {
+			GroupMemberResponse groupMemberRes = (GroupMemberResponse)iter.next();
+			ConversationGroup group = groups.getGroupByKey(groupMemberRes.getGroupKey());
+			group.addMember(groupMemberRes);
 		}
 	}
 	

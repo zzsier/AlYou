@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,6 +37,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 
 /*import com.easemob.EMConnectionListener;
@@ -62,6 +67,10 @@ import com.imalu.alyou.db.InviteMessgeDao;
 import com.imalu.alyou.domain.InviteMessage;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.domain.InviteMessage.InviteMesageStatus;
+import com.imalu.alyou.net.JsonHttpResponseHandler;
+import com.imalu.alyou.net.NetManager;
+import com.imalu.alyou.net.request.SearchFriendRequest;
+import com.imalu.alyou.net.response.FriendListResponse;
 import com.imalu.alyou.utils.CommonUtils;
 //import com.umeng.analytics.MobclickAgent;
 
@@ -100,6 +109,7 @@ public class MainActivity extends BaseActivity {
         }
 		setContentView(R.layout.activity_main);
 		initView();
+		getContactList();
 		
 		//if (getIntent().getBooleanExtra("conflict", false) && !isConflictDialogShow)
 		//	showConflictDialog();
@@ -151,6 +161,27 @@ public class MainActivity extends BaseActivity {
 		// 通知sdk，UI 已经初始化完毕，注册了相应的receiver和listener, 可以接受broadcast了
 		//EMChat.getInstance().setAppInited();
 
+		
+		
+		
+		
+	}
+	
+	
+	private void getContactList() {
+		SearchFriendRequest searchFriendReq= new SearchFriendRequest();
+		searchFriendReq.setUserKey(AlUApplication.getMyInfo().getKey());
+		
+		NetManager.execute(NetManager.MY_FRIEND_OPERATION, searchFriendReq, new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+				Log.e("FriendListFragament", response.toString());
+				super.onSuccess(statusCode, headers, response);
+				FriendListResponse friendlist = new FriendListResponse();
+				friendlist.setJsonObject(response);
+				AlUApplication.setFriends(friendlist);
+			}
+		});
 	}
 
 	/**

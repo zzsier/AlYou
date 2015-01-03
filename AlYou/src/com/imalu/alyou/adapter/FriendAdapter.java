@@ -37,16 +37,16 @@ import android.widget.TextView;
 
 import com.imalu.alyou.R;
 import com.imalu.alyou.Constant;
+import com.imalu.alyou.domain.Friend;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
-import com.imalu.alyou.net.response.FriendInfo;
 import com.imalu.alyou.widget.Sidebar;
 
 /**
  * 简单的好友Adapter实现
  *
  */
-public class FriendAdapter extends ArrayAdapter<FriendInfo>  implements SectionIndexer{
+public class FriendAdapter extends ArrayAdapter<Friend>  implements SectionIndexer{
 
 	private LayoutInflater layoutInflater;
 	private EditText query;
@@ -57,7 +57,7 @@ public class FriendAdapter extends ArrayAdapter<FriendInfo>  implements SectionI
 	private int res;
 	private int res2;
 
-	public FriendAdapter(Context context, int resource, int resource2, List<FriendInfo> objects,Sidebar sidebar) {
+	public FriendAdapter(Context context, int resource, int resource2, List<Friend> objects,Sidebar sidebar) {
 		super(context, resource, objects);
 		this.res = resource;
 		this.res2 = resource2;
@@ -130,11 +130,11 @@ public class FriendAdapter extends ArrayAdapter<FriendInfo>  implements SectionI
 			TextView unreadMsgView = (TextView) convertView.findViewById(R.id.unread_msg_number);
 			TextView nameTextview = (TextView) convertView.findViewById(R.id.name);
 			TextView tvHeader = (TextView) convertView.findViewById(R.id.header);
-			FriendInfo user = getItem(position);
+			Friend user = getItem(position);
 			if(user == null)
 				Log.d("ContactAdapter", position + "");
 			//设置nick，demo里不涉及到完整user，用username代替nick显示
-			String username = user.getUserName();
+			String username = user.getUsername();
 			String header = user.getHeader();
 			if (position == 0 || header != null && !header.equals(getItem(position - 1).getHeader())) {
 				if ("".equals(header)) {
@@ -148,7 +148,7 @@ public class FriendAdapter extends ArrayAdapter<FriendInfo>  implements SectionI
 			}
 			//显示申请与通知item
 			if(username.equals(Constant.NEW_FRIENDS_USERNAME)){
-				nameTextview.setText(user.getUserName());
+				nameTextview.setText(user.getUsername());
 				avatar.setImageResource(R.drawable.new_friends_icon);
 				if(user.getUnreadMsgCount() > 0){
 					unreadMsgView.setVisibility(View.VISIBLE);
@@ -158,7 +158,7 @@ public class FriendAdapter extends ArrayAdapter<FriendInfo>  implements SectionI
 				}
 			}else if(username.equals(Constant.GROUP_USERNAME)){
 				//群聊item
-				nameTextview.setText(user.getUserName());
+				nameTextview.setText(user.getUsername());
 				avatar.setImageResource(R.drawable.groups_icon);
 			}else{
 				nameTextview.setText(username);
@@ -172,8 +172,8 @@ public class FriendAdapter extends ArrayAdapter<FriendInfo>  implements SectionI
 	}
 	
 	@Override
-	public FriendInfo getItem(int position) {
-		FriendInfo user = new FriendInfo();
+	public Friend getItem(int position) {
+		Friend user = new Friend();
 		user.setHeader(getContext().getString(R.string.search_header));
 		return position == 0 ? user : super.getItem(position - 1);
 	}
@@ -204,7 +204,7 @@ public class FriendAdapter extends ArrayAdapter<FriendInfo>  implements SectionI
 		for (int i = 1; i < count; i++) {
 
 			String letter = getItem(i).getHeader();
-			System.err.println("contactadapter getsection getHeader:" + letter + " name:" + getItem(i).getUserName());
+			System.err.println("contactadapter getsection getHeader:" + letter + " name:" + getItem(i).getUsername());
 			int section = list.size() - 1;
 			if (list.get(section) != null && !list.get(section).equals(letter)) {
 				list.add(letter);

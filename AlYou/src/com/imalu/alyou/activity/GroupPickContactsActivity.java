@@ -22,12 +22,21 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.SparseIntArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SectionIndexer;
+import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 
@@ -37,6 +46,8 @@ import com.imalu.alyou.R;
 import com.imalu.alyou.Constant;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.adapter.ContactAdapter;
+import com.imalu.alyou.domain.Friend;
+import com.imalu.alyou.domain.GroupMember;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
 import com.imalu.alyou.widget.Sidebar;
@@ -62,28 +73,40 @@ public class GroupPickContactsActivity extends BaseActivity {
 			isCreatingNewGroup = true;
 		} else {
 			// 获取此群组的成员列表
-			EMGroup group = EMGroupManager.getInstance().getGroup(groupId);
-			exitingMembers = group.getMembers();
+//			EMGroup group = EMGroupManager.getInstance().getGroup(groupId);
+//			exitingMembers = group.getMembers();
+			exitingMembers = AlUApplication.getGroups().getGroupByKey(groupId).getMemberNameList();
 		}
 		if(exitingMembers == null)
 			exitingMembers = new ArrayList<String>();
+		
+		final List<Friend> friendlist = AlUApplication.getFriends().getFriendList();
 		// 获取好友列表
-		final List<HXUser> alluserList = new ArrayList<HXUser>();
-		for (HXUser user : AlUApplication.getInstance().getContactList().values()) {
-			if (!user.getUsername().equals(Constant.NEW_FRIENDS_USERNAME) & !user.getUsername().equals(Constant.GROUP_USERNAME))
-				alluserList.add(user);
-		}
+//		final List<HXUser> alluserList = new ArrayList<HXUser>();
+//		for (HXUser user : AlUApplication.getInstance().getContactList().values()) {
+//			if (!user.getUsername().equals(Constant.NEW_FRIENDS_USERNAME) & !user.getUsername().equals(Constant.GROUP_USERNAME))
+//				alluserList.add(user);
+//		}
 		// 对list进行排序
-		Collections.sort(alluserList, new Comparator<HXUser>() {
-			@Override
-			public int compare(HXUser lhs, HXUser rhs) {
-				return (lhs.getUsername().compareTo(rhs.getUsername()));
+//		Collections.sort(alluserList, new Comparator<HXUser>() {
+//			@Override
+//			public int compare(HXUser lhs, HXUser rhs) {
+//				return (lhs.getUsername().compareTo(rhs.getUsername()));
+//
+//			}
+//		});
 
-			}
+		Collections.sort(friendlist, new Comparator<Friend>() {
+		@Override
+		public int compare(Friend lhs, Friend rhs) {
+			return (lhs.getUsername().compareTo(rhs.getUsername()));
+
+		}
 		});
-
+		
 		listView = (ListView) findViewById(R.id.list);
-		contactAdapter = new PickContactAdapter(this, R.layout.row_contact_with_checkbox, alluserList);
+//		contactAdapter = new PickContactAdapter(this, R.layout.row_contact_with_checkbox, alluserList);
+		contactAdapter = new PickContactAdapter(this, R.layout.row_contact_with_checkbox, friendlist);
 		listView.setAdapter(contactAdapter);
 		((Sidebar) findViewById(R.id.sidebar)).setListView(listView);
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -128,22 +151,76 @@ public class GroupPickContactsActivity extends BaseActivity {
 	/**
 	 * adapter
 	 */
-	private class PickContactAdapter extends ContactAdapter {
+	private class PickContactAdapter extends ArrayAdapter<Friend>  implements SectionIndexer{
 
 		private boolean[] isCheckedArray;
+		private LayoutInflater layoutInflater;
+		private EditText query;
+		private ImageButton clearSearch;
+		private SparseIntArray positionOfSection;
+		private SparseIntArray sectionOfPosition;
+		private Sidebar sidebar;
+		private int res;
+		
+		@Override
+		public Object[] getSections() {
+			positionOfSection = new SparseIntArray();
+			sectionOfPosition = new SparseIntArray();
+			int count = getCount();
+			List<String> list = new ArrayList<String>();
+			list.add(getContext().getString(R.string.search_header));
+			positionOfSection.put(0, 0);
+			sectionOfPosition.put(0, 0);
+			for (int i = 1; i < count; i++) {
 
-		public PickContactAdapter(Context context, int resource, List<HXUser> users) {
-			super(context, resource, users, null);
-			isCheckedArray = new boolean[users.size()];
+//				String letter = getItem(i).getHeader();
+//				System.err.println("contactadapter getsection getHeader:" + letter + " name:" + getItem(i).getUsername());
+				int section = list.size() - 1;
+//				if (list.get(section) != null && !list.get(section).equals(letter)) {
+				if (list.get(section) != null) {
+//					list.add(letter);
+					section++;
+					positionOfSection.put(section, i);
+				}
+				sectionOfPosition.put(i, section);
+			}
+			return list.toArray(new String[list.size()]);
+		}
+
+		public PickContactAdapter(Context context, int resource, List<Friend> friends) {
+			super(context, resource, friends);
+			this.res = resource;
+			this.sidebar=sidebar;
+			layoutInflater = LayoutInflater.from(context);
+			isCheckedArray = new boolean[friends.size()];
+		}
+		
+		public int getPositionForSection(int section) {
+			return positionOfSection.get(section);
+		}
+
+		public int getSectionForPosition(int position) {
+			return sectionOfPosition.get(position);
 		}
 
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
-			View view = super.getView(position, convertView, parent);
+//			View view = super.getView(position, convertView, parent);
+			if(convertView == null){
+				convertView = layoutInflater.inflate(res, null);
+			}
 			if (position > 0) {
+				
+				ImageView avatar = (ImageView) convertView.findViewById(R.id.avatar);
+				TextView unreadMsgView = (TextView) convertView.findViewById(R.id.unread_msg_number);
+				TextView nameTextview = (TextView) convertView.findViewById(R.id.name);
+				TextView tvHeader = (TextView) convertView.findViewById(R.id.header);
+				
 				final String username = getItem(position).getUsername();
+				nameTextview.setText(username);
+				avatar.setImageResource(R.drawable.default_avatar);
 				// 选择框checkbox
-				final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkbox);
+				final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
 				if(exitingMembers != null && exitingMembers.contains(username)){
 					checkBox.setButtonDrawable(R.drawable.checkbox_bg_gray_selector);
 				}else{
@@ -182,7 +259,7 @@ public class GroupPickContactsActivity extends BaseActivity {
 					}
 				}
 			}
-			return view;
+			return convertView;
 		}
 	}
 

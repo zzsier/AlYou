@@ -24,7 +24,7 @@
             android:textSize="18sp" />
         
         <ImageView
-            android:id="@+id/iv_new_contact"
+            android:id="@+id/iv_new_group"
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
