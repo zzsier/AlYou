@@ -55,6 +55,7 @@ import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.NetObject;
 import com.imalu.alyou.net.request.LoginRequest;
+import com.imalu.alyou.net.response.PersonalInfoResponse;
 import com.imalu.alyou.net.response.UserInfo;
 import com.imalu.alyou.utils.CommonUtils;
 
@@ -167,6 +168,15 @@ public class LoginActivity extends BaseActivity {
 						AlUApplication.getMyInfo().setLocus(userInfo.getLocus());
 						AlUApplication.getMyInfo().setRealname(userInfo.getRealName());
 						AlUApplication.getMyInfo().setSex(userInfo.getSex());
+						
+
+						PersonalInfoResponse personal=new PersonalInfoResponse();
+						personal.setJsonObject(response);
+						AlUApplication.getUserfans().setId(personal.getId());
+						AlUApplication.getUserfans().setJifen(personal.getJifen());
+						AlUApplication.getUserfans().setUserName(personal.getUserName());
+						AlUApplication.getUserfans().setSocietyName(personal.getSocietyName());
+						
 						// 登陆成功，保存用户名密码
 						AlUApplication.getInstance().setUserName(username);
 						AlUApplication.getInstance().setPassword(password);

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 
 public class PersonInfoActivity extends BaseActivity{
@@ -29,7 +30,27 @@ public class PersonInfoActivity extends BaseActivity{
 		setContentView(R.layout.activity_personal_data);
 		initView();
 		setListener();
-		 
+		String app_id=String.valueOf(AlUApplication.getUserfans().getId());
+		String name=AlUApplication.getUserfans().getUserName();
+		String gonghui=AlUApplication.getUserfans().getSocietyName();
+		String jifen=String.valueOf(AlUApplication.getUserfans().getJifen());
+		if(name==null){
+			tvUserName.setText("未设置");
+			
+		}else{
+			
+			tvUserName.setText(name);
+		}
+		tvApp.setText(app_id);
+		tvJiFen.setText(jifen);
+		if(gonghui==null){
+			tvGongHui.setText("未设置");
+			
+		}else{
+			
+			tvGongHui.setText(gonghui);
+		}
+		
 	}
 	private void setListener() {
 		// TODO Auto-generated method stub
@@ -63,6 +84,7 @@ public class PersonInfoActivity extends BaseActivity{
 		 imgEnter=(ImageView) findViewById(R.id.imageView3);
 		
 	}
+	
 	public void back(View view) {
 		finish();
 	}

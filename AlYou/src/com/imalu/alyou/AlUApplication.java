@@ -33,11 +33,13 @@ import com.imalu.alyou.domain.Friend;
 import com.imalu.alyou.domain.Friends;
 import com.imalu.alyou.domain.HXUser;
 import com.imalu.alyou.domain.User;
+import com.imalu.alyou.domain.UserLM;
 import com.imalu.alyou.net.response.FriendInfo;
 import com.imalu.alyou.net.response.FriendListResponse;
 import com.imalu.alyou.net.response.GroupListResponse;
 import com.imalu.alyou.net.response.GroupMemberResponse;
 import com.imalu.alyou.net.response.MemberListResponse;
+import com.imalu.alyou.net.response.PersonalInfoResponse;
 import com.imalu.alyou.net.response.UserGroupResponse;
 import com.imalu.alyou.net.response.UserInfo;
 
@@ -52,6 +54,8 @@ public class AlUApplication extends Application {
     private static DaoSession daoSession;
     
     private static User myinfo;
+    private static UserLM userfans;
+    
     
     private static Friends friends;
     
@@ -97,6 +101,19 @@ public class AlUApplication extends Application {
         return myinfo;
 	}
 	
+	
+	public static UserLM getUserfans() {
+		if (userfans == null) {
+            userfans = new UserLM();
+        }
+		return userfans;
+	}
+	/*
+	public static void setUserfans(PersonalInfoResponse personal) {
+		if (userfans== null) {
+			userfans  = new UserLM();
+	    }
+	}*/
 	public static Friends getFriends(){
 		if (friends == null) {
             friends = new Friends();

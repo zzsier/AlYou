@@ -23,6 +23,7 @@ public class NetManager {
 	public static final int GROUP_MEMBER_REQUEST_OPERATION=11;
 	
 	public static final int ADD_FRIEND_REQUEST_OPERATION=12;
+	public static final int PERSONALINFO_REQUEST_OPERATION =14;
 
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
@@ -38,7 +39,7 @@ public class NetManager {
 	public static final String GROUP_MEMBER__REQUEST_URL="service/LianxirenServices.svc/HouQuTaoLunZhuChengYuan";
 	public static final String ADD_FRIEND_REQUEST_URL="service/LianxirenServices.svc/BecomeFriend";
 
-
+	public static final String PERSONALINFO_REQUEST_URL = "/service/GerenzhongxinServices.svc/ YonghuZiliaoOrShifouGuanzhu";
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
@@ -94,7 +95,8 @@ public class NetManager {
 			return BASE_URL+GROUP_MEMBER__REQUEST_URL;
 		case ADD_FRIEND_REQUEST_OPERATION:
 			return BASE_URL+ADD_FRIEND_REQUEST_URL;
-			
+		case PERSONALINFO_REQUEST_OPERATION:
+			return BASE_URL+PERSONALINFO_REQUEST_URL;		
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;
 		}
