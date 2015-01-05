@@ -240,7 +240,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/lol_text"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
@@ -248,11 +248,12 @@
                 android:background="@drawable/ico_login"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
-                android:text="测试数据1"
+                android:text="英雄联盟"
+                android:onClick="doClick"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/wow_text"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
@@ -260,7 +261,8 @@
                 android:background="@drawable/ico_lightlogin"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
-                android:text="测试数据2"
+                android:text="魔兽世界"
+                 android:onClick="doClick"
                 android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>

@@ -29,7 +29,10 @@ public class NetManager {
 	public static final int  CARE_ABOUT_CONCERN=13;
 	//取消关注
 	public static final int CANCEL_CARE_ABOUT_CONCERN=14;
-
+	//热门公会
+		public static final int POPULAR_ASSOCIATION_REQUEST_OPERATION=16;
+		//关注公会
+		public static final int CONCERN_ASSOCIATION_REQUEST_OPERATION=17;
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
 	public static final String REGISTER_REQUEST_URL = "/service/ZhanghuServices.svc/Zhuce";
@@ -48,7 +51,8 @@ public class NetManager {
 		//关注以及取消关注
 	public static final String  CARE_ABOUT_CONCERN_URL="service/GerenzhongxinServices.svc/GuanzhuUser";
 	public static final String  CANCEL_CARE_ABOUT_CONCERN_URL="service/GerenzhongxinServices.svc/QuxiaoguanzhuUser";
-
+	public static final String POPULAR_ASSOCIATION_REQUEST_URL="service/GonghuiServices.svc/Gonghui";
+	public static final String CONCERN_ASSOCIATION_REQUEST_URL="service/GonghuiTuisongServices.svc/ GuanzhuGonghuiYe";
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
 	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
@@ -109,6 +113,10 @@ public class NetManager {
 			return BASE_URL+CARE_ABOUT_CONCERN_URL;
 		case CANCEL_CARE_ABOUT_CONCERN:
 			return BASE_URL+CANCEL_CARE_ABOUT_CONCERN_URL;
+		case POPULAR_ASSOCIATION_REQUEST_OPERATION:
+			return BASE_URL+POPULAR_ASSOCIATION_REQUEST_URL;
+		case CONCERN_ASSOCIATION_REQUEST_OPERATION:
+			return BASE_URL+CONCERN_ASSOCIATION_REQUEST_URL;
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;
 		}

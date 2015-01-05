@@ -33,6 +33,9 @@ public class PersonalCenterActivity extends BaseActivity{
 	private TextView appnum;
 	private TextView jifen;
 	private ImageView userphoto;
+	private TextView lol;
+	private TextView wow;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class PersonalCenterActivity extends BaseActivity{
 	appnum=(TextView) findViewById(R.id.app_text);
 	userphoto=(ImageView) findViewById(R.id.image_personal_data_photo);
 	jifen=(TextView) findViewById(R.id.jifen_text);
+	lol=(TextView) findViewById(R.id.lol_text);
+	wow=(TextView) findViewById(R.id.wow_text);
 	
 	String app_id=String.valueOf(AlUApplication.getMyInfo().getId());
 	String name=AlUApplication.getMyInfo().getUsername();
@@ -56,6 +61,12 @@ public class PersonalCenterActivity extends BaseActivity{
 	}
 	appnum.setText(app_id);
 	jifen.setText(jifen_number);
+	
+	
+	
+	
+	
+	
 	userphoto.setOnClickListener(new OnClickListener() {
 		
 		@Override
@@ -65,7 +76,30 @@ public class PersonalCenterActivity extends BaseActivity{
 		}
 	});
 	
+	lol.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			Intent   intent1= new Intent(PersonalCenterActivity.this,GameDataActivity.class);
+			intent1.putExtra("flag", 1);	
+			startActivity(intent1);
+		}
+	});
+	wow.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			Intent   intent2= new Intent(PersonalCenterActivity.this,GameDataActivity.class);
+			intent2.putExtra("flag", 2);
+			startActivity(intent2);
+		}
+	});
+	
 	}
+
+	
 	/**
 	 * 返回
 	 * 
