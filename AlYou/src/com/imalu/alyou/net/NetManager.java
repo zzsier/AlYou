@@ -23,7 +23,12 @@ public class NetManager {
 	public static final int GROUP_MEMBER_REQUEST_OPERATION=11;
 	
 	public static final int ADD_FRIEND_REQUEST_OPERATION=12;
-	public static final int PERSONALINFO_REQUEST_OPERATION =14;
+	public static final int PERSONALINFO_REQUEST_OPERATION =15;
+	
+	//关注
+	public static final int  CARE_ABOUT_CONCERN=13;
+	//取消关注
+	public static final int CANCEL_CARE_ABOUT_CONCERN=14;
 
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
@@ -40,6 +45,9 @@ public class NetManager {
 	public static final String ADD_FRIEND_REQUEST_URL="service/LianxirenServices.svc/BecomeFriend";
 
 	public static final String PERSONALINFO_REQUEST_URL = "/service/GerenzhongxinServices.svc/ YonghuZiliaoOrShifouGuanzhu";
+		//关注以及取消关注
+	public static final String  CARE_ABOUT_CONCERN_URL="service/GerenzhongxinServices.svc/GuanzhuUser";
+	public static final String  CANCEL_CARE_ABOUT_CONCERN_URL="service/GerenzhongxinServices.svc/QuxiaoguanzhuUser";
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
@@ -96,7 +104,11 @@ public class NetManager {
 		case ADD_FRIEND_REQUEST_OPERATION:
 			return BASE_URL+ADD_FRIEND_REQUEST_URL;
 		case PERSONALINFO_REQUEST_OPERATION:
-			return BASE_URL+PERSONALINFO_REQUEST_URL;		
+			return BASE_URL+PERSONALINFO_REQUEST_URL;
+		case CARE_ABOUT_CONCERN :
+			return BASE_URL+CARE_ABOUT_CONCERN_URL;
+		case CANCEL_CARE_ABOUT_CONCERN:
+			return BASE_URL+CANCEL_CARE_ABOUT_CONCERN_URL;
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;
 		}
