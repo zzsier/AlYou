@@ -40,8 +40,22 @@ public class SociatyResponse extends NetObject{
 	 "ZhanghuList":[]}]
 	 */
 	
-	
-	
+	public int getSocietyType() {
+		try {
+			return this.getJsonObject().getInt("SocietyType");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
+	}
+	public int getTotal() {
+		try {
+			return this.getJsonObject().getInt("Total");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
+	}
 	
 	public int getId() {
 		try {

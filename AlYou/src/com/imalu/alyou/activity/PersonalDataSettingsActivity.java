@@ -3,18 +3,26 @@ package com.imalu.alyou.activity;
 
 
 
+import java.util.ArrayList;
+
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
+import com.imalu.alyou.domain.Sociaty;
 import com.imalu.alyou.net.AsyncHttpResponseHandler;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
+import com.imalu.alyou.net.request.GetSocaityRequest;
 import com.imalu.alyou.net.request.UpdateUserdataRequest;
+import com.imalu.alyou.net.request.UserKeyRequest;
+import com.imalu.alyou.net.response.SociatyResponse;
 import com.imalu.alyou.net.response.UpdateUserdataResponse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,21 +45,40 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 	private TextView app_text;
 	private TextView jifen_text;
 	private Button save_bt;
+	private Button apply_bt;
 	private Boolean flag;
 	private String info;
-
+	private String key;
+	private ArrayList<Sociaty> residentsociaties;
+	private UserKeyRequest userKeyRequest;
+	private TextView sociaty_name;
+	private String socaitykey;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_data_settings);	
 		init();
+		key=AlUApplication.getMyInfo().getKey();
+		userKeyRequest= new UserKeyRequest();
+		userKeyRequest.setUserKey(key);
+		socaitykey=AlUApplication.getMyInfo().getSocietykey();
+		Log.e("socaitykey",""+socaitykey);
+		Log.e("KEY", ""+key+socaitykey);
+		
 		username_et.setText(AlUApplication.getMyInfo().getUsername());
 		realname_et.setText(AlUApplication.getMyInfo().getRealname());
 		age_et.setText(String.valueOf(AlUApplication.getMyInfo().getAge()));
 		locus_et.setText(AlUApplication.getMyInfo().getLocus());
 		app_text.setText(String.valueOf(AlUApplication.getMyInfo().getId()));
 		jifen_text.setText(String.valueOf(AlUApplication.getMyInfo().getJifen()));
-
+		resident();
+			if(residentsociaties.size()==0){
+			sociaty_name.setText("");
+			apply_bt.setText("申请");
+		}else{
+			sociaty_name.setText(residentsociaties.get(0).getSocietyname());
+			apply_bt.setText("退出");
+		}
 	}
 
 
@@ -63,12 +90,30 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 		app_text=(TextView) findViewById(R.id.appid_textview);
 		jifen_text=(TextView) findViewById(R.id.jifen_textview);
 		save_bt=(Button) findViewById(R.id.save_bt);
+		apply_bt=(Button) findViewById(R.id.bangding_bt);
+		sociaty_name=(TextView) findViewById(R.id.sociaty_name_textview);
 	}
-
+	/**
+	 * 跳转申请界面
+	 */
+	public void next(View view){
+		if("null".equals(socaitykey)){
+			
+			Toast.makeText(this, "亲，未绑定公会，请先绑定！", Toast.LENGTH_SHORT).show();
+		}else{
+			
+			startActivity(new Intent(this,SociatyDataActivity.class));
+		}
+		
+		
+	}
+	
 	/**
 	 * 保存
 	 */
 	public void save(View view){
+
+		// 执行耗时操作  
 		String username=username_et.getText().toString();
 		String realname=realname_et.getText().toString();
 		int age=Integer.parseInt(age_et.getText().toString());
@@ -86,42 +131,76 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 
 
 		NetManager.execute(NetManager.UPDATE_USERDATA_REQUEST_OPERATION,UpdateReq,new JsonHttpResponseHandler(){
-//此方法不能被重写。。。。
-		@Override
-		public void onSuccess(int statusCode, Header[] headers,
-				JSONObject response) {
-			// TODO Auto-generated method stub
-			super.onSuccess(statusCode, headers, response);
-			UpdateUserdataResponse userdataResponse=new UpdateUserdataResponse();
-			userdataResponse.setJsonObject(response);
-			try {
-				flag=userdataResponse.getCode();
-				info=userdataResponse.getInfo();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			//此方法不能被重写。。。。
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				UpdateUserdataResponse userdataResponse=new UpdateUserdataResponse();
+				userdataResponse.setJsonObject(response);
+				try {
+					flag=userdataResponse.getCode();
+					info=userdataResponse.getInfo();
+
+					Log.i("FLAG",""+flag);
+					Log.i("INFO",""+ info);
+					if("true".equals(flag)){
+						Toast.makeText(PersonalDataSettingsActivity.this,""+ info,Toast.LENGTH_LONG).show();
+
+					}else{
+
+						Toast.makeText(PersonalDataSettingsActivity.this, ""+info,Toast.LENGTH_LONG).show();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-		}
-
-
 		});
-		Log.i("FLAG",""+flag);
-		Log.i("INFO",""+ info);
+		AlUApplication.getMyInfo().setRealname(realname_et.getText().toString());
+		AlUApplication.getMyInfo().setLocus(locus_et.getText().toString());
+		AlUApplication.getMyInfo().setAge(Integer.parseInt(age_et.getText().toString()));
+		AlUApplication.getMyInfo().setUsername(username_et.getText().toString());
 		
-		
-		
-		if("true".equals(flag)){
-			Toast.makeText(this,""+ info,Toast.LENGTH_LONG).show();
-
-		}else{
-
-			Toast.makeText(this, ""+info,Toast.LENGTH_LONG).show();
-		}
-		 
 	}
 
+	public void resident(){
+		Log.e("!!!!resident!!!!!!", "**********");
+		residentsociaties= new ArrayList<Sociaty>();
+		NetManager.execute(NetManager.RESIDENT_ASSOCIATION_REQUEST_OPERATION, userKeyRequest, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONArray response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				try {
+					getPopularJsonObj(response,residentsociaties);
+					Log.e("popularsociaties",""+ residentsociaties.toString());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	//遍历jsonarray
+	public void getPopularJsonObj(JSONArray array,ArrayList<Sociaty> sociaties ) throws JSONException{
 
-
+		SociatyResponse soc= new SociatyResponse();
+		for(int i=0;i<array.length();i++){
+			JSONObject jsonObject= new JSONObject();
+			jsonObject= array.getJSONObject(i);
+			soc.setJsonObject(jsonObject);
+			Sociaty sociaty= new Sociaty();
+			sociaty.setId(soc.getId());
+			sociaty.setJifen(soc.getJifen());
+			sociaty.setKey(soc.getKey());
+			sociaty.setSocietyname(soc.getSocietyName());
+			sociaty.setSocietysummary(soc.getSocietySummary());
+			sociaties.add(sociaty);
+		}
+	}
 	/**
 	 * 返回
 	 * 

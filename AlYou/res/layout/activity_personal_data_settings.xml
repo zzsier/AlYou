@@ -313,11 +313,12 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/bangding_bt"
-                        android:text="绑定"
+                        android:text="申请"
+                        android:onClick="next"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/sociaty_name_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/textView8"

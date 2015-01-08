@@ -168,7 +168,7 @@ public class LoginActivity extends BaseActivity {
 						AlUApplication.getMyInfo().setLocus(userInfo.getLocus());
 						AlUApplication.getMyInfo().setRealname(userInfo.getRealName());
 						AlUApplication.getMyInfo().setSex(userInfo.getSex());
-						
+						AlUApplication.getMyInfo().setSocietykey(userInfo.getSocietyKey());
 
 						PersonalInfoResponse personal=new PersonalInfoResponse();
 						personal.setJsonObject(response);

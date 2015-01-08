@@ -26,6 +26,8 @@ import com.imalu.alyou.adapter.SociatylistFragmentAdapter;
 import com.imalu.alyou.domain.Sociaty;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
+import com.imalu.alyou.net.request.ConcernSocaityRequest;
+import com.imalu.alyou.net.request.GetSocaityRequest;
 import com.imalu.alyou.net.request.UserKeyRequest;
 import com.imalu.alyou.net.response.SociatyResponse;
 
@@ -52,7 +54,10 @@ public class ConsortialistFragment extends Fragment {
 	private ListView concernlist;
 	private ListView bindinglist;
 	private String key;
+	private String socaitykey;
 	private UserKeyRequest keyRequest;
+	private ConcernSocaityRequest   socaityRequest;
+	private GetSocaityRequest getSocaityRequest;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,24 +69,43 @@ public class ConsortialistFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		key=AlUApplication.getMyInfo().getKey();
+		socaitykey=AlUApplication.getMyInfo().getSocietykey();
+		Log.e("socaitykey", ""+socaitykey);
+		
 		keyRequest= new UserKeyRequest();
+		socaityRequest=new ConcernSocaityRequest();
+		getSocaityRequest= new GetSocaityRequest();
+
+		getSocaityRequest.setSocietyKey(socaitykey);
+		socaityRequest.setYonghuKey(key);
 		keyRequest.setUserKey(key);
+
+
 		popularlist=(ListView) getActivity().findViewById(R.id.popular_association_list);
 		concernlist=(ListView) getActivity().findViewById(R.id.concerned_association_list);
+		bindinglist=(ListView) getActivity().findViewById(R.id.binding_association_list);
+
 		Popular();
 		Concern();
+		Binding();
+
+		Log.e("--------","xxxxxxxxx");
 		SociatylistFragmentAdapter adapter= new SociatylistFragmentAdapter(getActivity(), popularsociaties);
-	popularlist.setAdapter(adapter);
-	SociatylistFragmentAdapter adapter2= new SociatylistFragmentAdapter(getActivity(), concernsociaties);
-	concernlist.setAdapter(adapter2);
+		popularlist.setAdapter(adapter);
+
+		SociatylistFragmentAdapter adapter2= new SociatylistFragmentAdapter(getActivity(), concernsociaties);
+		concernlist.setAdapter(adapter2);
+
+		SociatylistFragmentAdapter adapter3= new SociatylistFragmentAdapter(getActivity(), bindingsociaties);
+		bindinglist.setAdapter(adapter3);
 	}
-	
-	
-   
+
+
+
 
 	//热门公会请求
 	public void  Popular(){
-	
+
 		popularsociaties= new ArrayList<Sociaty>();
 		NetManager.execute(NetManager.POPULAR_ASSOCIATION_REQUEST_OPERATION, keyRequest, new JsonHttpResponseHandler(){
 			@Override
@@ -98,35 +122,77 @@ public class ConsortialistFragment extends Fragment {
 				}
 			}
 		});
+
+
+		/*	concernsociaties= new ArrayList<Sociaty>();
+		NetManager.execute(NetManager.CONCERN_ASSOCIATION_REQUEST_OPERATION, keyRequest, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONArray response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				try {
+					getPopularJsonObj(response,concernsociaties);
+					Log.e("concernsociaties",""+ concernsociaties.toString());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});*/
+
 	}
-	
-	
-	
+
+
+
 	//关注公会请求
 	public void  Concern(){
 		Log.e("++++", "aaaaaaaaaaa");
 		concernsociaties= new ArrayList<Sociaty>();
-			NetManager.execute(NetManager.CONCERN_ASSOCIATION_REQUEST_OPERATION, keyRequest, new JsonHttpResponseHandler(){
-				@Override
-				public void onSuccess(int statusCode, Header[] headers,
-						JSONArray response) {
-					// TODO Auto-generated method stub
-					super.onSuccess(statusCode, headers, response);
-					try {
-						getPopularJsonObj(response,concernsociaties);
-						Log.e("concernsociaties",""+ concernsociaties.toString());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		NetManager.execute(NetManager.CONCERN_ASSOCIATION_REQUEST_OPERATION, socaityRequest, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONArray response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				try {
+					getPopularJsonObj(response,concernsociaties);
+					Log.e("concernsociaties",""+ concernsociaties.toString());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			});
-		}
+			}
+		});
+	}
 	//绑定公会请求
-	
+	public void  Binding(){
+		Log.e("++++", "aaaaaaaaaaa");
+		
+		bindingsociaties= new ArrayList<Sociaty>();
+		NetManager.execute(NetManager.BINDING_ASSOCIATION_REQUEST_OPERATION, getSocaityRequest, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				SociatyResponse soc= new SociatyResponse();
+				soc.setJsonObject(response);
+				Sociaty sociaty= new Sociaty();
+				sociaty.setId(soc.getId());
+				sociaty.setJifen(soc.getJifen());
+				sociaty.setKey(soc.getKey());
+				sociaty.setSocietyname(soc.getSocietyName());
+				sociaty.setSocietysummary(soc.getSocietySummary());
+				Log.i("sociaty", ""+sociaty.toString());
+				bindingsociaties.add(sociaty);
+				Log.e("bindingsociaties",""+ bindingsociaties.toString());
+			}
+		});
+	}
 	//遍历jsonarray
 	public void getPopularJsonObj(JSONArray array,ArrayList<Sociaty> sociaties ) throws JSONException{
-		
+
 		SociatyResponse soc= new SociatyResponse();
 		for(int i=0;i<array.length();i++){
 			JSONObject jsonObject= new JSONObject();
@@ -140,15 +206,15 @@ public class ConsortialistFragment extends Fragment {
 			sociaty.setSocietysummary(soc.getSocietySummary());
 			sociaties.add(sociaty);
 		}
-	
+
 	}
-	
-	
+
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-	    if(((MainActivity)getActivity()).isConflict)
-	        outState.putBoolean("isConflict", true);
-	    super.onSaveInstanceState(outState);
-	    
+		if(((MainActivity)getActivity()).isConflict)
+			outState.putBoolean("isConflict", true);
+		super.onSaveInstanceState(outState);
+
 	}
 }

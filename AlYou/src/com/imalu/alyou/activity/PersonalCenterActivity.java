@@ -35,7 +35,9 @@ public class PersonalCenterActivity extends BaseActivity{
 	private ImageView userphoto;
 	private TextView lol;
 	private TextView wow;
-	
+	private String app_id;
+	private String name;
+	private String jifen_number;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,9 @@ public class PersonalCenterActivity extends BaseActivity{
 	lol=(TextView) findViewById(R.id.lol_text);
 	wow=(TextView) findViewById(R.id.wow_text);
 	
-	String app_id=String.valueOf(AlUApplication.getMyInfo().getId());
-	String name=AlUApplication.getMyInfo().getUsername();
-	String jifen_number=String.valueOf(AlUApplication.getMyInfo().getJifen());
+	 app_id=String.valueOf(AlUApplication.getMyInfo().getId());
+	 name=AlUApplication.getMyInfo().getUsername();
+	 jifen_number=String.valueOf(AlUApplication.getMyInfo().getJifen());
 	Log.i("NAME", ""+name);
 	if(name==null){
 		username.setText("未设置");
@@ -61,12 +63,6 @@ public class PersonalCenterActivity extends BaseActivity{
 	}
 	appnum.setText(app_id);
 	jifen.setText(jifen_number);
-	
-	
-	
-	
-	
-	
 	userphoto.setOnClickListener(new OnClickListener() {
 		
 		@Override
@@ -98,7 +94,19 @@ public class PersonalCenterActivity extends BaseActivity{
 	});
 	
 	}
-
+@Override
+protected void onResume() {
+	// TODO Auto-generated method stub
+	super.onResume();
+	 name=AlUApplication.getMyInfo().getUsername();
+	 if(name==null){
+			username.setText("未设置");
+			
+		}else{
+			
+			username.setText(name);
+		}
+}
 	
 	/**
 	 * 返回

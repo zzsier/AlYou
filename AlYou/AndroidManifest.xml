@@ -71,7 +71,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-         <!-- 个人信息 -->
+        <!-- 个人信息 -->
         <activity
             android:name=".activity.PersonInfoActivity"
             android:screenOrientation="portrait"
@@ -354,11 +354,27 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <!-- 游戏资料 -->
-            <activity android:name=".activity.GameDataActivity"
-                android:screenOrientation="portrait"
+        <activity
+            android:name=".activity.GameDataActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
-            </activity>
+        </activity>
+     <!-- 公会资料 -->
+        <activity
+            android:name=".activity.SociatyDataActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- 验证信息 -->
+        <activity
+            android:name=".activity.AuthenticationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+
         <!-- 开机自启动服务 -->
         <receiver android:name="com.easemob.chat.StartServiceReceiver" >
             <intent-filter android:priority="1000" >
@@ -368,7 +384,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </receiver>
-
+       
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"

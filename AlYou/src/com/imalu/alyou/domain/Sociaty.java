@@ -6,10 +6,23 @@ public class Sociaty {
 	private int jifen;
 	private String societysummary;
 	private String societyname;
-	
+	private int type;
+	private int total;
 	
 
 	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 	public int getId() {
 		return id;
 	}
