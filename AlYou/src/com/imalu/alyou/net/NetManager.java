@@ -42,10 +42,18 @@ public class NetManager {
 	//加入公会
 	public static final int JOIN_SOCIATY_REQUEST_OPERATION=20;
 
+	//退出公会
+	public static final int OUT_SOCIATY_REQUEST_OPERATION=21;
 
 
-
-
+	//公会搜索
+		public static final int  ASSOCIATION_SEARCH=22;
+		//公会绑定与解绑
+		public static final int  BINDSOCIETY=23;
+		//关注公会
+		public static final int  CARE_ABOUT_CONCERN_SOCIETY =24;
+		//取消关注公会
+		public static final int  CANCEL_CARE_ABOUT_CONCERN_SOCIETY =25;
 
 
 
@@ -73,12 +81,22 @@ public class NetManager {
 	public static final String  CARE_ABOUT_CONCERN_URL="service/GerenzhongxinServices.svc/GuanzhuUser";
 	public static final String  CANCEL_CARE_ABOUT_CONCERN_URL="service/GerenzhongxinServices.svc/QuxiaoguanzhuUser";
 	public static final String POPULAR_ASSOCIATION_REQUEST_URL="service/GonghuiServices.svc/Gonghui";
-	public static final String CONCERN_ASSOCIATION_REQUEST_URL="service/GonghuiTuisongServices.svc/ GuanzhuGonghuiYe";
+	public static final String CONCERN_ASSOCIATION_REQUEST_URL="service/GonghuiTuisongServices.svc/GuanzhuGonghuiYe";
 	public static final String	BINDING_ASSOCIATION_REQUEST_URL="service/GonghuiServices.svc/HuoQuGongHuiXinXiByKey";
 	public static final String 	RESIDENT_ASSOCIATION_REQUEST_URL="service/GonghuiServices.svc/GetByMemberKey";
 	public static final String JOIN_SOCIATY_REQUEST_URL="/service/GonghuiServices.svc/ApplySocietyInfo";
+	public static final String OUT_SOCIATY_REQUEST_URL="/service/GerenzhongxinServices.svc/TuichuAndJiebangGonghui";
 
+	//公会搜索
+		public static final String ASSOCIATION_SEARCH_URL ="/service/LianxirenServices.svc/SearchSociety";
+		//公会绑定与解绑
+		public static final String BINDSOCIETY_URL ="/service/GerenzhongxinServices.svc/BindSociety";
+		//公会关注
+		public static final String  CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/GuanzhuGonghui";
+		//取消公会关注
+		public static final String  CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/QuxiaoGuanzhugonghui";
 
+	
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
 	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
@@ -149,6 +167,17 @@ public class NetManager {
 			return BASE_URL+RESIDENT_ASSOCIATION_REQUEST_URL;
 		case JOIN_SOCIATY_REQUEST_OPERATION:
 			return BASE_URL+JOIN_SOCIATY_REQUEST_URL;
+		case OUT_SOCIATY_REQUEST_OPERATION:
+			return BASE_URL+OUT_SOCIATY_REQUEST_URL;
+		case  ASSOCIATION_SEARCH:
+			return BASE_URL+ASSOCIATION_SEARCH_URL;
+		case  BINDSOCIETY:
+			return BASE_URL+BINDSOCIETY_URL;	
+		case  CARE_ABOUT_CONCERN_SOCIETY:
+			return BASE_URL+CARE_ABOUT_CONCERN_SOCIETY_URL;	
+		case  CANCEL_CARE_ABOUT_CONCERN_SOCIETY:
+			return BASE_URL+CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL;	
+		
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;
 		}

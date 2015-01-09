@@ -64,7 +64,7 @@
             android:textColor="#000000" />
 
         <EditText
-            android:id="@+id/editText_souhaoma"
+            android:id="@+id/et_souname"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
@@ -72,10 +72,11 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/ico_006"
             android:ems="10"
-            android:inputType="number" >
+            android:inputType="textPersonName" >
 
             <requestFocus />
         </EditText>
+
     </LinearLayout>
 
     <Button

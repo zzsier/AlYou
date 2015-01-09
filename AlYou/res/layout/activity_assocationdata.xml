@@ -109,14 +109,14 @@
                 android:src="@drawable/ico_personal_data_photo" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/SocietyNametv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView1"
                 android:layout_alignBottom="@+id/textView1"
                 android:layout_marginLeft="18dp"
                 android:layout_toRightOf="@+id/textView1"
-                android:text="ffffff"
+                android:text="00"
                 android:textColor="#000000" />
 
             <TextView
@@ -150,23 +150,24 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView3"
-                android:layout_alignBottom="@+id/textView3"
-                android:layout_alignLeft="@+id/textView2"
-                android:text="24"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/JiFentv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_toRightOf="@+id/textView4"
-                android:text="441"
+                android:text="00"
                 android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/Idtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView3"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_alignLeft="@+id/SocietyNametv2"
+                android:text="00"
+                android:textColor="#000000" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -299,7 +300,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/bangdingbt"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
@@ -308,20 +309,19 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="2dp"
         android:background="@drawable/ico_47"
-        android:text="加入公会" 
+        android:text="绑定公会" 
         android:textColor="#000000"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/guanzhubt"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_toRightOf="@+id/button1"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="5dp"
-        android:text="取消关注" 
-          android:background="@drawable/ico_48"
-          android:textColor="#000000"/>
+        android:layout_alignBaseline="@+id/bangdingbt"
+        android:layout_alignBottom="@+id/bangdingbt"
+        android:layout_alignRight="@+id/relativeLayout5"
+        android:layout_toRightOf="@+id/bangdingbt"
+        android:background="@drawable/ico_48"
+        android:text="关注"
+        android:textColor="#000000" />
 
 </RelativeLayout>

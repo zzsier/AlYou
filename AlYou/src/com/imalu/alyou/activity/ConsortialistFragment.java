@@ -20,6 +20,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.SociatylistFragmentAdapter;
@@ -30,15 +42,6 @@ import com.imalu.alyou.net.request.ConcernSocaityRequest;
 import com.imalu.alyou.net.request.GetSocaityRequest;
 import com.imalu.alyou.net.request.UserKeyRequest;
 import com.imalu.alyou.net.response.SociatyResponse;
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 
 
@@ -58,6 +61,8 @@ public class ConsortialistFragment extends Fragment {
 	private UserKeyRequest keyRequest;
 	private ConcernSocaityRequest   socaityRequest;
 	private GetSocaityRequest getSocaityRequest;
+	private Button search_bt;  
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,7 +85,7 @@ public class ConsortialistFragment extends Fragment {
 		socaityRequest.setYonghuKey(key);
 		keyRequest.setUserKey(key);
 
-
+		search_bt = (Button) getActivity().findViewById(R.id.search_bt);
 		popularlist=(ListView) getActivity().findViewById(R.id.popular_association_list);
 		concernlist=(ListView) getActivity().findViewById(R.id.concerned_association_list);
 		bindinglist=(ListView) getActivity().findViewById(R.id.binding_association_list);
@@ -88,6 +93,7 @@ public class ConsortialistFragment extends Fragment {
 		Popular();
 		Concern();
 		Binding();
+		setListener();
 
 		Log.e("--------","xxxxxxxxx");
 		SociatylistFragmentAdapter adapter= new SociatylistFragmentAdapter(getActivity(), popularsociaties);
@@ -102,7 +108,21 @@ public class ConsortialistFragment extends Fragment {
 
 
 
-
+	
+	private void setListener() {
+		// TODO Auto-generated method stub
+		search_bt.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent =new Intent();
+				intent.setClass(getActivity(), AssociationSearchActivity.class);
+				startActivity(intent);
+				
+			}
+		});
+	}
 	//热门公会请求
 	public void  Popular(){
 
