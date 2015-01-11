@@ -13,47 +13,71 @@
  */
 package com.imalu.alyou.activity;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.imalu.alyou.AlUApplication;
+import com.imalu.alyou.Constant;
 import com.imalu.alyou.R;
+import com.imalu.alyou.adapter.ClockAdapter;
+import com.imalu.alyou.adapter.FriendAdapter;
+import com.imalu.alyou.adapter.ClockAdapter.ClockViewHolder;
+import com.imalu.alyou.db.ClockDbService;
+import com.imalu.alyou.db.gen.Clock;
+import com.imalu.alyou.domain.HXUser;
 
  
 
 public class MainPageClockActivity extends BaseActivity{
-	private Button btCome;
+	private Button addclock;
+	private ClockAdapter adapter;
+	private ListView listView;
+
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainpage_clock);
-		setview();
-		setListener();
-		 
-	}
-	
-	 
-	private void setListener() {
-		// TODO Auto-generated method stub
-		btCome.setOnClickListener(new OnClickListener() {
-			
+		listView = (ListView) findViewById(R.id.list);
+		addclock = (Button)findViewById(R.id.addclock);
+		addclock.setOnClickListener(new OnClickListener(){
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent =  new Intent(
-						MainPageClockActivity.this,
-						AddClockActivity.class);		
-						startActivity(intent);
+			public void onClick(View view) {
+				startActivity(new Intent(MainPageClockActivity.this, AddClockActivity.class));
+				finish();
 			}
 		});
+		showListView();
 	}
+	
+	private void showListView() {
+		adapter = new ClockAdapter(this, R.layout.row_clock, 
+				ClockDbService.getInstance(AlUApplication.applicationContext).loadAllClock());
 
+		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ClockViewHolder holder = (ClockViewHolder) view.getTag();
+				holder.startClock();
+			}
+		});
 
-	private void setview() {
-		// TODO Auto-generated method stub
-		btCome = (Button) findViewById(R.id.button1);
+		registerForContextMenu(listView);
 	}
 
 
