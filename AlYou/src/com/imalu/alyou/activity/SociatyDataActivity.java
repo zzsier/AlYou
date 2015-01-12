@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.easemob.chat.EMGroupManager;
+import com.easemob.exceptions.EaseMobException;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.imalu.alyou.domain.Sociaty;
@@ -32,22 +34,20 @@ public class SociatyDataActivity  extends BaseActivity{
 	private TextView sociatyType;
 	private TextView sociatyTotal;
 	private Button join;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sociaty_data);
-
 		init();
-
 		Log.e("++++", "aaaaaaaaaaa");
 		socaitykey=AlUApplication.getMyInfo().getSocietykey();
 		Log.e("++++",""+ socaitykey);
 		getSocaityRequest= new GetSocaityRequest();
 		getSocaityRequest.setSocietyKey(socaitykey);
-
 		Binding();
+		
 	}
 
 	public void init(){
@@ -79,12 +79,12 @@ public class SociatyDataActivity  extends BaseActivity{
 				sociaty.setSocietyname(soc.getSocietyName());
 				sociaty.setSocietysummary(soc.getSocietySummary());
 				sociaty.setTotal(soc.getTotal());
-				sociaty.setType(soc.getSocietyType());
+				sociaty.setSocietytype(soc.getSocietyType());
 				sociatyName.setText(""+sociaty.getSocietyname());
 				sociatyId.setText(String.valueOf(sociaty.getId()));
 				sociatyJifen.setText(""+String.valueOf(sociaty.getJifen()));
 				sociatySummary.setText(""+sociaty.getSocietysummary());
-				sociatyType.setText(sociaty.getType()==1?"英雄联盟":"魔兽世界");
+				sociatyType.setText(sociaty.getSocietytype()==1?"英雄联盟":"魔兽世界");
 				sociatyTotal.setText(String.valueOf(sociaty.getTotal()));
 			}
 		});
@@ -114,6 +114,11 @@ public void next(View view){
 
 	}
 }
+
+
+
+
+
 }
 
 

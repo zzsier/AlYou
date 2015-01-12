@@ -169,6 +169,7 @@ public class LoginActivity extends BaseActivity {
 						AlUApplication.getMyInfo().setRealname(userInfo.getRealName());
 						AlUApplication.getMyInfo().setSex(userInfo.getSex());
 						AlUApplication.getMyInfo().setSocietykey(userInfo.getSocietyKey());
+						AlUApplication.getMyInfo().setJiarugonghuikey(userInfo.getJiaruGonghuiKey());
 
 						PersonalInfoResponse personal=new PersonalInfoResponse();
 						personal.setJsonObject(response);
@@ -176,6 +177,7 @@ public class LoginActivity extends BaseActivity {
 						AlUApplication.getUserfans().setJifen(personal.getJifen());
 						AlUApplication.getUserfans().setUserName(personal.getUserName());
 						AlUApplication.getUserfans().setSocietyName(personal.getSocietyName());
+
 						
 						// 登陆成功，保存用户名密码
 						AlUApplication.getInstance().setUserName(username);

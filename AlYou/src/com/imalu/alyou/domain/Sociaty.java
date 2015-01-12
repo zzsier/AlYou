@@ -6,12 +6,26 @@ public class Sociaty {
 	private int jifen;
 	private String societysummary;
 	private String societyname;
-	private int type;
+	private int societytype;
 	private int total;
-	
+	private int type;
+	private String huanxinid;
 
 	
-	public int getType() {
+
+	public String getHuanxinid() {
+		return huanxinid;
+	}
+	public void setHuanxinid(String huanxinid) {
+		this.huanxinid = huanxinid;
+	}
+	public int getSocietytype() {
+		return societytype;
+	}
+	public void setSocietytype(int societytype) {
+		this.societytype = societytype;
+	}
+public int getType() {
 		return type;
 	}
 	public void setType(int type) {
@@ -58,11 +72,14 @@ public class Sociaty {
 		// TODO Auto-generated method stub
 		return super.hashCode();
 	};
+
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	};
+		return "Sociaty [id=" + id + ", key=" + key + ", jifen=" + jifen
+				+ ", societysummary=" + societysummary + ", societyname="
+				+ societyname + ", societytype=" + societytype + ", total="
+				+ total + ", type=" + type + "]";
+	}
 	@Override
 	public boolean equals(Object o) {
 		// TODO Auto-generated method stub

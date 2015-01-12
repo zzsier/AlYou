@@ -17,15 +17,20 @@ import com.imalu.alyou.net.AsyncHttpResponseHandler;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.request.GetSocaityRequest;
+import com.imalu.alyou.net.request.OutSocaityRequest;
 import com.imalu.alyou.net.request.UpdateUserdataRequest;
 import com.imalu.alyou.net.request.UserKeyRequest;
 import com.imalu.alyou.net.response.SociatyResponse;
 import com.imalu.alyou.net.response.UpdateUserdataResponse;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,18 +58,24 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 	private UserKeyRequest userKeyRequest;
 	private TextView sociaty_name;
 	private String socaitykey;
+	private AlertDialog.Builder builder;
+	private OutSocaityRequest outSocaityRequest;
+	private AlertDialog	alert;
+
+	private String gonghuikey;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_data_settings);	
 		init();
 		key=AlUApplication.getMyInfo().getKey();
-		userKeyRequest= new UserKeyRequest();
-		userKeyRequest.setUserKey(key);
+
 		socaitykey=AlUApplication.getMyInfo().getSocietykey();
+
+
 		Log.e("socaitykey",""+socaitykey);
 		Log.e("KEY", ""+key+socaitykey);
-		
+
 		username_et.setText(AlUApplication.getMyInfo().getUsername());
 		realname_et.setText(AlUApplication.getMyInfo().getRealname());
 		age_et.setText(String.valueOf(AlUApplication.getMyInfo().getAge()));
@@ -72,13 +83,31 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 		app_text.setText(String.valueOf(AlUApplication.getMyInfo().getId()));
 		jifen_text.setText(String.valueOf(AlUApplication.getMyInfo().getJifen()));
 		resident();
-			if(residentsociaties.size()==0){
-			sociaty_name.setText("");
-			apply_bt.setText("申请");
-		}else{
-			sociaty_name.setText(residentsociaties.get(0).getSocietyname());
-			apply_bt.setText("退出");
-		}
+
+		builder= new AlertDialog.Builder(PersonalDataSettingsActivity.this);
+
+		apply_bt.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(apply_bt.getText().toString()=="退出"){
+					alert=tishi();
+				 alert.show();
+				 AlUApplication.getMyInfo().setHuanxinid(null);
+				}else{
+					if("null".equals(socaitykey)){
+
+						Toast.makeText(PersonalDataSettingsActivity.this, "亲，未绑定公会，请先绑定！", Toast.LENGTH_SHORT).show();
+					}else{
+
+						startActivity(new Intent(PersonalDataSettingsActivity.this,SociatyDataActivity.class));
+					}
+				}
+
+			}
+		});
+		
 	}
 
 
@@ -96,18 +125,14 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 	/**
 	 * 跳转申请界面
 	 */
-	public void next(View view){
-		if("null".equals(socaitykey)){
-			
-			Toast.makeText(this, "亲，未绑定公会，请先绑定！", Toast.LENGTH_SHORT).show();
-		}else{
-			
-			startActivity(new Intent(this,SociatyDataActivity.class));
-		}
-		
-		
-	}
 	
+
+
+
+
+
+	
+
 	/**
 	 * 保存
 	 */
@@ -162,11 +187,13 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 		AlUApplication.getMyInfo().setLocus(locus_et.getText().toString());
 		AlUApplication.getMyInfo().setAge(Integer.parseInt(age_et.getText().toString()));
 		AlUApplication.getMyInfo().setUsername(username_et.getText().toString());
-		
+
 	}
 
 	public void resident(){
 		Log.e("!!!!resident!!!!!!", "**********");
+		userKeyRequest= new UserKeyRequest();
+		userKeyRequest.setUserKey(key);
 		residentsociaties= new ArrayList<Sociaty>();
 		NetManager.execute(NetManager.RESIDENT_ASSOCIATION_REQUEST_OPERATION, userKeyRequest, new JsonHttpResponseHandler(){
 			@Override
@@ -176,7 +203,16 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 				super.onSuccess(statusCode, headers, response);
 				try {
 					getPopularJsonObj(response,residentsociaties);
+					
 					Log.e("popularsociaties",""+ residentsociaties.toString());
+					if(residentsociaties.size()==0){
+						sociaty_name.setText("");
+						apply_bt.setText("申请");
+					}else{
+						sociaty_name.setText(residentsociaties.get(0).getSocietyname());
+						gonghuikey=residentsociaties.get(0).getKey();
+						apply_bt.setText("退出");
+					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -201,6 +237,71 @@ public class PersonalDataSettingsActivity extends BaseActivity{
 			sociaties.add(sociaty);
 		}
 	}
+
+	/**
+	 *退出公会并解绑
+	 * 
+	 */
+	public void out(){
+		outSocaityRequest=new OutSocaityRequest();
+		outSocaityRequest.setGonghuikey(gonghuikey);
+		outSocaityRequest.setUserKey(key);
+		NetManager.execute(NetManager.OUT_SOCIATY_REQUEST_OPERATION, outSocaityRequest, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				UpdateUserdataResponse userdataResponse=new UpdateUserdataResponse();
+				userdataResponse.setJsonObject(response);
+				try {
+					flag=userdataResponse.getCode();
+					info=userdataResponse.getInfo();
+
+					Log.i("FLAG",""+flag);
+					Log.i("INFO",""+ info);
+					if("true".equals(flag)){
+						Toast.makeText(PersonalDataSettingsActivity.this,""+ info,Toast.LENGTH_LONG).show();
+
+					}else{
+
+						Toast.makeText(PersonalDataSettingsActivity.this, ""+info,Toast.LENGTH_LONG).show();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+
+
+
+
+	}
+/**
+ * 提示退出
+ */
+	public AlertDialog tishi(){
+		
+		builder.setTitle("提示")
+		.setMessage("你确定要退出公会?")
+		.setCancelable(false)  
+		.setPositiveButton("确定", new DialogInterface.OnClickListener() {  
+			public void onClick(DialogInterface dialog, int id) {  
+				out();
+				dialog.dismiss();
+			}  
+		})  
+		.setNegativeButton("取消", new DialogInterface.OnClickListener() {  
+			public void onClick(DialogInterface dialog, int id) {  
+				dialog.dismiss();  
+			}  
+		});  
+
+		AlertDialog	alert1=builder.create(); 
+		return alert1;
+	}
+	
 	/**
 	 * 返回
 	 * 

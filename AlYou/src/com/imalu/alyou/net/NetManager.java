@@ -86,7 +86,7 @@ public class NetManager {
 	public static final String 	RESIDENT_ASSOCIATION_REQUEST_URL="service/GonghuiServices.svc/GetByMemberKey";
 	public static final String JOIN_SOCIATY_REQUEST_URL="/service/GonghuiServices.svc/ApplySocietyInfo";
 	public static final String OUT_SOCIATY_REQUEST_URL="/service/GerenzhongxinServices.svc/TuichuAndJiebangGonghui";
-
+	
 	//公会搜索
 		public static final String ASSOCIATION_SEARCH_URL ="/service/LianxirenServices.svc/SearchSociety";
 		//公会绑定与解绑
@@ -95,7 +95,6 @@ public class NetManager {
 		public static final String  CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/GuanzhuGonghui";
 		//取消公会关注
 		public static final String  CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/QuxiaoGuanzhugonghui";
-
 	
 	private static AsyncHttpClient client = new AsyncHttpClient();
 

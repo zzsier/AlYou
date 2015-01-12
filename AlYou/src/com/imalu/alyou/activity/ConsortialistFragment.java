@@ -20,6 +20,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.imalu.alyou.AlUApplication;
+import com.imalu.alyou.R;
+import com.imalu.alyou.adapter.SociatylistMainFragmentAdapter;
+import com.imalu.alyou.domain.Sociaty;
+import com.imalu.alyou.net.JsonHttpResponseHandler;
+import com.imalu.alyou.net.NetManager;
+import com.imalu.alyou.net.request.ConcernSocaityRequest;
+import com.imalu.alyou.net.request.GetSocaityRequest;
+import com.imalu.alyou.net.request.UserKeyRequest;
+import com.imalu.alyou.net.response.SociatyResponse;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,19 +40,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-
-import com.imalu.alyou.AlUApplication;
-import com.imalu.alyou.R;
-import com.imalu.alyou.adapter.SociatylistFragmentAdapter;
-import com.imalu.alyou.domain.Sociaty;
-import com.imalu.alyou.net.JsonHttpResponseHandler;
-import com.imalu.alyou.net.NetManager;
-import com.imalu.alyou.net.request.ConcernSocaityRequest;
-import com.imalu.alyou.net.request.GetSocaityRequest;
-import com.imalu.alyou.net.request.UserKeyRequest;
-import com.imalu.alyou.net.response.SociatyResponse;
+import android.widget.Toast;
 
 
 
@@ -61,8 +64,11 @@ public class ConsortialistFragment extends Fragment {
 	private UserKeyRequest keyRequest;
 	private ConcernSocaityRequest   socaityRequest;
 	private GetSocaityRequest getSocaityRequest;
-	private Button search_bt;  
-	
+	private Sociaty  sociaty1;
+	private Sociaty  sociaty2;
+	private Sociaty  sociaty3;
+	private Sociaty  sociaty4;
+	private Button search_bt;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,7 +82,7 @@ public class ConsortialistFragment extends Fragment {
 		key=AlUApplication.getMyInfo().getKey();
 		socaitykey=AlUApplication.getMyInfo().getSocietykey();
 		Log.e("socaitykey", ""+socaitykey);
-		
+
 		keyRequest= new UserKeyRequest();
 		socaityRequest=new ConcernSocaityRequest();
 		getSocaityRequest= new GetSocaityRequest();
@@ -85,43 +91,72 @@ public class ConsortialistFragment extends Fragment {
 		socaityRequest.setYonghuKey(key);
 		keyRequest.setUserKey(key);
 
+
 		search_bt = (Button) getActivity().findViewById(R.id.search_bt);
 		popularlist=(ListView) getActivity().findViewById(R.id.popular_association_list);
-		concernlist=(ListView) getActivity().findViewById(R.id.concerned_association_list);
-		bindinglist=(ListView) getActivity().findViewById(R.id.binding_association_list);
+		//	concernlist=(ListView) getActivity().findViewById(R.id.concerned_association_list);
+		//bindinglist=(ListView) getActivity().findViewById(R.id.binding_association_list);
 
 		Popular();
-		Concern();
-		Binding();
-		setListener();
+		//	Concern();
+		//	Binding();
 
 		Log.e("--------","xxxxxxxxx");
-		SociatylistFragmentAdapter adapter= new SociatylistFragmentAdapter(getActivity(), popularsociaties);
+		SociatylistMainFragmentAdapter adapter= new SociatylistMainFragmentAdapter(getActivity(), popularsociaties);
 		popularlist.setAdapter(adapter);
 
-		SociatylistFragmentAdapter adapter2= new SociatylistFragmentAdapter(getActivity(), concernsociaties);
-		concernlist.setAdapter(adapter2);
+		//SociatylistFragmentAdapter adapter2= new SociatylistFragmentAdapter(getActivity(), concernsociaties);
+		//	concernlist.setAdapter(adapter2);
 
-		SociatylistFragmentAdapter adapter3= new SociatylistFragmentAdapter(getActivity(), bindingsociaties);
-		bindinglist.setAdapter(adapter3);
+		/*SociatylistFragmentAdapter adapter3= new SociatylistFragmentAdapter(getActivity(), bindingsociaties);
+		bindinglist.setAdapter(adapter3);*/
+
+		//给listview设置监听事件
+		setListviewListener();
+
+
 	}
 
 
 
-	
-	private void setListener() {
+	//设置监听事件
+	private void setListviewListener() {
 		// TODO Auto-generated method stub
-		search_bt.setOnClickListener(new OnClickListener() {
+		popularlist.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(),""+popularsociaties.get(arg2).getType() , Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent();
+				intent.setClass(
+						getActivity(), 
+						AssocationDataActivity.class);
+				intent.putExtra("Id", popularsociaties.get(arg2).getId());
+				intent.putExtra("SocietyName", popularsociaties.get(arg2).getSocietyname());
+				intent.putExtra("SocietySummary", popularsociaties.get(arg2).getSocietysummary());
+				intent.putExtra("SocietyKey", popularsociaties.get(arg2).getKey());
+				intent.putExtra("Key", key);
+				intent.putExtra("JiFen", popularsociaties.get(arg2).getJifen()) ;
+				startActivity(intent);
 			
+			
+			}
+		});
+
+		search_bt.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent =new Intent();
 				intent.setClass(getActivity(), AssociationSearchActivity.class);
 				startActivity(intent);
-				
+
 			}
 		});
+
 	}
 	//热门公会请求
 	public void  Popular(){
@@ -188,7 +223,7 @@ public class ConsortialistFragment extends Fragment {
 	//绑定公会请求
 	public void  Binding(){
 		Log.e("++++", "aaaaaaaaaaa");
-		
+
 		bindingsociaties= new ArrayList<Sociaty>();
 		NetManager.execute(NetManager.BINDING_ASSOCIATION_REQUEST_OPERATION, getSocaityRequest, new JsonHttpResponseHandler(){
 			@Override
@@ -211,7 +246,7 @@ public class ConsortialistFragment extends Fragment {
 		});
 	}
 	//遍历jsonarray
-	public void getPopularJsonObj(JSONArray array,ArrayList<Sociaty> sociaties ) throws JSONException{
+	/*	public void getPopularJsonObj(JSONArray array,ArrayList<Sociaty> sociaties ) throws JSONException{
 
 		SociatyResponse soc= new SociatyResponse();
 		for(int i=0;i<array.length();i++){
@@ -220,6 +255,7 @@ public class ConsortialistFragment extends Fragment {
 			soc.setJsonObject(jsonObject);
 			Sociaty sociaty= new Sociaty();
 			sociaty.setId(soc.getId());
+			sociaty.setType(soc.getType());
 			sociaty.setJifen(soc.getJifen());
 			sociaty.setKey(soc.getKey());
 			sociaty.setSocietyname(soc.getSocietyName());
@@ -228,6 +264,160 @@ public class ConsortialistFragment extends Fragment {
 		}
 
 	}
+	 */
+
+
+	//遍历jsonarray
+	public void getPopularJsonObj(JSONArray array,ArrayList<Sociaty> sociaties ) throws JSONException{
+
+		SociatyResponse soc= new SociatyResponse();
+		for(int i=0;i<array.length();i++){
+			JSONObject jsonObject= new JSONObject();
+			jsonObject= array.getJSONObject(i);
+			soc.setJsonObject(jsonObject);
+
+			if(soc.getType()==1){
+				if(sociaty1==null){
+
+					sociaty1= new Sociaty();
+					sociaty1.setType(5);
+					sociaty1.setSocietyname("加入公会");
+					sociaties.add(sociaty1);
+					/*	Sociaty sociaty= new Sociaty();
+					sociaty.setId(soc.getId());
+					sociaty.setType(soc.getType());
+					sociaty.setJifen(soc.getJifen());
+					sociaty.setKey(soc.getKey());
+					sociaty.setSocietyname(soc.getSocietyName());
+					sociaty.setSocietysummary(soc.getSocietySummary());
+					sociaties.add(sociaty);*/
+					addSociaty(sociaties, soc);
+				}else{
+
+					/*Sociaty sociaty= new Sociaty();
+						sociaty.setId(soc.getId());
+						sociaty.setType(soc.getType());
+						sociaty.setJifen(soc.getJifen());
+						sociaty.setKey(soc.getKey());
+						sociaty.setSocietyname(soc.getSocietyName());
+						sociaty.setSocietysummary(soc.getSocietySummary());
+						sociaties.add(sociaty);*/
+					addSociaty(sociaties, soc);
+
+				}
+
+
+
+			}else if(soc.getType()==2){
+
+				if(sociaty2==null){
+					sociaty2= new Sociaty();
+					sociaty2.setType(6);
+					sociaty2.setSocietyname("绑定公会");
+					sociaties.add(sociaty2);
+					Sociaty sociaty= new Sociaty();
+					sociaty.setId(soc.getId());
+					sociaty.setType(soc.getType());
+					sociaty.setJifen(soc.getJifen());
+					sociaty.setKey(soc.getKey());
+					sociaty.setSocietyname(soc.getSocietyName());
+					sociaty.setSocietysummary(soc.getSocietySummary());
+					AlUApplication.getMyInfo().setHuanxinid(soc.getHuanxinID());
+					sociaties.add(sociaty);
+
+					//	addSociaty(sociaties, soc);
+				}else{
+
+					Sociaty sociaty= new Sociaty();
+					sociaty.setId(soc.getId());
+					sociaty.setType(soc.getType());
+					sociaty.setJifen(soc.getJifen());
+					sociaty.setKey(soc.getKey());
+					sociaty.setSocietyname(soc.getSocietyName());
+					sociaty.setSocietysummary(soc.getSocietySummary());
+					AlUApplication.getMyInfo().setHuanxinid(soc.getHuanxinID());
+					sociaties.add(sociaty);
+
+					//	addSociaty(sociaties, soc);
+				}
+
+
+			}else if(soc.getType()==3){
+				if(sociaty3==null){
+					sociaty3= new Sociaty();
+					sociaty3.setType(7);
+					sociaty3.setSocietyname("关注公会");
+					sociaties.add(sociaty3);
+					/*Sociaty sociaty= new Sociaty();
+					sociaty.setId(soc.getId());
+					sociaty.setType(soc.getType());
+					sociaty.setJifen(soc.getJifen());
+					sociaty.setKey(soc.getKey());
+					sociaty.setSocietyname(soc.getSocietyName());
+					sociaty.setSocietysummary(soc.getSocietySummary());
+					sociaties.add(sociaty);*/
+					addSociaty(sociaties, soc);
+				}else{
+
+					/*	Sociaty sociaty= new Sociaty();
+						sociaty.setId(soc.getId());
+						sociaty.setType(soc.getType());
+						sociaty.setJifen(soc.getJifen());
+						sociaty.setKey(soc.getKey());
+						sociaty.setSocietyname(soc.getSocietyName());
+						sociaty.setSocietysummary(soc.getSocietySummary());
+						sociaties.add(sociaty);*/
+					addSociaty(sociaties, soc);
+
+				}
+
+			}else if(soc.getType()==4){
+				if(sociaty4==null){
+					sociaty4= new Sociaty();
+					sociaty4.setType(8);
+					sociaty4.setSocietyname("热门公会");
+					sociaties.add(sociaty4);
+					/*Sociaty sociaty= new Sociaty();
+					sociaty.setId(soc.getId());
+					sociaty.setType(soc.getType());
+					sociaty.setJifen(soc.getJifen());
+					sociaty.setKey(soc.getKey());
+					sociaty.setSocietyname(soc.getSocietyName());
+					sociaty.setSocietysummary(soc.getSocietySummary());
+					sociaties.add(sociaty);*/
+					addSociaty(sociaties, soc);
+				}else{
+
+					/*Sociaty sociaty= new Sociaty();
+						sociaty.setId(soc.getId());
+						sociaty.setType(soc.getType());
+						sociaty.setJifen(soc.getJifen());
+						sociaty.setKey(soc.getKey());
+						sociaty.setSocietyname(soc.getSocietyName());
+						sociaty.setSocietysummary(soc.getSocietySummary());
+						sociaties.add(sociaty);*/
+					addSociaty(sociaties, soc);
+
+				}
+
+
+			}
+		}
+
+	}
+
+	public void addSociaty(ArrayList<Sociaty> sociaties,SociatyResponse soc){
+		Sociaty sociaty= new Sociaty();
+		sociaty.setId(soc.getId());
+		sociaty.setType(soc.getType());
+		sociaty.setJifen(soc.getJifen());
+		sociaty.setKey(soc.getKey());
+		sociaty.setSocietyname(soc.getSocietyName());
+		sociaty.setSocietysummary(soc.getSocietySummary());
+		sociaty.setHuanxinid(soc.getHuanxinID());
+		sociaties.add(sociaty);
+	}
+
 
 
 	@Override

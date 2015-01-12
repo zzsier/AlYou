@@ -5,15 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ico_personal_data_bg" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
 
             <Button
                 android:id="@+id/search_bt"
@@ -22,83 +14,13 @@
                 android:background="@drawable/ico_personal_data_button"
                 android:text="搜索" />
 
-            <RelativeLayout
-                android:id="@+id/binding_association_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/search_bt"
-                android:layout_weight="1"
-             >
-
-                <TextView
-                    android:id="@+id/bangdinggonghui"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="绑定公会"
-                    android:textColor="#ffffff" />
-
-                <ListView
-                    android:id="@+id/binding_association_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_below="@+id/bangdinggonghui"
-                    android:layout_marginTop="5dp" >
-                </ListView>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/concerned_association_layout"
+            <ListView
+                android:id="@+id/popular_association_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/binding_association_layout"
-                android:layout_weight="1"
-              >
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/search_bt" >
 
-                <TextView
-                    android:id="@+id/guanzhugonghui"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="关注公会"
-                    android:textColor="#ffffff" />
-
-                <ListView
-                    android:id="@+id/concerned_association_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_below="@+id/guanzhugonghui"
-                    android:layout_marginTop="5dp" >
-                </ListView>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/popular_association_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/concerned_association_layout"
-                android:layout_weight="1" >
-
-                <TextView
-                    android:id="@+id/remengonghui"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="热门公会"
-                    android:textColor="#ffffff" />
-
-                <ListView
-                    android:id="@+id/popular_association_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_below="@+id/remengonghui"
-                    android:layout_marginTop="5dp" >
-                </ListView>
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
+            </ListView>
 
 </RelativeLayout>

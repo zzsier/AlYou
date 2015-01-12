@@ -325,7 +325,7 @@
                         android:layout_alignBottom="@+id/textView8"
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/bangding_bt"
-                        android:text="黎明之翼" />
+                        android:text="" />
                 </RelativeLayout>
 
                 <RelativeLayout

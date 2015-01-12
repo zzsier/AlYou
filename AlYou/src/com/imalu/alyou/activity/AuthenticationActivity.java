@@ -5,6 +5,8 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.easemob.chat.EMGroupManager;
+import com.easemob.exceptions.EaseMobException;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
@@ -33,16 +35,17 @@ import android.widget.Toast;
  */
 
 public class AuthenticationActivity extends BaseActivity{
-	
+
 	private EditText text;
 	private Button button;
-	
+
 	private String inserttext=null;
 	private String userkey;
 	private String sociatykey;
 	private JoinSocaityRequest joinSocaityRequest;
 	private Boolean flag;
 	private String info;
+	private String groupid;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,8 +57,8 @@ public class AuthenticationActivity extends BaseActivity{
 		joinSocaityRequest= new JoinSocaityRequest();
 		joinSocaityRequest.setSocietyKey(sociatykey);
 		joinSocaityRequest.setUserKey(userkey);
+		groupid=AlUApplication.getMyInfo().getHuanxinid();
 	}
-
 	/**
 	 * 发送验证信息
 	 */
@@ -64,16 +67,18 @@ public class AuthenticationActivity extends BaseActivity{
 		if(inserttext.length()==0){
 			Toast.makeText(this, "请输入验证信息！", Toast.LENGTH_SHORT).show();
 		}else {
-			join();
-		
+			//	join();
+			add(groupid, inserttext);
+			Log.e("发送", "---------");
 			//Toast.makeText(AuthenticationActivity.this, "发送失败，请检查网络。", Toast.LENGTH_SHORT).show();		
 		}
-		
+
 	}
 	/**
 	 * 加入
 	 */
 	public void join(){
+
 		NetManager.execute(NetManager.JOIN_SOCIATY_REQUEST_OPERATION, 
 				joinSocaityRequest, new JsonHttpResponseHandler(){
 			@Override
@@ -102,23 +107,23 @@ public class AuthenticationActivity extends BaseActivity{
 					e.printStackTrace();
 				}*/
 			}
-			
+
 			@Override
-					public void onFailure(int statusCode, Header[] headers,
-							Throwable throwable, JSONObject errorResponse) {
-						// TODO Auto-generated method stub
-						super.onFailure(statusCode, headers, throwable, errorResponse);
-						jixi(errorResponse);
-						//Toast.makeText(AuthenticationActivity.this, "发送失败，请检查网络。", Toast.LENGTH_SHORT).show();		
+			public void onFailure(int statusCode, Header[] headers,
+					Throwable throwable, JSONObject errorResponse) {
+				// TODO Auto-generated method stub
+				super.onFailure(statusCode, headers, throwable, errorResponse);
+				jixi(errorResponse);
+				//Toast.makeText(AuthenticationActivity.this, "发送失败，请检查网络。", Toast.LENGTH_SHORT).show();		
 			}
-			
+
 		});
-		
-		
-		
-		
+
+
+
+
 	}
-	
+
 	/**
 	 * 
 	 * 解析返回数据
@@ -141,8 +146,33 @@ public class AuthenticationActivity extends BaseActivity{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
+
+
+	/**
+	 * 加入公会
+	 */
+	public void add(String groupid ,String msg){
+
+		//如果群开群是自由加入的，即group.isMembersOnly()为false，直接join
+		//EMGroupManager.getInstance().joinGroup(groupid);
+		//需要申请和验证才能加入的，即group.isMembersOnly()为true，调用下面方法
+		try {
+			EMGroupManager.getInstance().applyJoinToGroup(groupid, msg);
+			Log.e("groupid+msg", ""+msg+":"+groupid);
+			Toast.makeText(AuthenticationActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+		} catch (EaseMobException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(AuthenticationActivity.this, "发送失败，请检查网络连接。", Toast.LENGTH_SHORT).show();
+		}
+
+
+
+	}
+
+
 	/**
 	 * 返回
 	 * 
@@ -151,5 +181,5 @@ public class AuthenticationActivity extends BaseActivity{
 	public void back(View view) {
 		finish();
 	}
-	
+
 }

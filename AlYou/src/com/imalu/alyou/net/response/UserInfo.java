@@ -72,7 +72,14 @@ public class UserInfo extends NetObject{
 		}
 		
 	}
-	
+	public String getJiaruGonghuiKey(){
+		try {
+			return this.getJsonObject().getString("JiaruGonghuiKey");
+		} catch (JSONException e) {
+			return "";
+		}
+		
+	}
 	public String getHXPwd(){
 		try {
 			return this.getJsonObject().getString("Key");

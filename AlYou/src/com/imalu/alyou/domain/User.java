@@ -30,9 +30,24 @@ public class User {
 	private String societykey;
 	private String realname;
 	private int age;
+	private String jiarugonghuikey;
+	private String huanxinid;
 	
 	
 	
+	
+	public String getHuanxinid() {
+		return huanxinid;
+	}
+	public void setHuanxinid(String huanxinid) {
+		this.huanxinid = huanxinid;
+	}
+	public String getJiarugonghuikey() {
+		return jiarugonghuikey;
+	}
+	public void setJiarugonghuikey(String jiarugonghuikey) {
+		this.jiarugonghuikey = jiarugonghuikey;
+	}
 	public int getJifen() {
 		return jifen;
 	}
