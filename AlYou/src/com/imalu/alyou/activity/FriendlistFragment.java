@@ -109,7 +109,8 @@ public class FriendlistFragment extends Fragment {
 		//防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
 		    return;
-		inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		inputMethodManager = (InputMethodManager) getActivity()
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
 		listView = (ListView) getView().findViewById(R.id.list);
 		sidebar = (Sidebar) getView().findViewById(R.id.sidebar);
 		relativeLayout=(RelativeLayout) getView().findViewById(R.id.add_friend_layout);
@@ -188,7 +189,8 @@ public class FriendlistFragment extends Fragment {
 		
 	}
 	private void showListView() {
-		adapter = new FriendAdapter(getActivity(), R.layout.row_contact, R.layout.row_contact2, AlUApplication.getFriends().getFriendList(), sidebar);
+		adapter = new FriendAdapter(getActivity(), R.layout.row_contact,
+				R.layout.row_contact2, AlUApplication.getFriends().getFriendList(), sidebar);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 //
@@ -197,7 +199,8 @@ public class FriendlistFragment extends Fragment {
 				String username = adapter.getItem(position).getUsername();
 				if (Constant.NEW_FRIENDS_USERNAME.equals(username)) {
 					// 进入申请与通知页面
-					HXUser user = AlUApplication.getInstance().getContactList().get(Constant.NEW_FRIENDS_USERNAME);
+					HXUser user = AlUApplication.getInstance().getContactList()
+							.get(Constant.NEW_FRIENDS_USERNAME);
 					user.setUnreadMsgCount(0);
 					startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
 				} else if (Constant.GROUP_USERNAME.equals(username)) {
@@ -205,7 +208,8 @@ public class FriendlistFragment extends Fragment {
 					startActivity(new Intent(getActivity(), GroupsActivity.class));
 				} else {
 					// demo中直接进入聊天页面，实际一般是进入用户详情页
-					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getHxname()));
+					startActivity(new Intent(getActivity(), ChatActivity.class)
+					.putExtra("userId", adapter.getItem(position).getHxname()));
 				}
 			}
 		});
@@ -217,8 +221,8 @@ public class FriendlistFragment extends Fragment {
 				// 隐藏软键盘
 				if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
 					if (getActivity().getCurrentFocus() != null)
-						inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
-								InputMethodManager.HIDE_NOT_ALWAYS);
+						inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus()
+								.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
 				}
 				return false;
 			}
@@ -247,7 +251,8 @@ public class FriendlistFragment extends Fragment {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.delete_contact) {
-			Friend tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
+			Friend tobeDeleteUser = adapter.getItem(((AdapterContextMenuInfo) item
+					.getMenuInfo()).position);
 			// 删除此联系人
 //			deleteContact(tobeDeleteUser);
 			// 删除相关的邀请消息

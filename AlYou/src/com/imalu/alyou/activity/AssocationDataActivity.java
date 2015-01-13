@@ -27,6 +27,8 @@ public class AssocationDataActivity  extends BaseActivity{
 	private TextView SocietyNametv2;
 	private TextView Idtv;
 	private TextView JiFentv;
+	private TextView SocietySummary_text;
+	private TextView Gonghuirenshu;
 	private String SocietyName;
 	private String SocietySummary;
 	private String SocietyKey;
@@ -37,7 +39,8 @@ public class AssocationDataActivity  extends BaseActivity{
 	private int JiFen;
 	private Boolean flag;
 	private String info;
-	 
+	 private Intent intent;
+	
 	
 	
 	@Override
@@ -45,46 +48,60 @@ public class AssocationDataActivity  extends BaseActivity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_assocationdata);
-		getValue(); 
+		//getValue(); 
 		setView();
-		steListener();
 		setText();
+		setListener();
 		}
 	private void setText() {
 		// TODO Auto-generated method stub
-		SocietyNametv2.setText(SocietyName);
-		Idtv.setText(String.valueOf(Id));
-		JiFentv.setText(String.valueOf(JiFen));
+		intent  =getIntent();
+		SocietyNametv2.setText(intent.getStringExtra("SocietyName"));
+		Idtv.setText(String.valueOf(intent.getIntExtra("Id", 0)));
+		JiFentv.setText(String.valueOf(intent.getIntExtra("JiFen", 0)));
+		Gonghuirenshu.setText(String.valueOf(intent.getIntExtra("Gonghuirenshu", 0)));
+		SocietySummary_text.setText(intent.getStringExtra("SocietySummary"));
+		
+		if(intent.getIntExtra("Type", 0)==1||intent.getIntExtra("Type", 0)==2){
+			bangdingbt.setText("取消绑定");
+		}else{
+			
+			
+			
+		}
 	}
-	private void getValue() {
+/*	private void getValue() {
 		// TODO Auto-generated method stub
-		Intent intent  =getIntent();
+		
 		SocietyName  = intent.getStringExtra("SocietyName");
-		Log.i("name..................", ""+SocietyName);	
+		//Log.i("name..................", ""+SocietyName);	
 		SocietySummary  = intent.getStringExtra("SocietySummary");
-		Log.i("Summary..................", ""+SocietySummary);		
+		//Log.i("Summary..................", ""+SocietySummary);		
 		SocietyKey  = intent.getStringExtra("SocietyKey");
-		Log.i("SKey..................", ""+SocietyKey);	
+		//Log.i("SKey..................", ""+SocietyKey);	
 		Key  = intent.getStringExtra("Key");
-		Log.i("Key..................", ""+Key);	
+		//Log.i("Key..................", ""+Key);	
 		Id  = intent.getIntExtra("Id", 1);
-		Log.i("Id..................", ""+Id);	
+		//Log.i("Id..................", ""+Id);	
 		JiFen= intent.getIntExtra("JiFen", 1);
-		Log.i("JiFen..................", ""+JiFen);
+		//Log.i("JiFen..................", ""+JiFen);
 	   
-	}
+	}*/
 	private void setView() {
 		// TODO Auto-generated method stub
 		SocietyNametv2 =  (TextView) findViewById(R.id.SocietyNametv2);
 		Idtv = (TextView) findViewById(R.id.Idtv);
 		JiFentv = (TextView) findViewById(R.id.JiFentv);
+		SocietySummary_text=(TextView) findViewById(R.id.sociaty_summary_text);
+		Gonghuirenshu=(TextView) findViewById(R.id.sociaty_total_textview);
 		guanzhubt=(Button) findViewById(R.id.guanzhubt);
 		bangdingbt=(Button) findViewById(R.id.bangdingbt);
 	}
 	private void BindSociaty(){
 		BindGonghuiRequest bindGonghuiReq = new BindGonghuiRequest();
 		bindGonghuiReq.setUID(AlUApplication.getMyInfo().getPhoneNum());
-		bindGonghuiReq.setSocietyKey(Key);
+		bindGonghuiReq.setSocietyKey(intent.getStringExtra("Key"));
+		AlUApplication.getMyInfo().setSocietykey(intent.getStringExtra("Key"));
 		  NetManager.execute(NetManager.BINDSOCIETY,
 				  bindGonghuiReq,new JsonHttpResponseHandler(){
 			  @Override
@@ -120,6 +137,7 @@ public class AssocationDataActivity  extends BaseActivity{
 				super.onSuccess(statusCode, headers, response);
 			BingGonghuiResponse bingGonghuiResp=new BingGonghuiResponse();
 			bingGonghuiResp.setJsonObject(response);
+			AlUApplication.getMyInfo().setSocietykey(null);
 			try {
 				flag = bingGonghuiResp.getCode();
 				info = bingGonghuiResp.getInfo();
@@ -137,7 +155,7 @@ public class AssocationDataActivity  extends BaseActivity{
 		Log.i("FLAG---------------",""+flag);
 		Log.i("INFO---------------",""+ info);
 	}
-	private void steListener() {
+	private void setListener() {
 		guanzhubt.setOnClickListener(new OnClickListener() {
 			
 			@Override

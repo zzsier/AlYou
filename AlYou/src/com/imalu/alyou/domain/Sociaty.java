@@ -10,9 +10,15 @@ public class Sociaty {
 	private int total;
 	private int type;
 	private String huanxinid;
+	private int gonghuirenshu;
 
-	
 
+	public int getGonghuirenshu() {
+		return gonghuirenshu;
+	}
+	public void setGonghuirenshu(int gonghuirenshu) {
+		this.gonghuirenshu = gonghuirenshu;
+	}
 	public String getHuanxinid() {
 		return huanxinid;
 	}
@@ -25,7 +31,7 @@ public class Sociaty {
 	public void setSocietytype(int societytype) {
 		this.societytype = societytype;
 	}
-public int getType() {
+	public int getType() {
 		return type;
 	}
 	public void setType(int type) {
@@ -85,8 +91,8 @@ public int getType() {
 		// TODO Auto-generated method stub
 		return super.equals(o);
 	}
-	
-	
+
+
 
 
 }

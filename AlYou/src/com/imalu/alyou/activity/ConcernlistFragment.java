@@ -78,7 +78,7 @@ public class ConcernlistFragment extends Fragment {
 
 	//发送请求，查询关注数据
 	public void  ConcernFound(){
-		String  key=	AlUApplication.getMyInfo().getKey();
+		String  key=AlUApplication.getMyInfo().getKey();
 		concerns= new ArrayList<ConsernPerson>();
 		ConcernRequest ConcernReq= new ConcernRequest();
 		ConcernReq.setUserkey(key);
@@ -117,13 +117,10 @@ public class ConcernlistFragment extends Fragment {
 		}
 		
 	}
-
-
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		if(((MainActivity)getActivity()).isConflict)
 			outState.putBoolean("isConflict", true);
 		super.onSaveInstanceState(outState);
-
 	}
 }

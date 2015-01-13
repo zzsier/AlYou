@@ -75,6 +75,14 @@ public class SociatyResponse extends NetObject{
 		}
 	}
 	
+	public int getGonghuirenshu() {
+		try {
+			return this.getJsonObject().getInt("Gonghuirenshu");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
+	}
 	public int getId() {
 		try {
 			return this.getJsonObject().getInt("ID");

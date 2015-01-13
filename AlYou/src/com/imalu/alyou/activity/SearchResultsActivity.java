@@ -23,6 +23,7 @@ import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.request.AssociationSearchRequest;
 import com.imalu.alyou.net.response.AssociationSearchResponse;
+import com.imalu.alyou.net.response.SociatyResponse;
 
 public class SearchResultsActivity extends BaseActivity{
 	private String AssociationName;
@@ -41,6 +42,7 @@ public class SearchResultsActivity extends BaseActivity{
 		setContentView(R.layout.activity_searchresults);
 		Intent intent = getIntent();
 		AssociationName =  intent.getStringExtra("AssociationName");
+		 SocietyKey=AlUApplication.getMyInfo().getSocietykey();
 		Log.e("AssociationName...................", ""+AssociationName);
 		listView=(ListView)findViewById(R.id.resultslV);
 		//Log.e("Association",""+sociatys.toString());
@@ -60,14 +62,16 @@ public class SearchResultsActivity extends BaseActivity{
 				intent.setClass(
 						SearchResultsActivity.this, 
 						AssocationDataActivity.class);
-				intent.putExtra("Id", Id);
-				intent.putExtra("SocietyName", SocietyName);
-				intent.putExtra("SocietySummary", SocietySummary);
+				intent.putExtra("Id", sociatys.get(arg2).getId());
+				intent.putExtra("SocietyName", sociatys.get(arg2).getSocietyname());
+				intent.putExtra("SocietySummary", sociatys.get(arg2).getSocietysummary());
 				intent.putExtra("SocietyKey", SocietyKey);
-				intent.putExtra("Key", Key);
-				intent.putExtra("JiFen", JiFen) ;
+				intent.putExtra("Key", sociatys.get(arg2).getKey());
+				intent.putExtra("JiFen", sociatys.get(arg2).getJifen()) ;
+				intent.putExtra("Gonghuirenshu",sociatys.get(arg2).getGonghuirenshu());
+				intent.putExtra("Type", sociatys.get(arg2).getType());
 				startActivity(intent);
-				finish();
+			//	finish();
 			}
 		});
 	}
@@ -95,22 +99,25 @@ public class SearchResultsActivity extends BaseActivity{
 		//遍历Json数组
 		protected void getJsonObj(JSONArray array)throws JSONException{
 			// TODO Auto-generated method stub
-			AssociationSearchResponse  associationSearchResp = new AssociationSearchResponse();
+			SociatyResponse  sociatyResponse = new SociatyResponse();
 			for(int i=0;i<array.length();i++){
 				JSONObject Obj = new JSONObject();
 				Obj = array.getJSONObject(i);
 				Sociaty  sociaty= new Sociaty();
-				associationSearchResp.setJsonObject(Obj);
-				sociaty.setJifen(associationSearchResp.getJifen());
-				sociaty.setSocietyname (associationSearchResp.getSocietyName());
-				sociaty.setSocietysummary (associationSearchResp.getSocietySummary());
-				 sociatys.add(sociaty);
-				 SocietyName = associationSearchResp.getSocietyName();
-				 SocietySummary=associationSearchResp.getSocietySummary();
+				sociatyResponse.setJsonObject(Obj);
+				sociaty.setJifen(sociatyResponse.getJifen());
+				sociaty.setSocietyname (sociatyResponse.getSocietyName());
+				sociaty.setSocietysummary (sociatyResponse.getSocietySummary());
+				sociaty.setGonghuirenshu(sociatyResponse.getGonghuirenshu());
+				sociaty.setId(sociatyResponse.getId());
+				sociaty.setType(sociatyResponse.getSocietyType());
+				sociatys.add(sociaty);
+				/* SocietyName = sociatyResponse.getSocietyName();
+				 SocietySummary=sociatyResponse.getSocietySummary();
 				 SocietyKey=AlUApplication.getMyInfo().getSocietykey();
-				 Key=associationSearchResp.getKey();
-				 Id=associationSearchResp.getId();
-				 JiFen=associationSearchResp.getJifen();
+				 Key=sociatyResponse.getKey();
+				 Id=sociatyResponse.getId();
+				 JiFen=sociatyResponse.getJifen();*/
 			}
 			Log.e("Json...........................", ""+sociatys.toString());		
 		}
