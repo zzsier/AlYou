@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp" >
+
+            <ImageView
+                android:id="@+id/touxiang_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ico_personal_data_photo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                 
+                android:orientation="vertical" >
+
+               
+
+                    <TextView
+                        android:id="@+id/nicheng_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                       android:layout_marginTop="10dp"
+                        android:text="昵称"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/xinqing_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="心情内容"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <ImageView
+            android:id="@+id/xinqing_image1"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+          android:layout_marginLeft="80dp"
+          android:layout_marginTop="5dp"
+            android:src="@drawable/come" />
+
+        <ImageView
+            android:id="@+id/xinqing_image2"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/xinqing_image1"
+            android:src="@drawable/come" />
+        <ImageView
+            android:id="@+id/xinqing_image3"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+           android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/xinqing_image2"
+            android:src="@drawable/come" />
+    </RelativeLayout>
+
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="20dp">
+
+        <TextView
+            android:id="@+id/riqi_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="80dp"
+            android:layout_centerVertical="true"
+            android:text="日期" 
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:id="@+id/xinqing_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ee_27" />
+
+        <TextView
+            android:id="@+id/shanchu_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="64dp"
+            android:layout_toRightOf="@+id/riqi_tv"
+            android:text="删除" />
+         
+    </RelativeLayout>
+<RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="20dp">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="97dp"
+        android:text="人觉得很赞" />
+
+    <TextView
+        android:id="@+id/renshu_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="82dp"
+        android:text="xx" />
+         
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/pinglun_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp" >
+    </ListView>
+</LinearLayout>
