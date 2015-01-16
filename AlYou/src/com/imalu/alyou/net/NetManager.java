@@ -63,7 +63,10 @@ public class NetManager {
 
 	//个人相册详细信息
 	public static final int DETAILS_OF_ALBUM = 29;
-
+	//上传图片
+	public static final int UPLOAD_PICTURE_REQUEST_OPERATION=30;
+	//发送心情
+	public static final int SEND_MOOD_REQUEST_OPERATION=31;
 
 
 
@@ -90,7 +93,6 @@ public class NetManager {
 	public static final String 	RESIDENT_ASSOCIATION_REQUEST_URL="service/GonghuiServices.svc/GetByMemberKey";
 	public static final String JOIN_SOCIATY_REQUEST_URL="/service/GonghuiServices.svc/ApplySocietyInfo";
 	public static final String OUT_SOCIATY_REQUEST_URL="/service/GerenzhongxinServices.svc/TuichuAndJiebangGonghui";
-
 	//公会搜索
 	public static final String ASSOCIATION_SEARCH_URL ="/service/LianxirenServices.svc/SearchSociety";
 	//公会绑定与解绑
@@ -99,17 +101,17 @@ public class NetManager {
 	public static final String  CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/GuanzhuGonghui";
 	//取消公会关注
 	public static final String  CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/QuxiaoGuanzhugonghui";
-
 	//朋友圈相册
 	public static final String PARSE_FRIEND_ALBUM_URL = "/service/PengyouquanServices.svc/Xinqing";
 	private static AsyncHttpClient client = new AsyncHttpClient();
-
 	//朋友心情并回复
 	public static final String CIRCLR_OF_FRIEND_URL="/service/PengyouquanServices.svc/XinqingAndHuifu";
-	
 	//个人相册详细信息
 	public static final String DETAILS_OF_ALBUM_URL = "/service/PengyouquanServices.svc/ChakanUserXingqing";
-
+	//上传图片
+	public static final String UPLOAD_PICTURE_REQUEST_URL="/service/CommonServices.svc/FileSc";
+	//发送图片
+	public static final String SEND_MOOD_REQUEST_URL="/service/PengyouquanServices.svc/SendMood";
 
 
 	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
@@ -131,6 +133,9 @@ public class NetManager {
 			NetManager.post(operationCode, netObj, responseHandler);
 		case REGISTER_REQUEST_OPERATION:
 			NetManager.post(operationCode, netObj, responseHandler);
+		case UPLOAD_PICTURE_REQUEST_OPERATION:
+			NetManager.post(operationCode, netObj, responseHandler);
+
 		default:
 			NetManager.get(operationCode, netObj, responseHandler);
 		}
@@ -190,16 +195,16 @@ public class NetManager {
 			return BASE_URL+CARE_ABOUT_CONCERN_SOCIETY_URL;	
 		case  CANCEL_CARE_ABOUT_CONCERN_SOCIETY:
 			return BASE_URL+CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL;	
-
 		case  PARSE_FRIEND_ALBUM:
 			return BASE_URL+PARSE_FRIEND_ALBUM_URL;	
-
 		case  CIRCLR_OF_FRIEND:
 			return BASE_URL+CIRCLR_OF_FRIEND_URL;	
-
 		case  DETAILS_OF_ALBUM:
 			return BASE_URL+DETAILS_OF_ALBUM_URL;	
-
+		case  UPLOAD_PICTURE_REQUEST_OPERATION:
+			return BASE_URL+UPLOAD_PICTURE_REQUEST_URL;	
+		case  SEND_MOOD_REQUEST_OPERATION:
+			return BASE_URL+SEND_MOOD_REQUEST_URL;	
 
 
 		default:

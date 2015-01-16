@@ -58,21 +58,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-        
-         <!-- 个人相册跳转 -->
+
+        <!-- 个人相册跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.PhotoAlbumActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-        
+
         <!-- 相册详细信息跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.MoodDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-        
+
         <!-- 公会个人资料跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.AssocationDataActivity"
@@ -409,6 +409,30 @@
         <!-- 验证信息 -->
         <activity
             android:name=".activity.AuthenticationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".activity.ImageGridPhotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".activity.PhotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".activity.PublishedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".activity.TestPicActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >

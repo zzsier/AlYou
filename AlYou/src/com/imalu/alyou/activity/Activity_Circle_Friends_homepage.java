@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -48,6 +49,7 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private TextView zhanghu_app;
 	private TextView zhanghu_jifen;
 	private TextView zhanghu_suoshugonghui;
+	private Button guanzhu_bt;
 	private int s = 1;
 	//private ArrayList<PingLunLM>pingLunLMs;
 	private String xinqingkey;
@@ -113,6 +115,7 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 		zhanghu_nicheng =(TextView) findViewById(R.id.zhanghu_nicheng);
 		zhanghu_app =(TextView) findViewById(R.id.zhanghu_app);
 		zhanghu_jifen =(TextView) findViewById(R.id.zhanghu_jifen);
+		guanzhu_bt=(Button) findViewById(R.id.guanzhu_bt);
 		zhanghu_suoshugonghui=(TextView) findViewById(R.id.zhanghu_suozaigonghui);
 		// TODO Auto-generated method stub
 		 
@@ -124,7 +127,14 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 		xinqingshuoList.setAdapter(adapter);
 //		 pinglun_lv.setAdapter(madapter);
 		xinqingshuoList.addFooterView(bottomView);
-
+		guanzhu_bt.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(Activity_Circle_Friends_homepage.this,PublishedActivity.class));
+			}
+		});
 		//添加底部按钮
 		jiazaiMore=(Button)bottomView.findViewById(R.id.bt11);
 		jiazaiMore.setOnClickListener(new OnClickListener() {
