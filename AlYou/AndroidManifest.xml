@@ -52,8 +52,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-           <!-- 公会个人资料跳转 -->
+        <!-- 朋友圈主页跳转 -->
+        <activity
+            android:name="com.imalu.alyou.activity.Activity_Circle_Friends_homepage"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        
+         <!-- 个人相册跳转 -->
+        <activity
+            android:name="com.imalu.alyou.activity.PhotoAlbumActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        
+        <!-- 相册详细信息跳转 -->
+        <activity
+            android:name="com.imalu.alyou.activity.MoodDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" >
+        </activity>
+        
+        <!-- 公会个人资料跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.AssocationDataActivity"
             android:screenOrientation="portrait"
@@ -71,8 +91,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" >
         </activity>
-        
-        
+
         <!-- 添加好友跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.Activity_add"
@@ -380,7 +399,7 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-     <!-- 公会资料 -->
+        <!-- 公会资料 -->
         <activity
             android:name=".activity.SociatyDataActivity"
             android:screenOrientation="portrait"
@@ -404,7 +423,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </receiver>
-       
+
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"

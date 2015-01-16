@@ -61,6 +61,9 @@ public class ChatAllHistoryFragment extends Fragment {
 	private boolean hidden;
 	private List<EMGroup> groups;
 	private List<EMConversation> conversationList;
+	//private RelativeLayout friendsCircle;
+	private RelativeLayout friendscircle_layout;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,9 +75,13 @@ public class ChatAllHistoryFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
             return;
+		//friendsCircle =  (RelativeLayout) getView().findViewById(R.id.friendscircle_layout);
 		inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		errorItem = (RelativeLayout) getView().findViewById(R.id.rl_error_item);
 		errorText = (TextView) errorItem.findViewById(R.id.tv_connect_errormsg);
+		friendscircle_layout = (RelativeLayout) getView().findViewById(R.id.friendscircle_layout);
+		
+		
 		
 		conversationList = loadConversationsWithRecentChat();
 		listView = (ListView) getView().findViewById(R.id.list);
@@ -84,7 +91,28 @@ public class ChatAllHistoryFragment extends Fragment {
 				
 		groups = EMGroupManager.getInstance().getAllGroups();
 
+		friendscircle_layout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent =new Intent();
+				intent.setClass(getActivity(), Activity_Circle_Friends_homepage.class);
+				startActivity(intent);
+			}
+		});
 		
+		 
+//		friendsCircle.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent=  new  Intent();
+//				intent.setClass(getActivity(), PhotoAlbumActivity.class);
+//				startActivity(intent);
+//				
+//			}
+//		});
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

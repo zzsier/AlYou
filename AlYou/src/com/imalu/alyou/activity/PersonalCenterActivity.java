@@ -18,6 +18,7 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -38,6 +39,7 @@ public class PersonalCenterActivity extends BaseActivity{
 	private String app_id;
 	private String name;
 	private String jifen_number;
+	private LinearLayout friendsCircle;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class PersonalCenterActivity extends BaseActivity{
 	jifen=(TextView) findViewById(R.id.jifen_text);
 	lol=(TextView) findViewById(R.id.lol_text);
 	wow=(TextView) findViewById(R.id.wow_text);
-	
+	friendsCircle = (LinearLayout)findViewById(R.id.friendsCircle);
 	 app_id=String.valueOf(AlUApplication.getMyInfo().getId());
 	 name=AlUApplication.getMyInfo().getUsername();
 	 jifen_number=String.valueOf(AlUApplication.getMyInfo().getJifen());
@@ -63,6 +65,16 @@ public class PersonalCenterActivity extends BaseActivity{
 	}
 	appnum.setText(app_id);
 	jifen.setText(jifen_number);
+	friendsCircle.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent intent=  new  Intent();
+			intent.setClass(PersonalCenterActivity.this, PhotoAlbumActivity.class);
+			startActivity(intent);
+			
+		}
+	});
 	userphoto.setOnClickListener(new OnClickListener() {
 		
 		@Override

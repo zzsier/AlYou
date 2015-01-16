@@ -47,18 +47,22 @@ public class NetManager {
 
 
 	//公会搜索
-		public static final int  ASSOCIATION_SEARCH=22;
-		//公会绑定与解绑
-		public static final int  BINDSOCIETY=23;
-		//关注公会
-		public static final int  CARE_ABOUT_CONCERN_SOCIETY =24;
-		//取消关注公会
-		public static final int  CANCEL_CARE_ABOUT_CONCERN_SOCIETY =25;
+	public static final int  ASSOCIATION_SEARCH=22;
+	//公会绑定与解绑
+	public static final int  BINDSOCIETY=23;
+	//关注公会
+	public static final int  CARE_ABOUT_CONCERN_SOCIETY =24;
+	//取消关注公会
+	public static final int  CANCEL_CARE_ABOUT_CONCERN_SOCIETY =25;
 
+	//显示朋友圈相册内容
+	public static final int PARSE_FRIEND_ALBUM = 26;
 
+	//朋友心情并回复
+	public static final int CIRCLR_OF_FRIEND = 27;
 
-
-
+	//个人相册详细信息
+	public static final int DETAILS_OF_ALBUM = 29;
 
 
 
@@ -86,17 +90,27 @@ public class NetManager {
 	public static final String 	RESIDENT_ASSOCIATION_REQUEST_URL="service/GonghuiServices.svc/GetByMemberKey";
 	public static final String JOIN_SOCIATY_REQUEST_URL="/service/GonghuiServices.svc/ApplySocietyInfo";
 	public static final String OUT_SOCIATY_REQUEST_URL="/service/GerenzhongxinServices.svc/TuichuAndJiebangGonghui";
-	
+
 	//公会搜索
-		public static final String ASSOCIATION_SEARCH_URL ="/service/LianxirenServices.svc/SearchSociety";
-		//公会绑定与解绑
-		public static final String BINDSOCIETY_URL ="/service/GerenzhongxinServices.svc/BindSociety";
-		//公会关注
-		public static final String  CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/GuanzhuGonghui";
-		//取消公会关注
-		public static final String  CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/QuxiaoGuanzhugonghui";
-	
+	public static final String ASSOCIATION_SEARCH_URL ="/service/LianxirenServices.svc/SearchSociety";
+	//公会绑定与解绑
+	public static final String BINDSOCIETY_URL ="/service/GerenzhongxinServices.svc/BindSociety";
+	//公会关注
+	public static final String  CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/GuanzhuGonghui";
+	//取消公会关注
+	public static final String  CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL="/service/GonghuiServices.svc/QuxiaoGuanzhugonghui";
+
+	//朋友圈相册
+	public static final String PARSE_FRIEND_ALBUM_URL = "/service/PengyouquanServices.svc/Xinqing";
 	private static AsyncHttpClient client = new AsyncHttpClient();
+
+	//朋友心情并回复
+	public static final String CIRCLR_OF_FRIEND_URL="/service/PengyouquanServices.svc/XinqingAndHuifu";
+	
+	//个人相册详细信息
+	public static final String DETAILS_OF_ALBUM_URL = "/service/PengyouquanServices.svc/ChakanUserXingqing";
+
+
 
 	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
 		RequestParams params = new RequestParams(netObj.getParams());
@@ -176,7 +190,18 @@ public class NetManager {
 			return BASE_URL+CARE_ABOUT_CONCERN_SOCIETY_URL;	
 		case  CANCEL_CARE_ABOUT_CONCERN_SOCIETY:
 			return BASE_URL+CANCEL_CARE_ABOUT_CONCERN_SOCIETY_URL;	
-		
+
+		case  PARSE_FRIEND_ALBUM:
+			return BASE_URL+PARSE_FRIEND_ALBUM_URL;	
+
+		case  CIRCLR_OF_FRIEND:
+			return BASE_URL+CIRCLR_OF_FRIEND_URL;	
+
+		case  DETAILS_OF_ALBUM:
+			return BASE_URL+DETAILS_OF_ALBUM_URL;	
+
+
+
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;
 		}

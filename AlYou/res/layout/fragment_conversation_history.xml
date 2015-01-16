@@ -25,6 +25,7 @@
     <include layout="@layout/search_bar" />
 
     <RelativeLayout
+        android:id="@+id/friendscircle_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/btn_contract_green_noraml1"
