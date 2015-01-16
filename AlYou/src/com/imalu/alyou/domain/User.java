@@ -32,9 +32,18 @@ public class User {
 	private int age;
 	private String jiarugonghuikey;
 	private String huanxinid;
+	private String SocietyName;
 	
 	
 	
+	
+	
+	public String getSocietyName() {
+		return SocietyName;
+	}
+	public void setSocietyName(String societyName) {
+		SocietyName = societyName;
+	}
 	
 	public String getHuanxinid() {
 		return huanxinid;

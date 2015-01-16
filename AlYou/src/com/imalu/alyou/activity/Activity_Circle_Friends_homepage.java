@@ -17,22 +17,28 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.CircleOfFriendsAdapter;
+//import com.imalu.alyou.adapter.MoodCommentAdapter;
+//import com.imalu.alyou.domain.PingLunLM;
 import com.imalu.alyou.domain.XinqingLM;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.request.CircleOfFriendRequest;
+//import com.imalu.alyou.net.request.MoodCommentRequest;
 import com.imalu.alyou.net.response.CircleOfFriendResponse;
+//import com.imalu.alyou.net.response.MoodCommentResponse;
 
 public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private Handler handler;
 	private ListView xinqingshuoList;
 	private CircleOfFriendsAdapter adapter;
+	//private MoodCommentAdapter madapter;
 	private ArrayList<XinqingLM> lms;
 	private  View  bottomView;
 	private Button jiazaiMore;
@@ -43,6 +49,9 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private TextView zhanghu_jifen;
 	private TextView zhanghu_suoshugonghui;
 	private int s = 1;
+	//private ArrayList<PingLunLM>pingLunLMs;
+	private String xinqingkey;
+	private ListView pinglun_lv;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -52,22 +61,51 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 		lms = new ArrayList<XinqingLM>();
 		//initData();
 		fundXinQingShuo();
-
+		//fundPinglun();
 		initViews();
 		setText();
 		//	findgonghui();
 	}
 
-	private void findgonghui() {
-		// TODO Auto-generated method stub
-
-	}
+//	private void fundPinglun() {
+//		// TODO Auto-generated method stub
+//		pingLunLMs = new ArrayList<PingLunLM>();
+//		MoodCommentRequest moodCommentReq = new MoodCommentRequest();
+//		moodCommentReq.setXinqingkey(xinqingkey);
+//		NetManager.execute(NetManager.MOOD_COMMENT, moodCommentReq, new JsonHttpResponseHandler(){
+//			@Override
+//			public void onSuccess(int statusCode, Header[] headers,
+//					JSONArray response) {
+//				super.onSuccess(statusCode, headers, response);
+//				// TODO Auto-generated method stub
+//				try {
+//					getPingLunJsonObj(response);
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+//			}
+//		});	
+//	}
+//	protected void getPingLunJsonObj(JSONArray array) throws JSONException {
+//		// TODO Auto-generated method stub
+//		MoodCommentResponse moodCommentResponse = new MoodCommentResponse();
+//		for (int i = 0; i < array.length(); i++) {
+//			JSONObject objt = new JSONObject();
+//			objt = array.getJSONObject(i);
+//			PingLunLM pingLunLM = new PingLunLM();
+//			moodCommentResponse.setJsonObject(objt);
+//			pingLunLM.setHuifurenName(moodCommentResponse.getHuifurenName());
+//			pingLunLM.setContent(moodCommentResponse.getContent());
+//			pingLunLMs.add(pingLunLM);
+//		}
+//	}
 
 	private void setText() {
 		// TODO Auto-generated method stub
 		zhanghu_nicheng.setText(AlUApplication.getMyInfo().getUsername());
 		zhanghu_app.setText( String.valueOf(AlUApplication.getMyInfo().getId()));
-		zhanghu_nicheng.setText(String.valueOf(AlUApplication.getMyInfo().getJifen()));
+		zhanghu_jifen.setText(String.valueOf(AlUApplication.getMyInfo().getJifen()));
+		zhanghu_suoshugonghui.setText(AlUApplication.getMyInfo().getSocietyName());
 
 	}
 
@@ -77,11 +115,14 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 		zhanghu_jifen =(TextView) findViewById(R.id.zhanghu_jifen);
 		zhanghu_suoshugonghui=(TextView) findViewById(R.id.zhanghu_suozaigonghui);
 		// TODO Auto-generated method stub
+		 
 		xinqingshuoList = (ListView)findViewById(R.id.homepage_lv);
+		
+		
 		bottomView=getLayoutInflater().inflate(R.layout.item_circle_friend_button, null);
-
 		adapter = new CircleOfFriendsAdapter(lms,Activity_Circle_Friends_homepage.this);
 		xinqingshuoList.setAdapter(adapter);
+//		 pinglun_lv.setAdapter(madapter);
 		xinqingshuoList.addFooterView(bottomView);
 
 		//添加底部按钮
@@ -103,8 +144,8 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 				loadData();
 				Log.e("****3333", "**************");
 				Log.e("***4444", lms.toString());
-				adapter.notifyDataSetChanged();
-				Log.e("****55555", "**************");
+				
+			//	Log.e("****55555", "**************");
 				///	jiazaiMore.setText("加载更多");
 
 				//listView.setSelection(5);
@@ -124,7 +165,7 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 	public void loadData() {
 
 		int count=adapter.getCount()+1;
-		for(int i=count;i<count+5;i++){
+		for(int i=count;i<count+4;i++){
 			adapter.addItem(xinqingLM);
 		}
 
@@ -219,13 +260,13 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 			}
 		}
 	}
-
 	private void fundXinQingShuo() {
 		// TODO Auto-generated method stub
 		//String  key="5e1df8c0-721e-4cf9-abc0-6a1f6907f4b4";
 		//AlUApplication.getMyInfo().getKey();
 		circleOfFriendRequest = new CircleOfFriendRequest();
 		circleOfFriendRequest.setUserKey(AlUApplication.getMyInfo().getKey());
+		Log.i(">>>>>>>>>>>>>>>>>>>>>", ""+AlUApplication.getMyInfo().getKey());
 		circleOfFriendRequest.setPageIndex(s);
 		circleOfFriendRequest.setPageSize(4);
 		NetManager.execute(NetManager.CIRCLR_OF_FRIEND, circleOfFriendRequest, new JsonHttpResponseHandler(){
@@ -238,12 +279,14 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 					getJsonObj(response);
 					Log.e("***66666", lms.toString());
 					Log.e("xinqingLM..............................", ""+response.toString());
+					adapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
 			}
 		});	
+		//fundPinglun();
 	}
 	//遍历Json数组
 	protected void getJsonObj(JSONArray array)throws JSONException {
@@ -270,8 +313,11 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 			Log.i("toupian3..............................", ""+circleOfFriendResponse.getPhotoUrl3());
 			xinqingLM.setUserName(circleOfFriendResponse.getUserName());
 			Log.i("nicheng................................", ""+circleOfFriendResponse.getUserName());
+			//xinqingLM.setXingqingkey(circleOfFriendResponse.getKey());
+			//Log.i("key................................", ""+circleOfFriendResponse.getKey());
 			//	xinqingLM.setpinglunLMs(circleOfFriendResponse.getpinglunLMs());
 			lms.add(xinqingLM);	
+			//xinqingkey = circleOfFriendResponse.getKey();
 		}		
 	}
 	public void back(View view) {

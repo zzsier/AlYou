@@ -98,7 +98,8 @@
             android:layout_marginLeft="80dp"
             android:layout_centerVertical="true"
             android:text="日期" 
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"/>
 
         <ImageView
             android:id="@+id/xinqing_image"
@@ -115,7 +116,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="64dp"
             android:layout_toRightOf="@+id/riqi_tv"
-            android:text="删除" />
+            android:text="删除"
+            android:textColor="#FFFFFF" />
          
     </RelativeLayout>
 <RelativeLayout 
@@ -129,7 +131,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="97dp"
-        android:text="人觉得很赞" />
+        android:text="人觉得很赞" 
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/renshu_tv"
@@ -138,7 +141,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="82dp"
-        android:text="xx" />
+        android:text="xx" 
+        android:textColor="#FFFFFF"/>
          
     </RelativeLayout>
 

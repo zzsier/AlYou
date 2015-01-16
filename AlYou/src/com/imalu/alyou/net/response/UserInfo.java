@@ -104,6 +104,14 @@ public class UserInfo extends NetObject{
 		}
 		
 	}
+	public String getSocietyName(){
+		try {
+			return this.getJsonObject().getString("SocietyName");
+		} catch (JSONException e) {
+			return "";
+		}
+		
+	}
 	
 
 }
