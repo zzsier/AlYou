@@ -151,7 +151,7 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 
 				fundXinQingShuo();
 				Log.e("****222", "**************");
-				loadData();
+				
 				Log.e("****3333", "**************");
 				Log.e("***4444", lms.toString());
 				
@@ -174,10 +174,10 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 	//加载数据
 	public void loadData() {
 
-		int count=adapter.getCount()+1;
-		for(int i=count;i<count+4;i++){
-			adapter.addItem(xinqingLM);
-		}
+//		int count=adapter.getCount()+1;
+//		for(int i=count;i<count+4;i++){
+//			adapter.addItem(xinqingLM);
+//		}
 
 	}
 	//	public void initData(){
@@ -289,6 +289,7 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 					getJsonObj(response);
 					Log.e("***66666", lms.toString());
 					Log.e("xinqingLM..............................", ""+response.toString());
+					loadData();
 					adapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					// TODO: handle exception
