@@ -32,18 +32,19 @@ public class User {
 	private int age;
 	private String jiarugonghuikey;
 	private String huanxinid;
-	private String SocietyName;
 	
+	//添加公会名
+	private String societyname;
 	
-	
-	
-	
-	public String getSocietyName() {
-		return SocietyName;
+	public String getSocietyname() {
+		return societyname;
 	}
-	public void setSocietyName(String societyName) {
-		SocietyName = societyName;
+	public void setSocietyname(String societyname) {
+		this.societyname = societyname;
 	}
+	
+	
+	
 	
 	public String getHuanxinid() {
 		return huanxinid;

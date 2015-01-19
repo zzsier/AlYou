@@ -189,16 +189,19 @@
             android:textColor="#ffffff"/>
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/qianming_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:imeOptions="actionDone" 
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/textView9"
             android:ems="10"
             android:inputType="textMultiLine"
+            android:textColor="#ffffff"
             android:textSize="16sp"
-            android:background="@drawable/ico_001" >
+            android:background="@drawable/ico_001"
+            >
 
             <requestFocus />
         </EditText>

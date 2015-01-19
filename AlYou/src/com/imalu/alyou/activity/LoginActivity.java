@@ -170,14 +170,16 @@ public class LoginActivity extends BaseActivity {
 						AlUApplication.getMyInfo().setSex(userInfo.getSex());
 						AlUApplication.getMyInfo().setSocietykey(userInfo.getSocietyKey());
 						AlUApplication.getMyInfo().setJiarugonghuikey(userInfo.getJiaruGonghuiKey());
-						AlUApplication.getMyInfo().setSocietyName(userInfo.getSocietyName());
-
+						//添加公会名
+						AlUApplication.getMyInfo().setSocietyname(userInfo.getSocietyName());
+						
 						PersonalInfoResponse personal=new PersonalInfoResponse();
 						personal.setJsonObject(response);
 						AlUApplication.getUserfans().setId(personal.getId());
 						AlUApplication.getUserfans().setJifen(personal.getJifen());
 						AlUApplication.getUserfans().setUserName(personal.getUserName());
 						AlUApplication.getUserfans().setSocietyName(personal.getSocietyName());
+
 						
 						// 登陆成功，保存用户名密码
 						AlUApplication.getInstance().setUserName(username);

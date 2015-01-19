@@ -5,12 +5,20 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.imalu.alyou.domain.HuifuXinqingLM;
+import com.imalu.alyou.domain.PingLunLM;
 import com.imalu.alyou.domain.XinqingLM;
 import com.imalu.alyou.net.NetObject;
 
 public class CircleOfFriendResponse extends NetObject{
   
+	public String getKey() {
+		try {
+			return this.getJsonObject().getString("Key");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+	}
 	public String getUserName() {
 		try {
 			return this.getJsonObject().getString("UserName");

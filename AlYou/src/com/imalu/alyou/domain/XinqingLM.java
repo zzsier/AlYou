@@ -1,3 +1,4 @@
+
 package com.imalu.alyou.domain;
 
 import java.util.ArrayList;
@@ -12,7 +13,26 @@ private  String  PhotoUrl1  ;
 private  String  PhotoUrl2  ;
 private  String  PhotoUrl3  ;
 private  String CreatedTime;
-private  ArrayList<HuifuXinqingLM>  pinglunLMs  ;
+private String xingqingkey;
+private  ArrayList<PingLunLM>  pinglunLMs  ;
+
+
+public ArrayList<PingLunLM> getPinglunLMs() {
+	return pinglunLMs;
+}
+public void setPinglunLMs(ArrayList<PingLunLM> pinglunLMs) {
+	this.pinglunLMs = pinglunLMs;
+}
+public String getXingqingkey() {
+	return xingqingkey;
+}
+public void setXingqingkey(String xingqingkey) {
+	this.xingqingkey = xingqingkey;
+}
+
+
+
+
 public String getHeadPicture() {
 	return HeadPicture;
 }
@@ -67,12 +87,7 @@ public String getCreatedTime() {
 public void setCreatedTime(String createdTime) {
 	CreatedTime = createdTime;
 }
-public ArrayList<HuifuXinqingLM> getpinglunLMs() {
-	return pinglunLMs;
-}
-public void setpinglunLMs(ArrayList<HuifuXinqingLM> pinglunLMs) {
-	this.pinglunLMs = pinglunLMs;
-}
+
 @Override
 public String toString() {
 	return "XinqingLM [HeadPicture=" + HeadPicture + ", UserName=" + UserName

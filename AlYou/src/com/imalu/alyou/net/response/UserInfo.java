@@ -104,6 +104,7 @@ public class UserInfo extends NetObject{
 		}
 		
 	}
+     //添加公会名称	
 	public String getSocietyName(){
 		try {
 			return this.getJsonObject().getString("SocietyName");
@@ -112,6 +113,5 @@ public class UserInfo extends NetObject{
 		}
 		
 	}
-	
 
 }

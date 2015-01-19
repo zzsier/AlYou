@@ -57,6 +57,11 @@ public class NetManager {
 	public static final int SEND_MOOD_REQUEST_OPERATION=31;
 	//发送验证码
 	public static final int SEND_SMS_REQUEST_OPERATION=32;
+	//评论心情
+	public static final int  MOOD_COMMENT =33;
+	//个性签名
+	public static final int SIGNED_PERSONALITY=34;
+
 
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
@@ -103,6 +108,15 @@ public class NetManager {
 	public static final String SEND_MOOD_REQUEST_URL="/service/PengyouquanServices.svc/SendMood";
 	//发送验证码
 	public static final String SEND_SMS_REQUEST_URL="service/ZhanghuServices.svc/SendPhoneMes";
+
+
+	//评论心情
+	public static final String  MOOD_COMMENT_URL ="/service/PengyouquanServices.svc/XinqingHuifuModels";
+
+	//个性签名
+	public static final String SIGNED_PERSONALITY_URL="/service/PengyouquanServices.svc/XiugaiGerenQianming";
+
+
 
 	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
 		RequestParams params = new RequestParams(netObj.getParams());
@@ -197,7 +211,10 @@ public class NetManager {
 			return BASE_URL+SEND_MOOD_REQUEST_URL;	
 		case  SEND_SMS_REQUEST_OPERATION:
 			return BASE_URL+SEND_SMS_REQUEST_URL;	
-
+		case  MOOD_COMMENT:
+			return BASE_URL+MOOD_COMMENT_URL;	
+		case  SIGNED_PERSONALITY:
+			return BASE_URL+SIGNED_PERSONALITY_URL;	
 
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.ChooseVideoAdapter.ViewHolder;
+import com.imalu.alyou.domain.PingLunLM;
 import com.imalu.alyou.domain.XinqingLM;
 
 import android.content.Context;
@@ -22,21 +23,25 @@ import android.widget.TextView;
 
 public class CircleOfFriendsAdapter extends BaseAdapter{
 	ArrayList<XinqingLM> lms;
-	Context mcontext;
+	ArrayList<PingLunLM>pls;
+	Context context;
 	private ViewHolder holder;
 	private LayoutInflater flater;
 
 	public CircleOfFriendsAdapter(ArrayList<XinqingLM> lms, Context context){
 		super();
-		this.mcontext = context;
-		flater = LayoutInflater.from(mcontext);
+		this.context = context;
+		flater = LayoutInflater.from(context);
 		if(this.lms == null)
 		{
 			this.lms = new ArrayList<XinqingLM>();
+	
 			this.lms=lms;
+		
 		}else
 		{
-			this.lms = lms;
+
+			this.lms =lms;
 	}
 		
 		Log.e("适配器", ""+lms.toString());
@@ -93,7 +98,7 @@ public class CircleOfFriendsAdapter extends BaseAdapter{
 		holder.Content.setText(lms.get(position).getContent());
 		holder.UserName.setText(lms.get(position).getUserName());
 		holder.Dianzan.setText(String.valueOf(lms.get(position).getDianzan()));
-
+		holder.pinglunLMs.setAdapter(new MoodCommentAdapter(lms.get(position).getPinglunLMs(), context));
 		return convertView;
 	}
 	class ViewHolder
