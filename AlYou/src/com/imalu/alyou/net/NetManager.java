@@ -15,37 +15,28 @@ public class NetManager {
 	//粉丝列表
 	public static final int FANS_REQUEST_OPERATION=7;
 	public static final int ADDFRIEND_FRIEND_REQUEST_OPERATION = 8;
-
 	//修改个人设置
 	public static final int UPDATE_USERDATA_REQUEST_OPERATION=9;
-
 	public static final int GROUPS_REQUEST_OPERATION=10;
 	public static final int GROUP_MEMBER_REQUEST_OPERATION=11;
-
 	public static final int ADD_FRIEND_REQUEST_OPERATION=12;
 	public static final int PERSONALINFO_REQUEST_OPERATION =15;
-
 	//关注
 	public static final int  CARE_ABOUT_CONCERN=13;
 	//取消关注
 	public static final int CANCEL_CARE_ABOUT_CONCERN=14;
 	//热门公会
 	public static final int POPULAR_ASSOCIATION_REQUEST_OPERATION=16;
-
 	//关注公会
 	public static final int CONCERN_ASSOCIATION_REQUEST_OPERATION=17;
 	//绑定公会信息
 	public static final int BINDING_ASSOCIATION_REQUEST_OPERATION=18;
 	//所在公会
 	public static final int RESIDENT_ASSOCIATION_REQUEST_OPERATION=19;
-
 	//加入公会
 	public static final int JOIN_SOCIATY_REQUEST_OPERATION=20;
-
 	//退出公会
 	public static final int OUT_SOCIATY_REQUEST_OPERATION=21;
-
-
 	//公会搜索
 	public static final int  ASSOCIATION_SEARCH=22;
 	//公会绑定与解绑
@@ -54,20 +45,18 @@ public class NetManager {
 	public static final int  CARE_ABOUT_CONCERN_SOCIETY =24;
 	//取消关注公会
 	public static final int  CANCEL_CARE_ABOUT_CONCERN_SOCIETY =25;
-
 	//显示朋友圈相册内容
 	public static final int PARSE_FRIEND_ALBUM = 26;
-
 	//朋友心情并回复
 	public static final int CIRCLR_OF_FRIEND = 27;
-
 	//个人相册详细信息
 	public static final int DETAILS_OF_ALBUM = 29;
 	//上传图片
 	public static final int UPLOAD_PICTURE_REQUEST_OPERATION=30;
 	//发送心情
 	public static final int SEND_MOOD_REQUEST_OPERATION=31;
-
+	//发送验证码
+	public static final int SEND_SMS_REQUEST_OPERATION=32;
 
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
@@ -112,7 +101,8 @@ public class NetManager {
 	public static final String UPLOAD_PICTURE_REQUEST_URL="/service/CommonServices.svc/FileSc";
 	//发送图片
 	public static final String SEND_MOOD_REQUEST_URL="/service/PengyouquanServices.svc/SendMood";
-
+	//发送验证码
+	public static final String SEND_SMS_REQUEST_URL="service/ZhanghuServices.svc/SendPhoneMes";
 
 	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
 		RequestParams params = new RequestParams(netObj.getParams());
@@ -205,6 +195,8 @@ public class NetManager {
 			return BASE_URL+UPLOAD_PICTURE_REQUEST_URL;	
 		case  SEND_MOOD_REQUEST_OPERATION:
 			return BASE_URL+SEND_MOOD_REQUEST_URL;	
+		case  SEND_SMS_REQUEST_OPERATION:
+			return BASE_URL+SEND_SMS_REQUEST_URL;	
 
 
 		default:

@@ -2,18 +2,11 @@ package com.imalu.alyou.activity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.imalu.alyou.AlUApplication;
@@ -30,7 +23,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender.SendIntentException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -166,26 +158,16 @@ public class PublishedActivity extends Activity {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
-
-
-
-
 			}
 		@Override
 		public void onFailure(int statusCode, Header[] headers,
 				String responseString, Throwable throwable) {
 			// TODO Auto-generated method stub
 			super.onFailure(statusCode, headers, responseString, throwable);
-			Toast.makeText(PublishedActivity.this, ""+responseString, Toast.LENGTH_SHORT).show();
-		
-		
+			Toast.makeText(PublishedActivity.this, ""+responseString, Toast.LENGTH_SHORT).show();	
 		}
 
 		});
-
-
-
-
 	}
 	//发送心情
 	public void sendMood(String content){
@@ -211,20 +193,10 @@ public class PublishedActivity extends Activity {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
-
-
-
-
-
 			}
 
 		});
-
-
 	}
-
-
-
 	@SuppressLint("HandlerLeak")
 	public class GridAdapter extends BaseAdapter {
 		private LayoutInflater inflater; // 视图容器
