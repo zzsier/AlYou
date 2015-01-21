@@ -14,9 +14,19 @@ private  String  PhotoUrl2  ;
 private  String  PhotoUrl3  ;
 private  String CreatedTime;
 private String xingqingkey;
+private String UserKey;
 private  ArrayList<PingLunLM>  pinglunLMs  ;
 
 
+
+
+ 
+public String getUserKey() {
+	return UserKey;
+}
+public void setUserKey(String userKey) {
+	UserKey = userKey;
+}
 public ArrayList<PingLunLM> getPinglunLMs() {
 	return pinglunLMs;
 }

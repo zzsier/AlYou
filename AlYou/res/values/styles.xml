@@ -159,6 +159,19 @@
         <item name="android:background">#eee</item>
     </style>
 
+     <style name="cricleBottomAnimation">
+        <item name="android:windowEnterAnimation">@anim/avatar_animation_right_in</item>
+        <item name="android:windowExitAnimation">@anim/avatar_animation_right_out</item>
+    </style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
  <style name="bottom_line_edit_text_style" parent="@android:style/Widget.EditText">
         <item name="android:gravity">center_vertical</item>

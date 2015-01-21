@@ -61,6 +61,8 @@ public class NetManager {
 	public static final int  MOOD_COMMENT =33;
 	//个性签名
 	public static final int SIGNED_PERSONALITY=34;
+	//点赞
+	public static final int DIANZAN=35;
 
 
 
@@ -115,6 +117,8 @@ public class NetManager {
 
 	//个性签名
 	public static final String SIGNED_PERSONALITY_URL="/service/PengyouquanServices.svc/XiugaiGerenQianming";
+	//点赞
+	public static final String DIANZAN_URL="/service/PengyouquanServices.svc/DianzanXinqing";
 
 
 
@@ -215,6 +219,8 @@ public class NetManager {
 			return BASE_URL+MOOD_COMMENT_URL;	
 		case  SIGNED_PERSONALITY:
 			return BASE_URL+SIGNED_PERSONALITY_URL;	
+		case  DIANZAN:
+			return BASE_URL+DIANZAN_URL;	
 
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;

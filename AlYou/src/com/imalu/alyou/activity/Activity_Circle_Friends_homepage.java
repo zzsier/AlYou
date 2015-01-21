@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private String str;
 	private Boolean flag;
 	private String info;
+
 	private CircleOfFriendResponse circleOfFriendResponse;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +76,19 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 		fundXinQingShuo();
 		initViews();
 		setText(); 
+		
+		 
 	}
+	
 	private ArrayList<PingLunLM> fundPinglun() {
 		// TODO Auto-generated method stub
 final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 		MoodCommentRequest moodCommentReq = new MoodCommentRequest();
+		//心情key
 		moodCommentReq.setXinqingkey(circleOfFriendResponse.getKey());
-		Log.i("key值》》》》》》》》》》", ""+circleOfFriendResponse.getKey());
+		Log.i("心key值1111111111111111111", ""+circleOfFriendResponse.getKey());
+	 
+		
 		NetManager.execute(NetManager.MOOD_COMMENT, moodCommentReq, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
@@ -127,6 +135,9 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 		zhanghu_suoshugonghui=(TextView) findViewById(R.id.zhanghu_suozaigonghui);
 		 qianming_et = (EditText) findViewById(R.id.qianming_et);
 		xinqingshuoList = (ListView)findViewById(R.id.homepage_lv);
+		
+		//group_discuss_popup = (ImageView) getLayoutInflater().inflate(R.layout.item_circle_friend, null);
+		 
 		bottomView=getLayoutInflater().inflate(R.layout.item_circle_friend_button, null);
 		adapter = new CircleOfFriendsAdapter(lms, Activity_Circle_Friends_homepage.this);
 		xinqingshuoList.setAdapter(adapter);
@@ -147,11 +158,12 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 		qianming_et.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
+			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-			qianming_et.setText("");	
+			    qianming_et.setText("");	
 			}
-		})	;
+		});
+		
 		 
 		
 		//添加底部按钮
@@ -293,7 +305,7 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 			xinqingLM.setCreatedTime(circleOfFriendResponse.getCreatedTime());
 			Log.i("shijian.......................", ""+circleOfFriendResponse.getCreatedTime());
 			xinqingLM.setContent(circleOfFriendResponse.getContent());
-			Log.i("neirong......................", ""+circleOfFriendResponse.getContent());
+			Log.i("内容1111111111111111......................", ""+circleOfFriendResponse.getContent());
 			xinqingLM.setDianzan(Integer.valueOf(circleOfFriendResponse.getDianzan()));
 			Log.i("dianzan.......................", ""+circleOfFriendResponse.getDianzan());
 			xinqingLM.setHeadPicture(circleOfFriendResponse.getHeadPicture());
@@ -307,7 +319,10 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 			xinqingLM.setUserName(circleOfFriendResponse.getUserName());
 			Log.i("nicheng................................", ""+circleOfFriendResponse.getUserName());
 			xinqingLM.setXingqingkey(circleOfFriendResponse.getKey());
-			Log.i("key................................", ""+circleOfFriendResponse.getKey());
+			Log.i("心情key1111111111111111................................", ""+circleOfFriendResponse.getKey());
+			xinqingLM.setUserKey(circleOfFriendResponse.getUserKey());
+			Log.i("发布心情用户key222222222222222................................", ""+circleOfFriendResponse.getUserKey());
+			Log.i("账号用户key333333333333333333333................................", ""+AlUApplication.getMyInfo().getKey());
 		ArrayList<PingLunLM> pinglunLMs=fundPinglun();	
 		Log.e("-------------", pinglunLMs.toString());
 			xinqingLM.setPinglunLMs(pinglunLMs);

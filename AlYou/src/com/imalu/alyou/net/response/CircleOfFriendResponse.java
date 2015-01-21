@@ -11,6 +11,14 @@ import com.imalu.alyou.net.NetObject;
 
 public class CircleOfFriendResponse extends NetObject{
   
+	public String getUserKey() {
+		try {
+			return this.getJsonObject().getString("UserKey");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+	}
 	public String getKey() {
 		try {
 			return this.getJsonObject().getString("Key");
