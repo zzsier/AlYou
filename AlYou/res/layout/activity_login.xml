@@ -193,7 +193,7 @@
             android:layout_weight="3"
             android:background="#00000000"
             android:gravity="right"
-            android:onClick="register"
+            android:onClick="forgetpwd"
             android:paddingRight="35dp"
             android:paddingTop="15dp"
             android:text="忘记密码"

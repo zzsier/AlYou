@@ -64,6 +64,10 @@ public class NetManager {
 	//点赞
 	public static final int DIANZAN=35;
 
+	//修改密码
+	public static final int CHANGE_PWD_REQUEST_OPERATION=36;
+	//重置密码
+	public static final int  FORGET_PWD_REQUEST_OPERATION=37;
 
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
@@ -78,7 +82,6 @@ public class NetManager {
 	public static final String GROUPS_REQUEST_URL="service/LianxirenServices.svc/GetForumInfo";
 	public static final String GROUP_MEMBER__REQUEST_URL="service/LianxirenServices.svc/HouQuTaoLunZhuChengYuan";
 	public static final String ADD_FRIEND_REQUEST_URL="service/LianxirenServices.svc/BecomeFriend";
-
 	public static final String PERSONALINFO_REQUEST_URL = "/service/GerenzhongxinServices.svc/ YonghuZiliaoOrShifouGuanzhu";
 	//关注以及取消关注
 	public static final String  CARE_ABOUT_CONCERN_URL="service/GerenzhongxinServices.svc/GuanzhuUser";
@@ -110,15 +113,16 @@ public class NetManager {
 	public static final String SEND_MOOD_REQUEST_URL="/service/PengyouquanServices.svc/SendMood";
 	//发送验证码
 	public static final String SEND_SMS_REQUEST_URL="service/ZhanghuServices.svc/SendPhoneMes";
-
-
 	//评论心情
 	public static final String  MOOD_COMMENT_URL ="/service/PengyouquanServices.svc/XinqingHuifuModels";
-
 	//个性签名
 	public static final String SIGNED_PERSONALITY_URL="/service/PengyouquanServices.svc/XiugaiGerenQianming";
 	//点赞
 	public static final String DIANZAN_URL="/service/PengyouquanServices.svc/DianzanXinqing";
+	//修改密码
+	public static final String CHANGE_PWD_REQUEST_URL="/service/GerenzhongxinServices.svc/UpdatePwd";
+	//重置密码
+	public static final String  FORGET_PWD_REQUEST_URL="/service/ZhanghuServices.svc/ResetPwd";
 
 
 
@@ -221,6 +225,10 @@ public class NetManager {
 			return BASE_URL+SIGNED_PERSONALITY_URL;	
 		case  DIANZAN:
 			return BASE_URL+DIANZAN_URL;	
+		case CHANGE_PWD_REQUEST_OPERATION:
+			return BASE_URL+CHANGE_PWD_REQUEST_URL;
+		case FORGET_PWD_REQUEST_OPERATION:
+			return BASE_URL+FORGET_PWD_REQUEST_URL;
 
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;

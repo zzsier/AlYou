@@ -50,13 +50,15 @@ public class RegisterActivity_first extends BaseActivity {
 	private EditText phoneNumberEditText;
 	private Button nextButton;
 	private Boolean isPhone;
+	private int flag;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register_first);
-
 		phoneNumberEditText = (EditText) findViewById(R.id.phone_number);
 		nextButton=(Button) findViewById(R.id.next_bt);
+		Intent intent= getIntent();
+		flag=intent.getIntExtra("flag", 0);
 	}
 
 	/**
@@ -80,8 +82,9 @@ public class RegisterActivity_first extends BaseActivity {
 		} 
 		Intent intent = new Intent(RegisterActivity_first.this,RegisterActivity_second.class);
 		intent.putExtra("phone", phone);
+		intent.putExtra("flag", flag);
 		startActivity(intent);
-		finish();
+		//	finish();
 	}
 
 	public void back(View view) {

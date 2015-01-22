@@ -14,6 +14,7 @@
 package com.imalu.alyou.activity;
 
 import org.apache.http.Header;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
@@ -33,6 +34,7 @@ import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.NetObject;
+import com.imalu.alyou.net.request.ForgetPwdRequest;
 import com.imalu.alyou.net.request.LoginRequest;
 import com.imalu.alyou.net.request.RegisterRequest;
 import com.imalu.alyou.net.response.RegisterResponse;
@@ -46,6 +48,7 @@ public class RegisterActivity extends BaseActivity {
 	private EditText passwordEditText;
 	private EditText confirmPwdEditText;
 	private String username;
+	private int flag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class RegisterActivity extends BaseActivity {
 		confirmPwdEditText = (EditText) findViewById(R.id.confirm_password);
 		Intent intent= getIntent();
 		username=intent.getStringExtra("phone");
+		flag=intent.getIntExtra("flag", 0);
 		Log.e("~PHONE~",username );
 	}
 
@@ -79,7 +83,36 @@ public class RegisterActivity extends BaseActivity {
 		} else if (!pwd.equals(confirm_pwd)) {
 			Toast.makeText(this, "两次输入的密码不一致，请重新输入！", Toast.LENGTH_SHORT).show();
 			return;
-		}
+		}else{
+			
+		if(flag==2){
+			ForgetPwdRequest forgetPwdRequest= new ForgetPwdRequest();
+			forgetPwdRequest.setUid(username);
+			forgetPwdRequest.setRepwd(passwordEditText.getText().toString());
+			NetManager.execute(NetManager.FORGET_PWD_REQUEST_OPERATION, forgetPwdRequest, new JsonHttpResponseHandler(){
+				
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						JSONObject response) {
+					// TODO Auto-generated method stub
+					super.onSuccess(statusCode, headers, response);
+					RegisterResponse registerResponse= new RegisterResponse();
+					registerResponse.setJsonObject(response);
+					try {
+						Toast.makeText(RegisterActivity.this, ""+registerResponse.getInfo(), Toast.LENGTH_SHORT).show();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				
+			});
+			
+			
+		}else{
+			
+	
 
 		RegisterRequest registerReq = new RegisterRequest();
 		
@@ -230,7 +263,8 @@ public class RegisterActivity extends BaseActivity {
 					}
 				}
 			}).start();
-
+		}
+		}
 		}
 		//注释
 	}

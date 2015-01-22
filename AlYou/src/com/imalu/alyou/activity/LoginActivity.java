@@ -310,15 +310,27 @@ public class LoginActivity extends BaseActivity {
 
 		}
 	}
-
+	/**
+	 * 忘记密码
+	 * 
+	 * @param view
+	 */
+	public void forgetpwd(View view) {
+		Intent intent= new Intent(this,RegisterActivity_first.class);
+		intent.putExtra("flag", 2);
+		startActivityForResult(intent, 0);
+	}
 	/**
 	 * 注册
 	 * 
 	 * @param view
 	 */
 	public void register(View view) {
-		startActivityForResult(new Intent(this, RegisterActivity_first.class), 0);
+		Intent intent= new Intent(this,RegisterActivity_first.class);
+		intent.putExtra("flag", 1);
+		startActivityForResult(intent, 0);
 	}
+
 
 	@Override
 	protected void onResume() {

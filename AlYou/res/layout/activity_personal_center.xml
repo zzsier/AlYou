@@ -273,7 +273,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/change_pwd_bt"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
@@ -283,8 +283,9 @@
             android:background="@drawable/ico_47"
             android:text="修改密码"
             android:textSize="15sp" />
-        <Button
-            android:id="@+id/button2"
+ 
+      <Button
+            android:id="@+id/log_out_bt"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
@@ -292,8 +293,10 @@
             android:layout_marginTop="30dp"
             android:layout_weight="2"
             android:background="@drawable/ico_login"
-            android:text="关注"
+            android:onClick="out"
+            android:text="退出"
             android:textSize="15sp" />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -54,16 +54,17 @@ public class RegisterActivity_second extends BaseActivity {
 	private Button identifying_codeButton;//获取验证码按钮
 	private String phone;
 	private String code;
+	private int flag;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register_second);
-
 		identifying_codeEditText = (EditText) findViewById(R.id.identifying_code_edit);
 		nextButton=(Button) findViewById(R.id.code_next_bt);
 		identifying_codeButton=(Button) findViewById(R.id.identifying_code_bt);
 		Intent intent= getIntent();
 		phone=intent.getStringExtra("phone");
+		flag=intent.getIntExtra("flag", 0);
 	}
 
 	/**
@@ -89,6 +90,7 @@ public class RegisterActivity_second extends BaseActivity {
 
 				Intent intent = new Intent(RegisterActivity_second.this,RegisterActivity.class);
 				intent.putExtra("phone", phone);
+				intent.putExtra("flag", flag);
 				startActivity(intent);
 				finish();
 			}else{
