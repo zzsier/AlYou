@@ -173,6 +173,7 @@ public class CircleOfFriendsAdapter extends BaseAdapter{
 					case 0:
 						//赞
 						Log.i("这个是》》》》》》》》》", String.valueOf(position));
+						getvalue(position);
 						Zan();
 						
 						break;
