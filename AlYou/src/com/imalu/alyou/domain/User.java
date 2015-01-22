@@ -172,6 +172,10 @@ public class User {
 		}
 		return getUsername().equals(((User) o).getUsername());
 	}
+	
+	public void logout() {
+		
+	}
 
 //	@Override
 //	public String toString() {

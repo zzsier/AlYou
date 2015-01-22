@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,14 +17,17 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
@@ -43,6 +47,7 @@ import com.imalu.alyou.net.response.CircleOfFriendResponse;
 import com.imalu.alyou.net.response.FindFriendResponse;
 import com.imalu.alyou.net.response.MoodCommentResponse;
 import com.imalu.alyou.net.response.SignedPersonalityResponse;
+import com.imalu.alyou.widget.PasteEditText;
 
 public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private Handler handler;
@@ -65,6 +70,10 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private String str;
 	private Boolean flag;
 	private String info;
+	private PasteEditText cEditTextContent;
+	private ImageView circle_emoticons_normal;
+	private ImageView circle_emoticons_checked;
+	private RelativeLayout circle_edittext_layout;
 
 	private CircleOfFriendResponse circleOfFriendResponse;
 	@Override
@@ -72,6 +81,14 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_circle_friends_homepage);
+		cEditTextContent = (PasteEditText) findViewById(R.id.circle_sendmessage);
+		circle_emoticons_normal = (ImageView) findViewById(R.id.circle_emoticons_normal);
+		circle_emoticons_checked = (ImageView) findViewById(R.id.circle_emoticons_checked);
+		circle_edittext_layout = (RelativeLayout) findViewById(R.id.circle_edittext_layout);
+		
+		circle_emoticons_normal.setVisibility(View.VISIBLE);
+		circle_emoticons_checked.setVisibility(View.INVISIBLE);
+		
 		lms = new ArrayList<XinqingLM>(); 
 		fundXinQingShuo();
 		initViews();
@@ -332,5 +349,23 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 	}
 	public void back(View view) {
 		finish();
+	}
+	
+	public void showKeyBoard() {
+		LinearLayout loyout = (LinearLayout) findViewById(R.id.tankuang_buju);
+		EditText shuru_et = (EditText) findViewById(R.id.shuru_et);
+		Button fasong_bt = (Button) findViewById(R.id.fasong_bt);
+		Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里1");
+//		EditText disInputText = (EditText) convertView.findViewById(R.id.popu_comment); 
+//        //disInputText.requestFocus();  
+//		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);       
+//        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        
+        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里2");
+        loyout.setVisibility(View.VISIBLE);
+        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里3");
+//        shuru_et.setFocusableInTouchMode(true);
+        shuru_et.requestFocus();	
+        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里4");  
 	}
 }

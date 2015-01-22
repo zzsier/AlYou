@@ -135,7 +135,10 @@ public class PersonalCenterActivity extends BaseActivity{
 			@Override
 			public void onSuccess() {
 				// TODO Auto-generated method stub
-				startActivity(new Intent(PersonalCenterActivity.this,LoginActivity.class));
+				AlUApplication.logout();
+				Intent logoutIntent = new Intent(PersonalCenterActivity.this, LoginActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(logoutIntent);
 				//Toast.makeText(PersonalCenterActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
 			Log.e("onSuccess", "onSuccess");
 			

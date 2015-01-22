@@ -262,11 +262,15 @@ public class AlUApplication extends Application {
 	}
 	
 	public boolean isLogined() {
-		if(getMyInfo().getUsername() != null && getMyInfo().getPassword() != null){
-            return true;
+
+		if((getMyInfo().getUsername() == null 
+				|| getMyInfo().getUsername().isEmpty())
+				&& ( getMyInfo().getPassword() == null
+				|| getMyInfo().getPassword().isEmpty()) ){
+            return false;
         }
         
-        return false;
+        return true;
 	}
 
 	/**
@@ -277,5 +281,11 @@ public class AlUApplication extends Application {
 		getMyInfo().setUsername("");
 		getMyInfo().setPassword("");
 	    hxSDKHelper.logout(emCallBack);
+	}
+	
+	public static void logout() {
+		// 先调用sdk logout，在清理app中自己的数据
+		getMyInfo().setUsername("");
+		getMyInfo().setPassword("");
 	}
 }

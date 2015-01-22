@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.imalu.alyou.activity.ActionItem;
+import com.imalu.alyou.activity.Activity_Circle_Friends_homepage;
 import com.imalu.alyou.activity.TitlePopup;
 import com.imalu.alyou.activity.TitlePopup.OnItemOnClickListener;
 import com.imalu.alyou.domain.PingLunLM;
@@ -39,6 +40,7 @@ import com.imalu.alyou.net.request.ZanRequest;
 import com.imalu.alyou.net.response.BingGonghuiResponse;
 import com.imalu.alyou.net.response.ZanResponse;
 import com.imalu.alyou.utils.TanKuangUtil;
+import com.imalu.alyou.widget.PasteEditText;
 
 
 
@@ -46,7 +48,7 @@ import com.imalu.alyou.utils.TanKuangUtil;
 public class CircleOfFriendsAdapter extends BaseAdapter{
 	ArrayList<XinqingLM> lms;
 	ArrayList<PingLunLM>pls;
-	Context mcontext;
+	Activity_Circle_Friends_homepage mcontext;
 	private ViewHolder holder;
 	private LayoutInflater flater;
 	private TitlePopup titlePopup;
@@ -58,15 +60,15 @@ public class CircleOfFriendsAdapter extends BaseAdapter{
 	private String faxinqingkey;
 	private Boolean flag;
 	private String info;
-	
 	 
-	public CircleOfFriendsAdapter(ArrayList<XinqingLM> lms, Context context){
+	public CircleOfFriendsAdapter(ArrayList<XinqingLM> lms, Activity_Circle_Friends_homepage context){
 		
 		
 		
 		super();
 		this.mcontext = context;
 		flater = LayoutInflater.from(mcontext);
+		
 		if(this.lms == null)
 		{
 			this.lms = new ArrayList<XinqingLM>();
@@ -180,27 +182,29 @@ public class CircleOfFriendsAdapter extends BaseAdapter{
 					case 1:
 						//评论
 						Log.i("这个是》》》》》》》》》", String.valueOf(position));
+						titlePopup.dismiss();
+						mcontext.showKeyBoard();
 						//为防止layout界面上的EditText在进入页面时就弹出输入法,隐藏软键盘  
 					//	getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);  
 						
 						
 					//	按下popupwindow评论按钮后先让输入法弹出， 让评论popupwindow隐藏，显示EditText
-						layout_pinglunbuju = flater.inflate(R.layout.activity_circle_friends_homepage, null);
-						LinearLayout	loyout=	(LinearLayout) layout_pinglunbuju.findViewById(R.id.tankuang_buju);
-						shuru_et = (EditText) loyout.findViewById(R.id.shuru_et);
-						fasong_bt = (Button) loyout.findViewById(R.id.fasong_bt);
-						Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里1");
-//						EditText disInputText = (EditText) convertView.findViewById(R.id.popu_comment); 
-//				        //disInputText.requestFocus();  
-						InputMethodManager imm = (InputMethodManager)mcontext.getSystemService(Context.INPUT_METHOD_SERVICE);       
-                        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                        titlePopup.dismiss();
-                        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里2");
-                        loyout.setVisibility(View.VISIBLE);
-                        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里3");
-                        shuru_et.setFocusableInTouchMode(true);
-                        shuru_et.requestFocus();	
-                        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里4");  
+//						layout_pinglunbuju = flater.inflate(R.layout.activity_circle_friends_homepage, null);
+//						LinearLayout loyout=	(LinearLayout) findViewById(R.id.tankuang_buju);
+//						shuru_et = (EditText) findViewById(R.id.shuru_et);
+//						fasong_bt = (Button) findViewById(R.id.fasong_bt);
+//						Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里1");
+////						EditText disInputText = (EditText) convertView.findViewById(R.id.popu_comment); 
+////				        //disInputText.requestFocus();  
+//						InputMethodManager imm = (InputMethodManager)mcontext.getSystemService(Context.INPUT_METHOD_SERVICE);       
+//                        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//                        titlePopup.dismiss();
+//                        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里2");
+//                        loyout.setVisibility(View.VISIBLE);
+//                        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里3");
+//                        shuru_et.setFocusableInTouchMode(true);
+//                        shuru_et.requestFocus();	
+//                        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里4");  
                         break;
 
 					default:
