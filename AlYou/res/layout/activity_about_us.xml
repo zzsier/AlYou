@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/activity_bg">
+     <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/common_top_bar_black" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/common_tab_bg"
+            android:onClick="back" >
+
+            <Button
+                android:id="@+id/back_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:onClick="back"
+                android:text="返回"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="关于我们"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:src="@drawable/ico_welline" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="关于我们"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/btn_green_noraml"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="作为一家领先的游戏在线媒体及增值服务提供商、中文游戏第一门户，我们一直专注于向游戏用户及游戏企业提供全方位多元化的内容资讯、互动娱乐及增值服务区。" 
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffffffff"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="       我们以敏锐的新闻嗅觉，丰富的游戏资讯以及独到的行业见解潜心服务11年，注册用户以及日均浏览量均领先全行业，成为中国及全球华人的游戏玩家中最受推崇的游戏门户网站。网站用户群覆盖面广，主要用户群体集中在19-33岁之间这批中国网游的资优用户--具有高在线率。高APRU值得特点，是一个具有超强黏着性的用户群体。" 
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffffffff"/>
+
+</LinearLayout>

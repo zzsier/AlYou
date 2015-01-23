@@ -52,6 +52,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 版本检测跳转 -->
+        <activity 
+            android:name=".activity.VersionUpdateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            
+        </activity>
+        <activity android:name=".activity.AdviceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide">
+            
+        </activity>
+        <activity android:name=".activity.AboutUsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"></activity>
+        
+        <activity
+            android:name=".activity.VerifyFriendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
         <!-- 朋友圈主页跳转 -->
         <activity
             android:name="com.imalu.alyou.activity.Activity_Circle_Friends_homepage"
