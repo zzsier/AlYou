@@ -9,7 +9,7 @@ public class ConsernResponse extends NetObject{
 	
 	public int getId() {
 		try {
-			return this.getJsonObject().getInt("id");
+			return this.getJsonObject().getInt("ID");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 	return 0;
@@ -34,6 +34,14 @@ public class ConsernResponse extends NetObject{
 	public String getSocietyKey() {
 		try {
 			return this.getJsonObject().getString("SocietyKey");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+	}
+	public String getKey() {
+		try {
+			return this.getJsonObject().getString("Key");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return "";

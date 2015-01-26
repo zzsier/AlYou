@@ -6,9 +6,15 @@ public class ConsernPerson {
 	private int jifen;
 	private String societykey;
 	private String headpicture;
+	private String key;
 	
 	
-	
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
 	public String getHeadpicture() {
 		return headpicture;
 	}

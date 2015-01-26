@@ -31,7 +31,7 @@ public class SystemSettingsActivity extends BaseActivity{
 	private Switch SwitchMsgSend;
 	int status;
 	private TextView tvFriendVarify,tvVersionTest,tvAdvice,//评价是去应用商店评价
-						tvUs,tvFanhui;
+						tvUs,tvFanhui,tvBlacklist;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +40,15 @@ public class SystemSettingsActivity extends BaseActivity{
 		setListeners();
 	}
 	private void setListeners() {
+tvBlacklist.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(SystemSettingsActivity.this,BlacklistActivity.class);
+				startActivity(intent);
+				
+			}
+		});
 		tvUs.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -126,6 +135,7 @@ public class SystemSettingsActivity extends BaseActivity{
 		tvAdvice = (TextView)findViewById(R.id.settings_advice_tv);
 		tvUs = (TextView)findViewById(R.id.system_settings_about_us);
 		tvFanhui = (TextView)findViewById(R.id.system_setting_yijianfankui);
+		tvBlacklist = (TextView)findViewById(R.id.system_setting_blacklist);
 	}
 	/**
 	 * 返回

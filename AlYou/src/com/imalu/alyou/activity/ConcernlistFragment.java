@@ -31,6 +31,7 @@ import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.request.ConcernRequest;
 import com.imalu.alyou.net.response.ConsernResponse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 
@@ -49,6 +52,7 @@ import android.widget.ListView;
 public class ConcernlistFragment extends Fragment {
 	private ArrayList<ConsernPerson> concerns;
 	private  ListView listView;
+
 
 
 	@Override
@@ -66,7 +70,21 @@ public class ConcernlistFragment extends Fragment {
 		Log.e("CONCERN",""+concerns.toString());
 	ConsernlistFragemntAdapter adapter= new ConsernlistFragemntAdapter(getActivity(), concerns);
 	listView.setAdapter(adapter);
+listView.setOnItemClickListener(new OnItemClickListener() {
 
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		// TODO Auto-generated method stub
+		Intent intent= new Intent(getActivity(), PersonInfoActivity.class);
+		intent.putExtra("username",concerns.get(position).getUsername());
+		intent.putExtra("jifen", concerns.get(position).getJifen());
+		intent.putExtra("id", concerns.get(position).getId());
+		intent.putExtra("flag", 1);
+		intent.putExtra("key", concerns.get(position).getKey());
+		intent.putExtra("societykey",concerns.get(position).getSocietykey() );
+		startActivity(intent);
+	}
+});
 
 
 	}
@@ -110,6 +128,7 @@ public class ConcernlistFragment extends Fragment {
 			con.setJsonObject(jsonObject);
 			person.setId(con.getId());
 			person.setJifen(con.getJifen());
+			person.setKey(con.getKey());
 			person.setUsername(con.getUserName());
 			person.setSocietykey(con.getSocietyKey());
 			person.setHeadpicture(con.getHeadPicture());

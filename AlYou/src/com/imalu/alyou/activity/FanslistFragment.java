@@ -71,7 +71,15 @@ public class FanslistFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				startActivity(new Intent(getActivity(), PersonInfoActivity.class));
+				Intent intent= new Intent(getActivity(), PersonInfoActivity.class);
+				intent.putExtra("username",fans.get(position).getUserName());
+				intent.putExtra("jifen", fans.get(position).getJifen());
+				intent.putExtra("id", fans.get(position).getId());
+				intent.putExtra("flag", 2);
+				intent.putExtra("key", fans.get(position).getKey());
+				intent.putExtra("societykey",fans.get(position).getSocietyKey() );
+				startActivity(intent);
+				
 				//Toast.makeText(getActivity(), "你点击了"+position,0).show();
 				
 			}
@@ -108,6 +116,8 @@ public class FanslistFragment extends Fragment {
 				jsonObject= array.getJSONObject(i);
 				UserLM fan= new UserLM();
 				fansRponse.setJsonObject(jsonObject);
+				fan.setJifen(fansRponse.getJiFen());
+				fan.setSocietyKey(fansRponse.getSocietyKey());
 				fan.setId(fansRponse.getId());
 				fan.setUserName(fansRponse.getUserName());
 				fan.setGexingQianming(fansRponse.getGexingQianming());

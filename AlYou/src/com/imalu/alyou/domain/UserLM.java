@@ -7,6 +7,8 @@ public class UserLM {
 	private String GexingQianming;
 	private int Jifen;
 	private String SocietyName;
+	private String key;
+	private String SocietyKey;
 	
 	public UserLM() {
 		super();
@@ -33,6 +35,22 @@ public class UserLM {
 	public int getId() {
 		return Id;
 	}
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getSocietyKey() {
+		return SocietyKey;
+	}
+
+	public void setSocietyKey(String societyKey) {
+		SocietyKey = societyKey;
+	}
+
 	public void setId(int id) {
 		Id = id;
 	}
