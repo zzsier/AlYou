@@ -28,6 +28,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -37,7 +38,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -92,7 +97,11 @@ public class ContactlistFragment extends Fragment {
 	//private NewMessageBroadcastReceiver msgReceiver;
 	// 账号在别处登录
 	public boolean isConflict = false;
-
+	private int[] location;
+	private int[] locationBt;
+	//动画时间
+	private static int TIME=500;
+private RelativeLayout relativeLayout;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_contact_list, container, false);
@@ -104,18 +113,28 @@ public class ContactlistFragment extends Fragment {
 		mTabs[1] = (Button) this.getView().findViewById(R.id.btn_club_list);
 		mTabs[2] = (Button) this.getView().findViewById(R.id.btn_fans_list);
 		mTabs[3] = (Button) this.getView().findViewById(R.id.btn_tweet_list);
+		
 		mImages=new ImageView[4];
 		mImages[0]=(ImageView) this.getView().findViewById(R.id.image_guangbiao0);
-		mImages[1]=(ImageView) this.getView().findViewById(R.id.image_guangbiao1);
+		relativeLayout=(RelativeLayout) this.getView().findViewById(R.id.image_layout);
+		
+
+		/*mImages[1]=(ImageView) this.getView().findViewById(R.id.image_guangbiao1);
 		mImages[2]=(ImageView) this.getView().findViewById(R.id.image_guangbiao2);
-		mImages[3]=(ImageView) this.getView().findViewById(R.id.image_guangbiao3);
+		mImages[3]=(ImageView) this.getView().findViewById(R.id.image_guangbiao3);*/
 		//imageView=(ImageView) this.getView().findViewById(R.id.contact_image);
+
+
 		// 把第一个tab设为选中状态
 		mTabs[0].setSelected(true);
 		mTabs[0].setTextColor(Color.GREEN);
 		mImages[0].setVisibility(View.VISIBLE);
-	//	imageView.bringToFront();
-	 
+		//	imageView.bringToFront();
+
+		location=new int[2];
+		locationBt=new int[2];
+		relativeLayout.getLocationOnScreen(location);
+
 	}
 
 	@Override
@@ -128,25 +147,23 @@ public class ContactlistFragment extends Fragment {
 
 		initView();
 
-		
-	friendListFragment = new FriendlistFragment();
+		friendListFragment = new FriendlistFragment();
 		consortialistFragment= new ConsortialistFragment();
 		concernlistFragment= new ConcernlistFragment();
 		fanslistFragment= new FanslistFragment();
 		fragments = new Fragment[] { friendListFragment ,consortialistFragment, concernlistFragment, fanslistFragment };
 		// 添加显示第一个fragment
-		 FragmentTransaction	transaction=getChildFragmentManager().beginTransaction();
+		FragmentTransaction	transaction=getChildFragmentManager().beginTransaction();
 		transaction.add(R.id.fragment_layout, friendListFragment)
-			.add(R.id.fragment_layout, consortialistFragment)
-			.add(R.id.fragment_layout, concernlistFragment)
-			.add(R.id.fragment_layout, fanslistFragment)
-			.hide(consortialistFragment)
-			.hide(concernlistFragment)
-			.hide(fanslistFragment)
-			.show(friendListFragment)
-			.commit();
+		.add(R.id.fragment_layout, consortialistFragment)
+		.add(R.id.fragment_layout, concernlistFragment)
+		.add(R.id.fragment_layout, fanslistFragment)
+		.hide(consortialistFragment)
+		.hide(concernlistFragment)
+		.hide(fanslistFragment)
+		.show(friendListFragment)
+		.commit();
 		onContractTabClicked();
-
 	}
 
 	public void onContractTabClicked() {
@@ -155,22 +172,49 @@ public class ContactlistFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				mTabs[0].getLocationOnScreen(locationBt);
 				index=0;
 				mTabs[0].setTextColor(Color.GREEN);
 				mTabs[1].setTextColor(Color.WHITE);
 				mTabs[2].setTextColor(Color.WHITE);
 				mTabs[3].setTextColor(Color.WHITE);
 
-				mImages[0].setVisibility(View.VISIBLE);
-				mImages[1].setVisibility(View.GONE);
-				mImages[2].setVisibility(View.GONE);
-				mImages[3].setVisibility(View.GONE);
-
+				//	mImages[0].setVisibility(View.VISIBLE);
+				//	mImages[1].setVisibility(View.GONE);
+				//	mImages[2].setVisibility(View.GONE);
+				//	mImages[3].setVisibility(View.GONE);
+				
 				/*	mImages[0].bringToFront();
 				mImages[1].bringToFront();
 				mImages[2].bringToFront();
 				mImages[3].bringToFront();*/
-			//	imageView.bringToFront();
+				//	imageView.bringToFront();
+				mTabs[0].getLocationOnScreen(locationBt);
+				Log.e("坐标", location[0]+"");
+				Animation translateAnimation = new TranslateAnimation(location[0],locationBt[0],0,0);  
+				translateAnimation.setDuration(TIME); 
+				translateAnimation.setFillAfter(true);
+				translateAnimation.setAnimationListener(new AnimationListener() {
+					@Override
+					public void onAnimationStart(Animation arg0) {
+						// TODO Auto-generated method stub
+						Log.e("开始坐标1：",location[0]+" "+locationBt[0]);
+					}
+					@Override
+					public void onAnimationRepeat(Animation arg0) {
+						// TODO Auto-generated method stub
+					}
+					@Override
+					public void onAnimationEnd(Animation arg0) {
+						// TODO Auto-generated method stub
+//						mImages[0].clearAnimation();  
+//						mImages[0].layout(mTabs[0].getLeft(), 41,0,51);
+//						Log.e("坐标1：",mImages[0].getLeft()+" "+mImages[0].getTop()+" "+mImages[0].getRight()+" "+mImages[0].getBottom());
+						location[0]=locationBt[0];
+					}
+				});
+
+				relativeLayout.startAnimation(translateAnimation);
 				util(index);
 			}
 		});
@@ -185,17 +229,42 @@ public class ContactlistFragment extends Fragment {
 				mTabs[2].setTextColor(Color.WHITE);
 				mTabs[3].setTextColor(Color.WHITE);
 
-				mImages[0].setVisibility(View.GONE);
-				mImages[1].setVisibility(View.VISIBLE);
-				mImages[2].setVisibility(View.GONE);
-				mImages[3].setVisibility(View.GONE);
-
+				//	mImages[0].setVisibility(View.GONE);
+				//	mImages[1].setVisibility(View.VISIBLE);
+				//	mImages[2].setVisibility(View.GONE);
+				//	mImages[3].setVisibility(View.GONE);
 				//imageView.bringToFront();
+				mTabs[1].getLocationOnScreen(locationBt);
+				Log.e("坐标", location[0]+"");
+				Animation translateAnimation = new TranslateAnimation(location[0],locationBt[0],0,0);  
+				translateAnimation.setDuration(TIME); 
+				translateAnimation.setFillAfter(true);
+				translateAnimation.setAnimationListener(new AnimationListener() {
+					@Override
+					public void onAnimationStart(Animation arg0) {
+						// TODO Auto-generated method stub
+						Log.e("开始坐标1：",location[0]+" "+locationBt[0]);
+					}
+					@Override
+					public void onAnimationRepeat(Animation arg0) {
+						// TODO Auto-generated method stub
+					}
+					@Override
+					public void onAnimationEnd(Animation arg0) {
+						// TODO Auto-generated method stub
+//						mImages[0].clearAnimation();  
+//						Log.e("长度：", mTabs[1].getWidth()+":"+mImages[0].getWidth());
+//						mImages[0].layout(mTabs[1].getLeft(), 41,0,51);
+//						Log.e("坐标1：",mImages[0].getLeft()+" "+mImages[0].getTop()+" "+mImages[0].getRight()+" "+mImages[0].getBottom());
+					
+						location[0]=locationBt[0];
+					}
+				});
+				relativeLayout.startAnimation(translateAnimation);
 				util(index);
 			}
 		});
 		mTabs[2].setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -204,13 +273,38 @@ public class ContactlistFragment extends Fragment {
 				mTabs[1].setTextColor(Color.WHITE);
 				mTabs[2].setTextColor(Color.GREEN);
 				mTabs[3].setTextColor(Color.WHITE);
-
-				mImages[0].setVisibility(View.GONE);
-				mImages[1].setVisibility(View.GONE);
-				mImages[2].setVisibility(View.VISIBLE);
-				mImages[3].setVisibility(View.GONE);
-
+				//	mImages[0].setVisibility(View.GONE);
+				//	mImages[1].setVisibility(View.GONE);
+				//	mImages[2].setVisibility(View.VISIBLE);
+				//	mImages[3].setVisibility(View.GONE);
 				//imageView.bringToFront();
+				mTabs[2].getLocationOnScreen(locationBt);
+				Log.e("坐标", location[0]+"");
+				Animation translateAnimation = new TranslateAnimation(location[0],locationBt[0],0,0);  
+				translateAnimation.setDuration(TIME); 
+				translateAnimation.setFillAfter(true);
+				translateAnimation.setAnimationListener(new AnimationListener() {
+					@Override
+					public void onAnimationStart(Animation arg0) {
+						// TODO Auto-generated method stub
+						Log.e("开始坐标1：",location[0]+" "+locationBt[0]);
+					}
+					@Override
+					public void onAnimationRepeat(Animation arg0) {
+						// TODO Auto-generated method stub
+					}
+					@Override
+					public void onAnimationEnd(Animation arg0) {
+						// TODO Auto-generated method stub
+//						mImages[0].clearAnimation();  
+//						Log.e("长度：", mTabs[1].getWidth()+":"+mImages[0].getWidth());
+//						mImages[0].layout(mTabs[1].getLeft(), 41,0,51);
+//						Log.e("坐标1：",mImages[0].getLeft()+" "+mImages[0].getTop()+" "+mImages[0].getRight()+" "+mImages[0].getBottom());
+					
+						location[0]=locationBt[0];
+					}
+				});
+				relativeLayout.startAnimation(translateAnimation);
 				util(index);
 			}
 		});
@@ -225,17 +319,42 @@ public class ContactlistFragment extends Fragment {
 				mTabs[2].setTextColor(Color.WHITE);
 				mTabs[3].setTextColor(Color.GREEN);
 
-				mImages[0].setVisibility(View.GONE);
-				mImages[1].setVisibility(View.GONE);
-				mImages[2].setVisibility(View.GONE);
-				mImages[3].setVisibility(View.VISIBLE);
-
+				//mImages[0].setVisibility(View.GONE);
+				//mImages[1].setVisibility(View.GONE);
+				//	mImages[2].setVisibility(View.GONE);
+				//	mImages[3].setVisibility(View.VISIBLE);
 				//imageView.bringToFront();
+				mTabs[3].getLocationOnScreen(locationBt);
+				Log.e("坐标", location[0]+"");
+				Animation translateAnimation = new TranslateAnimation(location[0],locationBt[0],0,0);  
+				translateAnimation.setDuration(TIME); 
+				translateAnimation.setFillAfter(true);
+				translateAnimation.setAnimationListener(new AnimationListener() {
+					@Override
+					public void onAnimationStart(Animation arg0) {
+						// TODO Auto-generated method stub
+						Log.e("开始坐标1：",location[0]+" "+locationBt[0]);
+					}
+					@Override
+					public void onAnimationRepeat(Animation arg0) {
+						// TODO Auto-generated method stub
+					}
+					@Override
+					public void onAnimationEnd(Animation arg0) {
+						// TODO Auto-generated method stub
+//						mImages[0].clearAnimation();  
+//						Log.e("长度：", mTabs[1].getWidth()+":"+mImages[0].getWidth());
+//						mImages[0].layout(mTabs[1].getLeft(), 41,0,51);
+//						Log.e("坐标1：",mImages[0].getLeft()+" "+mImages[0].getTop()+" "+mImages[0].getRight()+" "+mImages[0].getBottom());
+					
+						location[0]=locationBt[0];
+					}
+				});
+				relativeLayout.startAnimation(translateAnimation);
 				util(index);
 			}
 		});
-	/*	if (currentTabIndex != index) {
-		
+		/*	if (currentTabIndex != index) {
 			transaction.hide(fragments[currentTabIndex]);
 			if (!fragments[index].isAdded()) {
 				transaction.add(R.id.fragment_container, fragments[index]);
@@ -249,9 +368,9 @@ public class ContactlistFragment extends Fragment {
 		mImages[index].setVisibility(View.VISIBLE);
 		currentTabIndex = index;*/
 	}
-   public void util(int index){
+	public void util(int index){
 		if (currentTabIndex != index) {
-			 FragmentTransaction ft=getChildFragmentManager().beginTransaction();
+			FragmentTransaction ft=getChildFragmentManager().beginTransaction();
 			ft.hide(fragments[currentTabIndex]);
 			if (!fragments[index].isAdded()) {
 				ft.add(R.id.fragment_container, fragments[index]);
@@ -259,15 +378,12 @@ public class ContactlistFragment extends Fragment {
 			ft.show(fragments[index]).commit();
 		}
 		mTabs[currentTabIndex].setSelected(false);
-		mImages[currentTabIndex].setVisibility(View.INVISIBLE);
+		//	mImages[currentTabIndex].setVisibility(View.INVISIBLE);
 		// 把当前tab设为选中状态
 		mTabs[index].setSelected(true);
-		mImages[index].setVisibility(View.VISIBLE);
+		//	mImages[index].setVisibility(View.VISIBLE);
 		currentTabIndex = index;
-   }
-	
-	
-	
+	}
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -276,7 +392,7 @@ public class ContactlistFragment extends Fragment {
 			getActivity().getMenuInflater().inflate(R.menu.context_contact_list, menu);
 		}
 	}
-
+	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.delete_contact) {
@@ -294,7 +410,7 @@ public class ContactlistFragment extends Fragment {
 		}
 		return super.onContextItemSelected(item);
 	}
-
+	
 	@Override
 	public void onHiddenChanged(boolean hidden) {
 		super.onHiddenChanged(hidden);
@@ -322,34 +438,34 @@ public class ContactlistFragment extends Fragment {
 		pd.setMessage("正在删除...");
 		pd.setCanceledOnTouchOutside(false);
 		pd.show();
-//		new Thread(new Runnable() {
-//			public void run() {
-//				try {
-//					//EMContactManager.getInstance().deleteContact(tobeDeleteUser.getUsername());
-//					// 删除db和内存中此用户的数据
-//					UserDao dao = new UserDao(getActivity());
-//					dao.deleteContact(tobeDeleteUser.getUsername());
-//					AlUApplication.getInstance().getContactList().remove(tobeDeleteUser.getUsername());
-//					getActivity().runOnUiThread(new Runnable() {
-//						public void run() {
-//							pd.dismiss();
-//							adapter.remove(tobeDeleteUser);
-//							adapter.notifyDataSetChanged();
-//
-//						}
-//					});
-//				} catch (final Exception e) {
-//					getActivity().runOnUiThread(new Runnable() {
-//						public void run() {
-//							pd.dismiss();
-//							Toast.makeText(getActivity(), "删除失败: " + e.getMessage(), 1).show();
-//						}
-//					});
-//
-//				}
-//
-//			}
-//		}).start();
+		//		new Thread(new Runnable() {
+		//			public void run() {
+		//				try {
+		//					//EMContactManager.getInstance().deleteContact(tobeDeleteUser.getUsername());
+		//					// 删除db和内存中此用户的数据
+		//					UserDao dao = new UserDao(getActivity());
+		//					dao.deleteContact(tobeDeleteUser.getUsername());
+		//					AlUApplication.getInstance().getContactList().remove(tobeDeleteUser.getUsername());
+		//					getActivity().runOnUiThread(new Runnable() {
+		//						public void run() {
+		//							pd.dismiss();
+		//							adapter.remove(tobeDeleteUser);
+		//							adapter.notifyDataSetChanged();
+		//
+		//						}
+		//					});
+		//				} catch (final Exception e) {
+		//					getActivity().runOnUiThread(new Runnable() {
+		//						public void run() {
+		//							pd.dismiss();
+		//							Toast.makeText(getActivity(), "删除失败: " + e.getMessage(), 1).show();
+		//						}
+		//					});
+		//
+		//				}
+		//
+		//			}
+		//		}).start();
 
 	}
 

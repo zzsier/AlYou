@@ -65,17 +65,18 @@
       <ImageView
         android:id="@+id/contact_image"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="15dp"
         android:layout_below="@+id/linearLayout1"
         android:src="@drawable/ico_welline" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="15dp"
         android:layout_below="@+id/linearLayout1" >
 
         <RelativeLayout
+            android:id="@+id/image_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -83,7 +84,7 @@
             <ImageView
                 android:id="@+id/image_guangbiao0"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="15dp"
                 android:background="#01000000"
                 android:src="@drawable/ico_guanzhuliebiaoguangbiao"
                 android:visibility="gone" />
