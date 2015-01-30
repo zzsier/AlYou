@@ -6,10 +6,13 @@
 
     <Button
         android:id="@+id/bt11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="加载更多" />
+        android:background="@drawable/ico_48"
+        android:text="要加载更多嘛亲爱的" 
+        android:textColor="#000000"
+        />
   
  </RelativeLayout>

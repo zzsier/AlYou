@@ -70,13 +70,20 @@ public class NetManager {
 	public static final int  FORGET_PWD_REQUEST_OPERATION=37;
 
 	//系统设置消息推送
-		public static final int SYSTEM_SETTING_MSG_SENG = 40;
-		//版本更新
-		public static final int VERSION_UPDATE = 41;
-		//好友验证
-		public static final int VERIFY_FRIEND = 42;
-		//评价
-		public static final int ADVICE = 43;
+	public static final int SYSTEM_SETTING_MSG_SENG = 40;
+	//版本更新
+	public static final int VERSION_UPDATE = 41;
+	//好友验证
+	public static final int VERIFY_FRIEND = 42;
+	//评价
+	public static final int ADVICE = 43;
+
+	//删除
+	public static final int SHANCHU=44;
+	// 评论心情
+	public static final int XINQING=45;
+
+
 
 	public static final String LOGIN_REQUEST_URL = "/service/ZhanghuServices.svc/Denglu";
 	public static final String REGISTER_REQUEST_URL = "/service/ZhanghuServices.svc/Zhuce";
@@ -133,13 +140,18 @@ public class NetManager {
 	public static final String  FORGET_PWD_REQUEST_URL="/service/ZhanghuServices.svc/ResetPwd";
 
 	//系统设置消息推送
-		public static final String SYSTEM_SETTING_MSG_SENG_URL="/service/XitongServices.svc/XiugaiTuisong";
-		//版本检查更新
-		public static final String VERSION_UPDATE_URL="/service/XitongServices.svc/BanbenJiance";
-		//好友验证
-		public static final String VERIFY_FRIEND_URL="/service/ShezhiServices.svc/FriendValidate";
-		//评价
-		public static final String ADVICE_URL="/service/XitongServices.svc/Pingjia";
+	public static final String SYSTEM_SETTING_MSG_SENG_URL="/service/XitongServices.svc/XiugaiTuisong";
+	//版本检查更新
+	public static final String VERSION_UPDATE_URL="/service/XitongServices.svc/BanbenJiance";
+	//好友验证
+	public static final String VERIFY_FRIEND_URL="/service/ShezhiServices.svc/FriendValidate";
+	//评价
+	public static final String ADVICE_URL="/service/XitongServices.svc/Pingjia";
+
+	//删除
+	public static final String SHANCHU_URL="/service/PengyouquanServices.svc/ShanchuXinqing";
+	// 评论心情
+	public static final String  XINQING_URL="/service/PengyouquanServices.svc/PinglunXinqing";
 
 
 	public static void get(int operationCode, NetObject netObj, AsyncHttpResponseHandler responseHandler) {
@@ -245,7 +257,7 @@ public class NetManager {
 			return BASE_URL+CHANGE_PWD_REQUEST_URL;
 		case FORGET_PWD_REQUEST_OPERATION:
 			return BASE_URL+FORGET_PWD_REQUEST_URL;
-			
+
 		case  SYSTEM_SETTING_MSG_SENG:
 			return BASE_URL+SYSTEM_SETTING_MSG_SENG_URL;	
 
@@ -256,6 +268,14 @@ public class NetManager {
 			return BASE_URL+VERIFY_FRIEND_URL;	
 		case  ADVICE:
 			return BASE_URL+ADVICE_URL;
+
+		case  SHANCHU:
+			return BASE_URL+SHANCHU_URL;
+		case  XINQING:
+			return BASE_URL+XINQING_URL;
+
+
+
 
 		default:
 			return BASE_URL+LOGIN_REQUEST_URL;

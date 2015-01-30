@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/zhengti_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ico_personal_data_bg"
@@ -220,9 +221,10 @@
     
     <LinearLayout 
         android:id="@+id/tankuang_buju"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_width="match_parent" 
         android:layout_alignParentBottom="true"
+        android:background="@drawable/ico_50"
         android:visibility="gone">
         
         <EditText
@@ -232,17 +234,23 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:textSize="18sp"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:background="#000000"
+            android:textColor="#FFFFFF"/>
         <Button
             android:id="@+id/fasong_bt"
             android:layout_width="80dp"
-            android:layout_height="40dp"  
+            android:layout_height="44dp"  
             android:layout_alignParentRight="true"  
             android:layout_centerVertical="true"  
             android:layout_marginRight="10dp"
-            android:textSize="20sp"
-            android:text="发送" />
+            android:textSize="22sp"
+            android:textColor="#000000"
+            android:text="发送"
+            android:background="@drawable/bangding_bt"
+             />
     </LinearLayout>
 
     <ListView

@@ -3,20 +3,18 @@ package com.imalu.alyou.activity;
 import java.util.ArrayList;
 
 import org.apache.http.Header;
-import org.ice4j.attribute.FingerprintAttribute;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
+import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -25,7 +23,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,16 +40,16 @@ import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.request.CircleOfFriendRequest;
 import com.imalu.alyou.net.request.MoodCommentRequest;
 import com.imalu.alyou.net.request.SignedPersonalityRequest;
+import com.imalu.alyou.net.request.XinqingPinglunRequest;
 import com.imalu.alyou.net.response.CircleOfFriendResponse;
-import com.imalu.alyou.net.response.FindFriendResponse;
 import com.imalu.alyou.net.response.MoodCommentResponse;
 import com.imalu.alyou.net.response.SignedPersonalityResponse;
+import com.imalu.alyou.net.response.XinqingPinglunResponse;
 import com.imalu.alyou.widget.PasteEditText;
-
 public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private Handler handler;
 	private ListView xinqingshuoList;
-	private CircleOfFriendsAdapter adapter;
+	private CircleOfFriendsAdapter cadapter;
 	private MoodCommentAdapter madapter;
 	private ArrayList<XinqingLM> lms;
 	private  View  bottomView;
@@ -74,38 +71,46 @@ public class Activity_Circle_Friends_homepage extends BaseActivity {
 	private ImageView circle_emoticons_normal;
 	private ImageView circle_emoticons_checked;
 	private RelativeLayout circle_edittext_layout;
-
+	private LinearLayout zhengti_layout;
+	private LinearLayout tankuang_buju;
+	private EditText shuru_et;
+	private Button fasong_bt;
+	private TitlePopup titlePopup;
 	private CircleOfFriendResponse circleOfFriendResponse;
+	 
+	public void test(){	 
+		cadapter.notifyDataSetChanged(); 
+		yitiao();
+	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_circle_friends_homepage);
+		//强制隐藏软键盘
+		InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);  
+		imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);  
+		
 		cEditTextContent = (PasteEditText) findViewById(R.id.circle_sendmessage);
 		circle_emoticons_normal = (ImageView) findViewById(R.id.circle_emoticons_normal);
 		circle_emoticons_checked = (ImageView) findViewById(R.id.circle_emoticons_checked);
 		circle_edittext_layout = (RelativeLayout) findViewById(R.id.circle_edittext_layout);
-		
+		zhengti_layout = (LinearLayout) findViewById(R.id.zhengti_layout);
+		tankuang_buju = (LinearLayout) findViewById(R.id.tankuang_buju);
 		circle_emoticons_normal.setVisibility(View.VISIBLE);
 		circle_emoticons_checked.setVisibility(View.INVISIBLE);
-		
 		lms = new ArrayList<XinqingLM>(); 
 		fundXinQingShuo();
 		initViews();
-		setText(); 
-		
-		 
+		setText(); 	 
 	}
-	
 	private ArrayList<PingLunLM> fundPinglun() {
 		// TODO Auto-generated method stub
-final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
+		final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 		MoodCommentRequest moodCommentReq = new MoodCommentRequest();
 		//心情key
 		moodCommentReq.setXinqingkey(circleOfFriendResponse.getKey());
 		Log.i("心key值1111111111111111111", ""+circleOfFriendResponse.getKey());
-	 
-		
 		NetManager.execute(NetManager.MOOD_COMMENT, moodCommentReq, new JsonHttpResponseHandler(){
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
@@ -150,21 +155,28 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 		zhanghu_app =(TextView) findViewById(R.id.zhanghu_app);
 		zhanghu_jifen =(TextView) findViewById(R.id.zhanghu_jifen);
 		zhanghu_suoshugonghui=(TextView) findViewById(R.id.zhanghu_suozaigonghui);
-		 qianming_et = (EditText) findViewById(R.id.qianming_et);
+		qianming_et = (EditText) findViewById(R.id.qianming_et);
 		xinqingshuoList = (ListView)findViewById(R.id.homepage_lv);
-		
-		//group_discuss_popup = (ImageView) getLayoutInflater().inflate(R.layout.item_circle_friend, null);
-		 
 		bottomView=getLayoutInflater().inflate(R.layout.item_circle_friend_button, null);
-		adapter = new CircleOfFriendsAdapter(lms, Activity_Circle_Friends_homepage.this);
-		xinqingshuoList.setAdapter(adapter);
+		cadapter = new CircleOfFriendsAdapter(lms, Activity_Circle_Friends_homepage.this);
+		xinqingshuoList.setAdapter(cadapter);
 		xinqingshuoList.addFooterView(bottomView);
-		
+		zhengti_layout.setOnTouchListener(new OnTouchListener() {		
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				// TODO Auto-generated method stub
+				int i = 0;
+				if (i==0) {
+					tankuang_buju.setVisibility(View.GONE);
+				}
+				InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);  
+				return imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);  
+			}
+		});
 		qianming_et.setOnEditorActionListener(new OnEditorActionListener() {
-			
 			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
 				// TODO Auto-generated method stub
-		        str = qianming_et.getText().toString();
+				str = qianming_et.getText().toString();
 				Log.i("取值》》》》》》》》》》", ""+str);
 				qianming();
 				Toast.makeText(Activity_Circle_Friends_homepage.this,info, Toast.LENGTH_SHORT).show(); 
@@ -173,16 +185,12 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 			}
 		});
 		qianming_et.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-			    qianming_et.setText("");	
+				qianming_et.setText("");	
 			}
 		});
-		
-		 
-		
 		//添加底部按钮
 		jiazaiMore=(Button)bottomView.findViewById(R.id.bt11);
 		jiazaiMore.setOnClickListener(new OnClickListener() {
@@ -192,14 +200,12 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 				s+=1;	
 				fundXinQingShuo();
 				Log.e("***4444", lms.toString());
-		 
 			}
 		});
 		//给list设置事件
 		xinqingshuoList.setOnItemClickListener(new OnItemListener());
 		xinqingshuoList.setOnScrollListener(new OnScrollListener());
 	}
-	  
 	protected void qianming() {
 		// TODO Auto-generated method stub
 		SignedPersonalityRequest signedPersonalityReq = new SignedPersonalityRequest();
@@ -213,9 +219,9 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 					JSONObject response) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, headers, response);
-				 SignedPersonalityResponse signedPersonalityResp = new SignedPersonalityResponse();
-				 signedPersonalityResp.setJsonObject(response);
-				 try {
+				SignedPersonalityResponse signedPersonalityResp = new SignedPersonalityResponse();
+				signedPersonalityResp.setJsonObject(response);
+				try {
 					flag = signedPersonalityResp.getCode();
 					info = signedPersonalityResp.getInfo();
 					log();
@@ -230,7 +236,6 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 		Log.i("看看真假---------------",""+flag);
 		Log.i("是否成功---------------",""+ info);
 	}
-
 	/**
 	 * 单击ListView中某一项触发的事件
 	 * @author dell
@@ -244,7 +249,6 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 			System.out.println("123");
 		}
 	}
-
 	//滚动加载事件：
 	//是否到达ListView底部
 	boolean isLastRow=false;
@@ -254,12 +258,10 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 	 *
 	 */
 	class OnScrollListener implements android.widget.AbsListView.OnScrollListener{
-
 		//滚动的时候一直回调，直到停止滚动时才停止回调，单击时回调一次
 		//firstVisibleItem:当前嫩看见的第一个列表项ID(从0开始,小半个也算)
 		//visibleItemCount：当前能看见的列表项个数(小半个也算)
 		//totalItemCount：列表项总共数
-
 		@Override
 		public void onScroll(AbsListView view, int firstVisibleItem,
 				int visibleItemCount, int totalItemCount) {
@@ -287,6 +289,8 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 	}
 	private void fundXinQingShuo() {
 		// TODO Auto-generated method stub
+		
+		
 		circleOfFriendRequest = new CircleOfFriendRequest();
 		circleOfFriendRequest.setUserKey(AlUApplication.getMyInfo().getKey());
 		Log.i(">>>>>>>>>>>>>>>>>>>>>", ""+AlUApplication.getMyInfo().getKey());
@@ -302,7 +306,7 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 					getJsonObj(response);
 					Log.e("***66666", lms.toString());
 					Log.e("xinqingLM..............................", ""+response.toString());
-					adapter.notifyDataSetChanged();
+					cadapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					// TODO: handle exception
 					e.printStackTrace();
@@ -310,10 +314,41 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 			}
 		});	
 	}
+	
+	private void yitiao() {
+		// TODO Auto-generated method stub
+		circleOfFriendRequest = new CircleOfFriendRequest();
+		circleOfFriendRequest.setUserKey(AlUApplication.getMyInfo().getKey());
+		Log.i(">>>>>>>>>>>>>>>>>>>>>", ""+AlUApplication.getMyInfo().getKey());
+		circleOfFriendRequest.setPageIndex(s);
+		circleOfFriendRequest.setPageSize(1);
+		NetManager.execute(NetManager.CIRCLR_OF_FRIEND, circleOfFriendRequest, new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONArray response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				try {
+					getJsonObj(response);
+					Log.e("***66666", lms.toString());
+					Log.e("xinqingLM..............................", ""+response.toString());
+					cadapter.notifyDataSetChanged();
+				} catch (JSONException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+		});	
+	}
+	
+	
+	
+	
+	
 	//遍历Json数组
 	protected void getJsonObj(JSONArray array)throws JSONException {
 		// TODO Auto-generated method stub
-	circleOfFriendResponse = new CircleOfFriendResponse();
+		circleOfFriendResponse = new CircleOfFriendResponse();
 		for(int i=0;i<array.length();i++){
 			JSONObject jsonObject= new JSONObject();
 			jsonObject= array.getJSONObject(i);
@@ -340,32 +375,84 @@ final ArrayList<PingLunLM> pingLunLMs = new ArrayList<PingLunLM>();
 			xinqingLM.setUserKey(circleOfFriendResponse.getUserKey());
 			Log.i("发布心情用户key222222222222222................................", ""+circleOfFriendResponse.getUserKey());
 			Log.i("账号用户key333333333333333333333................................", ""+AlUApplication.getMyInfo().getKey());
-		ArrayList<PingLunLM> pinglunLMs=fundPinglun();	
-		Log.e("-------------", pinglunLMs.toString());
+			ArrayList<PingLunLM> pinglunLMs=fundPinglun();	
+			Log.e("-------------", pinglunLMs.toString());
 			xinqingLM.setPinglunLMs(pinglunLMs);
-			//	xinqingLM.setpinglunLMs(circleOfFriendResponse.getpinglunLMs());
 			lms.add(xinqingLM);			 
 		}		
 	}
 	public void back(View view) {
 		finish();
 	}
-	
-	public void showKeyBoard() {
+	private int viewpos;
+	public void showKeyBoard(int pos) {
 		LinearLayout loyout = (LinearLayout) findViewById(R.id.tankuang_buju);
-		EditText shuru_et = (EditText) findViewById(R.id.shuru_et);
-		Button fasong_bt = (Button) findViewById(R.id.fasong_bt);
+		shuru_et = (EditText) findViewById(R.id.shuru_et);
+		fasong_bt = (Button) findViewById(R.id.fasong_bt);
 		Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里1");
-//		EditText disInputText = (EditText) convertView.findViewById(R.id.popu_comment); 
-//        //disInputText.requestFocus();  
-//		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);       
-//        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-        
-        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里2");
-        loyout.setVisibility(View.VISIBLE);
-        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里3");
-//        shuru_et.setFocusableInTouchMode(true);
-        shuru_et.requestFocus();	
-        Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里4");  
+		loyout.setVisibility(View.VISIBLE);
+		Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里3");
+		shuru_et.requestFocus();	
+		Log.i(">>>>>>>>>>>>>>>>>", "已经执行到这里4");  
+		viewpos=pos;
+		//评论这块
+		xiangyin();
+	}
+	private void xiangyin() {
+		// TODO Auto-generated method stub
+		shuru_et.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				shuru_et.setText("");
+			}
+		});
+		fasong_bt.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				XinqingPinglun(viewpos);
+				int i = 0;
+				if (i==0) {
+					tankuang_buju.setVisibility(View.GONE);
+				}
+				//强制隐藏软键盘
+				InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);  
+				imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);  
+				Toast.makeText(Activity_Circle_Friends_homepage.this,info, Toast.LENGTH_SHORT).show();
+				shuru_et.setText("");
+			}
+		});
+	}
+	private void XinqingPinglun( int position) {
+		// TODO Auto-generated method stub
+		String s =shuru_et.getText().toString();
+		Log.i("这是传过来的的值",""+s);		
+		XinqingPinglunRequest xinqingPinglunReq = new XinqingPinglunRequest();
+		xinqingPinglunReq.setPinglunrenkey(AlUApplication.getMyInfo().getKey());
+		Log.i("用用~~~~~", ""+AlUApplication.getMyInfo().getKey());		
+		xinqingPinglunReq.setPinglunneirong(s);
+		Log.i("内内~~~~~~~~", ""+s);		
+		xinqingPinglunReq.setXinqingkey(lms.get(position).getXingqingkey());
+		Log.i("心心~~~~~~~~~", ""+lms.get(position).getXingqingkey());	
+		NetManager.execute(NetManager.XINQING,
+				xinqingPinglunReq,new JsonHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, headers, response);
+				XinqingPinglunResponse xinqingPinglunResp=new  XinqingPinglunResponse();
+				xinqingPinglunResp.setJsonObject(response);
+				try {
+					flag = xinqingPinglunResp.getCode();
+					info = xinqingPinglunResp.getInfo();
+					log();
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
