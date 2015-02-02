@@ -13,34 +13,20 @@
  */
 package com.imalu.alyou.activity;
 
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.imalu.alyou.AlUApplication;
-import com.imalu.alyou.Constant;
 import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.ClockAdapter;
-import com.imalu.alyou.adapter.FriendAdapter;
 import com.imalu.alyou.adapter.ClockAdapter.ClockViewHolder;
 import com.imalu.alyou.db.ClockDbService;
-import com.imalu.alyou.db.gen.Clock;
-import com.imalu.alyou.domain.HXUser;
-
- 
 
 public class MainPageClockActivity extends BaseActivity{
 	private Button addclock;
@@ -57,8 +43,8 @@ public class MainPageClockActivity extends BaseActivity{
 		addclock.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View view) {
-				startActivity(new Intent(MainPageClockActivity.this, AddClockActivity.class));
-				finish();
+				startActivity(new Intent(MainPageClockActivity.this, TimerListActivity.class));
+				
 			}
 		});
 		showListView();

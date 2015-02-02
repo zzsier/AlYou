@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/clock_background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@drawable/title_background" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_welline" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="135dp"
+            android:text="计时器"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <include layout="@layout/commom_back_btn" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp" >
+
+        <ImageButton
+            android:id="@+id/create_timer_create_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/clock_creat_photo" />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/create_timer_create_timer"
+            android:gravity="center_vertical"
+            android:text="新建计时"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/edit_tv_timer_list2"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:text="编辑"
+            android:textColor="#b8de01" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="25dp" >
+
+        <ImageButton
+            android:id="@+id/add_timer_create_timer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/clock_photo" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/add_timer_create_timer1"
+            android:gravity="center_vertical"
+            android:text="预设计时"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/edit_tv_timer_list1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:text="编辑"
+            android:textColor="#b8de01" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ico_welline" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp" 
+        android:layout_marginBottom="15dp">
+
+        <ImageButton
+            android:id="@+id/timerlist_ib1"
+            android:layout_width="30dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/clock_photo" />
+
+        <TextView
+            android:id="@+id/timerlist_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/timerlist_ib1"
+            android:gravity="center_vertical"
+            android:text="预设计时1"
+            android:textColor="#ffffff" />
+        <TextView 
+            android:id="@+id/edit_timerlist_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="编辑"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textColor="#b8de01"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp" 
+        android:layout_marginBottom="15dp" >
+
+        <ImageButton
+            android:id="@+id/timerlist_ib2"
+            android:layout_width="30dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/clock_photo" />
+
+        <TextView
+            android:id="@+id/timerlist_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/timerlist_ib2"
+            android:gravity="center_vertical"
+            android:text="预设计时2"
+            android:textColor="#ffffff" />
+        <TextView 
+            android:id="@+id/edit_timerlist_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="编辑"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textColor="#b8de01"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp" 
+        android:layout_marginBottom="15dp" >
+
+        <ImageButton
+            android:id="@+id/timerlist_ib3"
+            android:layout_width="30dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/clock_photo" />
+
+        <TextView
+            android:id="@+id/timerlist_tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/timerlist_ib3"
+            android:gravity="center_vertical"
+            android:text="预设计时3"
+            android:textColor="#ffffff" />
+        <TextView 
+            android:id="@+id/edit_timerlist_tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="编辑"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textColor="#b8de01"/>
+    </RelativeLayout>
+   <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ico_welline"/> 
+    
+
+    <ListView
+        android:id="@+id/listview_timer_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

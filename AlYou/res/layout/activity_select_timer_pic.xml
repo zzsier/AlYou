@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/clock_background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar" 
+         android:background="@drawable/title_background">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_welline" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="135dp"
+            android:text="计时器"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <include layout="@layout/commom_back_btn" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp" >
+
+        <ImageButton
+            android:id="@+id/add_timer_select_pic"
+            android:layout_width="30dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/clock_photo" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/add_timer_select_pic"
+            android:gravity="center_vertical"
+            android:text="选定图标"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+    
+	<ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ico_welline"
+        android:layout_marginTop="50dp" />
+
+	<HorizontalScrollView
+	    android:id="@+id/pic_sv"
+	    android:layout_width="match_parent"
+	    android:layout_height="110dp" 
+	    android:background="@drawable/title_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" 
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/iv1"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+
+            <ImageView
+                android:id="@+id/iv2"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+
+            <ImageView
+                android:id="@+id/iv3"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+            <ImageView
+                android:id="@+id/iv4"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+            <ImageView
+                android:id="@+id/iv5"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+            <ImageView
+                android:id="@+id/iv6"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+            <ImageView
+                android:id="@+id/iv7"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+            <ImageView
+                android:id="@+id/iv8"
+                android:onClick="onClick"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/clock_photo_1" />
+        </LinearLayout>
+   
+	</HorizontalScrollView>
+    
+	<ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ico_welline" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/title_background" >
+
+        <TextView
+            android:id="@+id/textview10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="是否选定所选图标?" 
+            android:textColor="#ffffff" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textview10"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/pic_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/ico_47"
+                android:text="否"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/pic_saveClock"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:background="@drawable/ico_login"
+                android:text="是"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
