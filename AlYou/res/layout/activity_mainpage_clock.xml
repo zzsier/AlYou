@@ -39,7 +39,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical" >
     
-    <ListView
+  <!--    <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,8 +48,17 @@
         android:descendantFocusability="afterDescendants"
         android:divider="@color/divider_list"
         android:dividerHeight="1px"
+        android:fastScrollEnabled="false" />-->
+    <com.imalu.alyou.widget.SlideListView 
+          android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="#00000000"
+        android:descendantFocusability="afterDescendants"
+        android:divider="@color/divider_list"
+        android:dividerHeight="1px"
         android:fastScrollEnabled="false" />
-    
     </RelativeLayout>
 
     

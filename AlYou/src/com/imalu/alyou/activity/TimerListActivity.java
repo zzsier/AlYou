@@ -22,6 +22,8 @@ public class TimerListActivity extends BaseActivity{
 		Intent intent = getIntent();
 		String name = intent.getStringExtra("name");
 		preTime1.setText(name);
+		Clock clock = new Clock();
+		clock.setDescription(name);
 	}
 
 	private void setListeners() {

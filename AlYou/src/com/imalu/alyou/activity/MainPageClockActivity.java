@@ -13,46 +13,64 @@
  */
 package com.imalu.alyou.activity;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.imalu.alyou.AlUApplication;
+import com.imalu.alyou.Constant;
 import com.imalu.alyou.R;
 import com.imalu.alyou.adapter.ClockAdapter;
+import com.imalu.alyou.adapter.FriendAdapter;
 import com.imalu.alyou.adapter.ClockAdapter.ClockViewHolder;
 import com.imalu.alyou.db.ClockDbService;
+import com.imalu.alyou.db.gen.Clock;
+import com.imalu.alyou.domain.HXUser;
+import com.imalu.alyou.widget.SlideListView;
+import com.imalu.alyou.widget.SlideListView.RemoveDirection;
+import com.imalu.alyou.widget.SlideListView.RemoveListener;
+
+ 
 
 public class MainPageClockActivity extends BaseActivity{
 	private Button addclock;
 	private ClockAdapter adapter;
-	private ListView listView;
+	private SlideListView listView;
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainpage_clock);
-		listView = (ListView) findViewById(R.id.list);
+		listView = (SlideListView) findViewById(R.id.list);
 		addclock = (Button)findViewById(R.id.addclock);
 		addclock.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(MainPageClockActivity.this, TimerListActivity.class));
-				
+				finish();
 			}
 		});
 		showListView();
 	}
 	
 	private void showListView() {
+		final List<Clock> clocklist= ClockDbService.getInstance(AlUApplication.applicationContext).loadAllClock();
 		adapter = new ClockAdapter(this, R.layout.row_clock, 
-				ClockDbService.getInstance(AlUApplication.applicationContext).loadAllClock());
+				clocklist);
 
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -62,7 +80,27 @@ public class MainPageClockActivity extends BaseActivity{
 				holder.startClock();
 			}
 		});
-
+		listView.setRemoveListener(new RemoveListener() {
+			
+			@Override
+			public void removeItem(RemoveDirection direction, int position) {
+				// TODO Auto-generated method stub
+				Log.e("ClockId1", "id:"+position+","+"size:"+	ClockDbService.getInstance(AlUApplication.applicationContext).loadAllClock().size());
+				ClockDbService
+				.getInstance(AlUApplication
+						.applicationContext)
+						.deleteNote(ClockDbService
+								.getInstance(AlUApplication
+										.applicationContext)
+										.loadAllClock()
+										.get(position));
+				Log.e("ClockId2", "id:"+position+","+"size:"+	ClockDbService.getInstance(AlUApplication.applicationContext).loadAllClock().size());
+		
+				clocklist.remove(position);
+				adapter.notifyDataSetChanged();
+			
+			}
+		});
 		registerForContextMenu(listView);
 	}
 

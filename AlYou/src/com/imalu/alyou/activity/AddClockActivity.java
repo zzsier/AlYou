@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.imalu.alyou.AlUApplication;
 import com.imalu.alyou.R;
 import com.imalu.alyou.db.ClockDbService;
 import com.imalu.alyou.db.gen.Clock;
@@ -138,12 +140,12 @@ public class AddClockActivity extends BaseActivity{
 				Intent intent = getIntent();
 				byte[] pic = intent.getByteArrayExtra("data");
 				clock.setPic(pic);
-				Bitmap bitmap = BitmapFactory.decodeByteArray(pic,0,pic.length);
-				selectPic.setImageBitmap(bitmap);
+			//	Bitmap bitmap = BitmapFactory.decodeByteArray(pic,0,pic.length);
+			//	selectPic.setImageBitmap(bitmap);
 				ClockDbService.getInstance(AddClockActivity.this).saveClock(clock);
-				
+				ClockDbService.getInstance(AlUApplication.applicationContext).loadAllClock().add(clock);
+				Log.e("CLOCKLIST", ""+ClockDbService.getInstance(AlUApplication.applicationContext).loadAllClock().size());
 				finish();
-
 			}
 		});
 	}
