@@ -168,12 +168,12 @@ public class CircleOfFriendsAdapter extends BaseAdapter{
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				final int pos=(Integer) holder.tankuang.getTag();
-				titlePopup = new TitlePopup(mcontext, TanKuangUtil.dip2px(mcontext, 165), TanKuangUtil.dip2px(
-						mcontext, 40));
-				titlePopup
-				.addAction(new ActionItem(mcontext, "赞", R.drawable.circle_praise));
-				titlePopup.addAction(new ActionItem(mcontext, "评论",
-						R.drawable.circle_comment));			 
+				titlePopup = new TitlePopup(mcontext, TanKuangUtil.dip2px(mcontext, 165), 
+											TanKuangUtil.dip2px(mcontext, 40));
+				
+				titlePopup.addAction(new ActionItem(mcontext, "赞", R.drawable.circle_praise));
+				titlePopup.addAction(new ActionItem(mcontext, "评论",R.drawable.circle_comment));	
+				
 				titlePopup.setItemOnClickListener(new OnItemOnClickListener() {				
 					@Override
 					public void onItemClick(ActionItem item, int position) {
