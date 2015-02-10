@@ -64,4 +64,7 @@ public class TimerListActivity extends BaseActivity{
 		edit2 = (TextView)findViewById(R.id.edit_timerlist_tv2);
 		edit3 = (TextView)findViewById(R.id.edit_timerlist_tv3);
 	}
+	public void back(View v) {
+		finish();
+	}
 }

@@ -55,4 +55,12 @@ public class ConsernResponse extends NetObject{
 			return "";
 		}
 	}
-}
+	public String getGexingQianming() {
+		try {
+			return this.getJsonObject().getString("GexingQianming");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+		}
+	}

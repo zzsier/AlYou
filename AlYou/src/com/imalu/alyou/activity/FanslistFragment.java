@@ -40,6 +40,7 @@ import com.imalu.alyou.domain.UserLM;
 import com.imalu.alyou.net.JsonHttpResponseHandler;
 import com.imalu.alyou.net.NetManager;
 import com.imalu.alyou.net.request.FansRequest;
+import com.imalu.alyou.net.response.ConsernResponse;
 import com.imalu.alyou.net.response.FansResponse;
 
 
@@ -77,10 +78,18 @@ public class FanslistFragment extends Fragment {
 				intent.putExtra("id", fans.get(position).getId());
 				intent.putExtra("flag", 2);
 				intent.putExtra("key", fans.get(position).getKey());
+				Log.e("societykey", fans.get(position).getSocietyKey());
 				intent.putExtra("societykey",fans.get(position).getSocietyKey() );
 				startActivity(intent);
-				
 				//Toast.makeText(getActivity(), "你点击了"+position,0).show();
+				
+//				intent.putExtra("username",concerns.get(position).getUsername());
+//				intent.putExtra("jifen", concerns.get(position).getJifen());
+//				intent.putExtra("id", concerns.get(position).getId());
+//				intent.putExtra("flag", 1);
+//				intent.putExtra("key", concerns.get(position).getKey());
+//				intent.putExtra("societykey",concerns.get(position).getSocietykey() );
+				
 				
 			}
 		});
@@ -106,19 +115,19 @@ public class FanslistFragment extends Fragment {
 						}
 				}
 			});
-			
 		}
 		//遍历Json数组
 		protected void getJsonObj(JSONArray array) throws JSONException{
-			FansResponse fansRponse=new FansResponse();
+			ConsernResponse fansRponse=new ConsernResponse();
 			for(int i=0;i<array.length();i++){
 				JSONObject jsonObject= new JSONObject();
 				jsonObject= array.getJSONObject(i);
 				UserLM fan= new UserLM();
 				fansRponse.setJsonObject(jsonObject);
-				fan.setJifen(fansRponse.getJiFen());
+				fan.setJifen(fansRponse.getJifen());
 				fan.setSocietyKey(fansRponse.getSocietyKey());
 				fan.setId(fansRponse.getId());
+				fan.setKey(fansRponse.getKey());
 				fan.setUserName(fansRponse.getUserName());
 				fan.setGexingQianming(fansRponse.getGexingQianming());
 				fans.add(fan);

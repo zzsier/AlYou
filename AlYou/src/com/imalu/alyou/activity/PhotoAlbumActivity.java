@@ -19,7 +19,6 @@ import com.imalu.alyou.net.response.PhotoAlbumResponse;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
@@ -101,7 +100,7 @@ public class PhotoAlbumActivity extends BaseActivity{
 					adapter.notifyDataSetChanged();
 					//listView.setSelection(5);
 					loadMore.setText("加载更多");
-			//	}
+			//	}  
 		//	}, 2000);
 		}
 	}
@@ -116,7 +115,7 @@ public class PhotoAlbumActivity extends BaseActivity{
 			intent.putExtra("own", own);
 			intent.putExtra("other", other);
 			startActivity(intent);
-			finish();
+			finish(); 
 		}
 	}
 			
@@ -209,7 +208,7 @@ public class PhotoAlbumActivity extends BaseActivity{
 			other = photoAlbumResponse.getKey();
 		}			
 	}
-	public void back(View view) {
+	public void back(View view){
 		finish();
 	}
 }
